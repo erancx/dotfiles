@@ -34,11 +34,12 @@ return require('packer').startup(function()
   -- Packer can manage itself as an optional plugin
   use {'wbthomason/packer.nvim'}
   use {
-    'iamcco/markdown-preview.nvim',
-    run = function() vim.fn['mkdp#util#install']() end
-}
-
-
+    'iamcco/markdown-preview.nvim', run = function() vim.fn['mkdp#util#install']() end
+  }
+  use {
+    'kkoomen/vim-doge',
+    run = ':call doge#install()'
+  }
   use 'b3nj5m1n/kommentary'
   use {
   'hrsh7th/nvim-compe',

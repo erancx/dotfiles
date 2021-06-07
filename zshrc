@@ -5,7 +5,7 @@ fi
 export ZSH=$HOME/.oh-my-zsh
 plugins=(git docker osx common-aliases virtualenv kubectl)
 source $ZSH/oh-my-zsh.sh
-export LANG=en_US.UTF-8
+export LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 export GOPATH=$HOME/go
 export PATH=/usr/local/opt/openssl/bin:$PATH:$GOPATH/bin:~/workspace/repo/utilities/list_instances/aws/:~/tmp/roer
@@ -18,6 +18,7 @@ export CLOUDSDK_PYTHON_SITEPACKAGES=1
 export PATH=$PATH:$HOME/workspace/venv/default/bin/:/usr/local/bin
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=180'
+
 
 alias ls='gls --color=auto'
 alias gitlog='git log --pretty=format:"%h %ad | %s%d [%an]" --graph --all'

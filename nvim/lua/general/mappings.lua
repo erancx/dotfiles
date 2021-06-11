@@ -1,6 +1,20 @@
 local g = vim.g
 local api = vim.api
 
+-- Formatter
+function run_formatter()
+  local filetype = vim.bo.filetype
+  local formatters = require("formatter.config").values.filetype[filetype]
+
+  if vim.bo.modifiable then
+    if not require("formatter.util").isEmpty(formatters) then
+      vim.api.nvim_command("Format")
+    else
+      vim.lsp.buf.formatting()
+    end
+  end
+end
+
 g.mapleader = ','
 api.nvim_set_keymap('n', '<Tab>', '%', { noremap = true })
 api.nvim_set_keymap('v', '<Tab>', '%', { noremap = true })
@@ -25,5 +39,7 @@ api.nvim_set_keymap('n', '<Leader>fw', ':Telescope grep_string<cr>', { noremap =
 api.nvim_set_keymap('n', '<leader>ff', ':Telescope find_files<CR>', { noremap = true })
 api.nvim_set_keymap('n', '<leader>fb', ':Telescope file_browser<CR>', { noremap = true })
 api.nvim_set_keymap('n', '<leader>c', ':BufferClose<CR>', { noremap = true })
+api.nvim_set_keymap('n', '<esc>', ':nohlsearch<return><esc>', { noremap = true })
+api.nvim_set_keymap('n', '<leader>f', '<cmd>lua run_formatter()<CR>', { noremap = true })
 
 -- https://github.com/mjlbach/defaults.nvim/blob/master/init.lua

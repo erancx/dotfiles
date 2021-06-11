@@ -63,7 +63,14 @@ return require('packer').startup(function()
   use 'nvim-lua/diagnostic-nvim'
   use 'windwp/nvim-autopairs'
   use 'sindrets/diffview.nvim'
+  use 'glepnir/lspsaga.nvim'
   use 'tpope/vim-fugitive'
+  use {
+      "mhartington/formatter.nvim",
+      config = function()
+        require("plugins.formatter")
+      end
+  }
   use {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
   use {
     'lewis6991/gitsigns.nvim',

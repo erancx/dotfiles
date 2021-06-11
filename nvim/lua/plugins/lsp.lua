@@ -49,78 +49,17 @@ local on_attach = function(client, bufnr)
 end
 
 
-nvim_lsp.diagnosticls.setup {
-    on_attach = on_attach,
-    capabilities = lsp_status.capabilities,
-    cmd = {"diagnostic-languageserver", "--stdio"},
-    filetypes = {
-        "lua",
-        "sh",
-        "markdown",
-        "toml"
-    },
-    init_options = {
-        linters = {
-            shellcheck = {
-                command = "shellcheck",
-                debounce = 100,
-                args = {"--format", "json", "-"},
-                sourceName = "shellcheck",
-                parseJson = {
-                    line = "line",
-                    column = "column",
-                    endLine = "endLine",
-                    endColumn = "endColumn",
-                    message = "${message} [${code}]",
-                    security = "level"
-                },
-                securities = {
-                    error = "error",
-                    warning = "warning",
-                    info = "info",
-                    style = "hint"
-                }
-            },
-            markdownlint = {
-                command = "markdownlint",
-                isStderr = true,
-                debounce = 100,
-                args = {"--stdin"},
-                offsetLine = 0,
-                offsetColumn = 0,
-                sourceName = "markdownlint",
-                formatLines = 1,
-                formatPattern = {
-                    "^.*?:\\s?(\\d+)(:(\\d+)?)?\\s(MD\\d{3}\\/[A-Za-z0-9-/]+)\\s(.*)$",
-                    {
-                        line = 1,
-                        column = 3,
-                        message = {4}
-                    }
-                }
-            }
-        },
-        filetypes = {
-            sh = "shellcheck",
-            markdown = "markdownlint"
-        },
-        formatters = {
-            shfmt = {
-                command = "shfmt",
-                args = {"-i", "2", "-bn", "-ci", "-sr"}
-            },
-            prettier = {
-                command = "prettier",
-                args = {"--stdin-filepath", "%filepath"},
-            }
-        },
-        formatFiletypes = {
-            sh = "shfmt",
-            toml = "prettier",
-            markdown = "prettier",
-            lua = "prettier"
-        }
-    }
+nvim_lsp.efm.setup {
+  -- filetypes = {"yaml", "snakemake"},
+  filetypes = {"yaml"},
+  cmd = {
+    "efm-langserver",
+    "-c",
+    vim.fn.stdpath("config") .. "/lua/plugins/efm.yml"
+  },
+  root_dir = function()
+    return vim.fn.getcwd()
+  end
 }
 
 -- Enable diagnostics
@@ -135,9 +74,27 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] =
     }
 )
 
+local function set_sign(type, icon)
+    local sign = string.format("LspDiagnosticsSign%s", type)
+    local texthl = string.format("LspDiagnosticsDefault%s", type)
+    vim.fn.sign_define(sign, {text = icon, texthl = texthl})
+end
+
+set_sign("Hint", "")
+set_sign("Information", "")
+set_sign("Warning", "")
+set_sign("Error", "ﰸ")
+
+
 -- Use a loop to conveniently both setup defined servers
 -- and map buffer local keybindings when the language server attaches
-local servers = { "pyright", "yamlls", "bashls", "terraformls", "vimls", "jsonls", "dockerls", "gopls" }
+local servers = { "pyright", "yamlls", "bashls", "vimls", "jsonls", "dockerls", "gopls" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup { on_attach = on_attach }
 end
+
+nvim_lsp.terraformls.setup {
+    on_attach = on_attach_common,
+    cmd = {"terraform-ls", "serve"},
+    filetypes = {"tf"}
+}

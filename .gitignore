@@ -1,15 +1,2 @@
-# Swap
-[._]*.s[a-v][a-z]
-!*.svg  # comment out if you don't need vector files
-[._]*.sw[a-p]
-[._]s[a-rt-v][a-z]
-[._]ss[a-gi-z]
-[._]sw[a-p]
-
-.netrwhist
-*~
-tags
-[._]*.un~
-
-# No need to save compiled packer file
+nvim/autoload
 nvim/plugin/packer_compiled.vim

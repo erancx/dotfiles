@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ln -sf "$PWD/gitconfig" ~/.gitconfig
-ln -sf "$PWD/kitty.conf" ~/.config/kitty/kitty.conf
+ln -sf "$PWD/kitty" ~/.config/
 ln -sf "$PWD/p10k.zsh" ~/.p10k.zsh
 ln -sf "$PWD/tmux.conf" ~/.tmux.conf
 ln -sf "$PWD/tmux.conf.local" ~/.tmux.conf.local

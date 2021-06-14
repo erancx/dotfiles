@@ -104,3 +104,23 @@ fi
 #### FIG ENV VARIABLES ####
 [ -s ~/.fig/fig.sh ] && source ~/.fig/fig.sh
 #### END FIG ENV VARIABLES ####
+
+### Kitty #########################
+autoload -Uz compinit
+compinit
+# Completion for kitty
+kitty + complete setup zsh | source /dev/stdin
+
+# Kitty tab name
+function set-title-precmd() {
+  printf "\e]2;%s\a" "${PWD/#$HOME/~}"
+}
+
+function set-title-preexec() {
+  printf "\e]2;%s\a" "$1"
+}
+
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd set-title-precmd
+add-zsh-hook preexec set-title-preexec
+####################################

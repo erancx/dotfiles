@@ -64,6 +64,7 @@ return require('packer').startup(function()
   use 'windwp/nvim-autopairs'
   use 'sindrets/diffview.nvim'
   use 'glepnir/lspsaga.nvim'
+  use 'lewis6991/spellsitter.nvim'
   use 'tpope/vim-fugitive'
   use {
       "mhartington/formatter.nvim",

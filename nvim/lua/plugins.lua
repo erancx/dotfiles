@@ -57,7 +57,6 @@ return require('packer').startup(function()
   use 'neovim/nvim-lspconfig'
   use 'kabouzeid/nvim-lspinstall'
   use 'ntpeters/vim-better-whitespace'
-  use 'psf/black'
   use 'folke/tokyonight.nvim'
   use 'nvim-lua/lsp-status.nvim'
   use 'nvim-lua/diagnostic-nvim'

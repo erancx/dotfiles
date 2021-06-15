@@ -1,18 +1,21 @@
 -- General
-require('general/settings')
-require('general/mappings')
-require('general/autocmd')
+require('general.settings')
+require('general.mappings')
+require('general.autocmd')
+require('general.eviline')
 
 -- Plugins
 require('plugins')
 
--- Plugin configs
-require('plugins/treesitter')
-require('plugins/gitsigns')
-require('plugins/compe')
-require('plugins/telescope')
-require('general/eviline')
-require('plugins/lsp')
-require('plugins/kommentary')
-require('plugins/indent_blank_line')
-require('plugins/doge')
+-- Plugins configs
+require('plugins.autopairs')
+require('plugins.compe')
+require('plugins.doge')
+require('plugins.formatter')
+require('plugins.gitsigns')
+require('plugins.indent_blank_line')
+require('plugins.kommentary')
+require('plugins.lsp')
+require('plugins.spellsitter')
+require('plugins.telescope')
+require('plugins.treesitter')

@@ -23,7 +23,7 @@ end
 
 nvim_lsp.efm.setup {
   -- filetypes = {"yaml", "snakemake"},
-  filetypes = {"yaml"},
+  filetypes = {"yaml", "python", "sh", "json"},
   cmd = {
     "efm-langserver",
     "-c",
@@ -66,4 +66,9 @@ nvim_lsp.terraformls.setup {
     on_attach = on_attach_common,
     cmd = {"terraform-ls", "serve"},
     filetypes = {"tf"}
+}
+
+nvim_lsp.jsonls.setup {
+    on_attach = on_attach,
+    cmd = {"vscode-json-languageserver", "--stdio"}
 }

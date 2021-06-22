@@ -425,7 +425,6 @@ languages:
   python:
     - <<: *flake8-lint
     - <<: *pylint-lint
-    - <<: *mypy-lint
     - <<: *black-action-format
     - <<: *pydocstyle-lint
 

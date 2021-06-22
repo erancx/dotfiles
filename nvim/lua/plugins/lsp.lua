@@ -22,8 +22,8 @@ local on_attach = function(client, bufnr)
 end
 
 nvim_lsp.efm.setup {
-  -- filetypes = {"yaml", "snakemake"},
-  filetypes = {"yaml", "python", "sh", "json"},
+  filetypes = {"yaml", "python", "sh", "json", "markdown"},
+  init_options = {documentFormatting = true},
   cmd = {
     "efm-langserver",
     "-c",

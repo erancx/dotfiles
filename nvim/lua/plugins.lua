@@ -65,6 +65,7 @@ return require('packer').startup(function()
   use 'glepnir/lspsaga.nvim'
   use 'lewis6991/spellsitter.nvim'
   use 'tpope/vim-fugitive'
+  use {"ray-x/lsp_signature.nvim"}
   use {
       "mhartington/formatter.nvim",
       config = function()

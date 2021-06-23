@@ -7,7 +7,7 @@ plugins=(git docker osx common-aliases virtualenv kubectl)
 source $ZSH/oh-my-zsh.sh
 export LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
 export SSH_KEY_PATH="~/.ssh/rsa_id"
-export GOPATH=$HOME/go
+export GOPATH=$HOME/workspace/go
 export PATH=/usr/local/opt/openssl/bin:$PATH:$GOPATH/bin:~/workspace/repo/utilities/list_instances/aws/:~/tmp/roer
 export EDITOR=nvim
 export SPINNAKER_API="https://gate-corp.witools.foo"

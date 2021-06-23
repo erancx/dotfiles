@@ -57,10 +57,16 @@ set_sign("Information", "")
 set_sign("Warning", "")
 set_sign("Error", "ﰸ")
 
-local servers = { "pyright", "yamlls", "bashls", "vimls", "jsonls", "dockerls", "gopls" }
+local servers = { "yamlls", "bashls", "vimls", "jsonls", "dockerls", "gopls" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup { on_attach = on_attach }
 end
+
+nvim_lsp.pyright.setup {
+    on_attach = function(client)
+        require'lsp_signature'.on_attach()
+    end,
+}
 
 nvim_lsp.terraformls.setup {
     on_attach = on_attach_common,

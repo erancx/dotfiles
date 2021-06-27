@@ -51,6 +51,8 @@ return require('packer').startup(function()
   }
   use 'romgrk/barbar.nvim'
   use 'glepnir/galaxyline.nvim'
+  use 'kevinhwang91/nvim-bqf'
+  use 'ahmedkhalf/lsp-rooter.nvim'
   use 'jiangmiao/auto-pairs'
   use 'kyazdani42/nvim-web-devicons'
   use 'martinda/Jenkinsfile-vim-syntax'

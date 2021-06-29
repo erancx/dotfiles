@@ -35,6 +35,7 @@ api.nvim_set_keymap('n', '<Leader>fg', ':Telescope live_grep<cr>', { noremap = t
 api.nvim_set_keymap('n', '<Leader>fw', ':Telescope grep_string<cr>', { noremap = true })
 api.nvim_set_keymap('n', '<leader>fb', ':Telescope file_browser<CR>', { noremap = true })
 api.nvim_set_keymap('n', '<Leader>ff', ':Telescope find_files hidden=true<cr>', { noremap = true })
+api.nvim_set_keymap('n', '<Leader>ft', ':Telescope filetypes<cr>', { noremap = true })
 api.nvim_set_keymap('n', '<leader>c', ':BufferClose<CR>', { noremap = true })
 api.nvim_set_keymap('n', '<esc>', ':nohlsearch<return><esc>', { noremap = true })
 api.nvim_set_keymap('n', '<leader>f', '<cmd>lua run_formatter()<CR>', { noremap = true })

@@ -66,6 +66,7 @@ return require('packer').startup(function()
   use 'sindrets/diffview.nvim'
   use 'glepnir/lspsaga.nvim'
   use 'lewis6991/spellsitter.nvim'
+  use 'norcalli/nvim-colorizer.lua'
   use 'tpope/vim-fugitive'
   use {"ray-x/lsp_signature.nvim"}
   use {

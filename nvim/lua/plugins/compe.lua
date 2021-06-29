@@ -17,13 +17,11 @@ require'compe'.setup {
     source = {
         path = {kind = "   (Path)"},
         buffer = {kind = "   (Buffer)"},
-        calc = {kind = "   (Calc)"},
         vsnip = {kind = "   (Snippet)"},
         nvim_lsp = {kind = "   (LSP)"},
 		nvim_lua = false,
         spell = {kind = "   (Spell)"},
-        tags = false,
-        vim_dadbod_completion = true,
+        tags = true,
         emoji = {kind = " ﲃ  (Emoji)", filetypes={"markdown", "text"}}
     }
 }

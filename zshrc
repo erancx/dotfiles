@@ -10,7 +10,6 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 export GOPATH=$HOME/workspace/go
 export PATH=/usr/local/opt/openssl/bin:$PATH:$GOPATH/bin:~/workspace/repo/utilities/list_instances/aws/:~/tmp/roer
 export EDITOR=nvim
-export SPINNAKER_API="https://gate-corp.witools.foo"
 export LESS=-Ri
 export MANPAGER="nvim -c 'set ft=man' -"
 export KUBE_EDITOR="nvim"
@@ -64,16 +63,25 @@ fe() {
 }
 
 fep() {
-    local files=$(fzf --query="$1" --select-1 --exit-0 --preview="bat --color=always {}" --preview-window=right:50%:wrap | sed -e "s/\(.*\)/\'\1\'/")
+    local files=$(fzf --query="$1" --select-1 --exit-0 --preview="bat --wrap character --color always {1} --highlight-line {2} --line-range {3}" --preview-window=right:50%:wrap | sed -e "s/\(.*\)/\'\1\'/")
     local command="${EDITOR:-vim} -p $files"
     [ -n "$files" ] && eval $command
 }
 
-# fag - find an argument with ag and fzf and open with vim
+# fag - find an argument with rg and fzf and open with vim
 fag() {
-    [ $# -eq 0  ] && return
-    local out cols
-    if out=$(ag --nogroup --color "$@" | fzf --ansi); then
+	if out=$(rg  \
+	--column \
+	--line-number \
+	--no-column \
+	--no-heading \
+	--fixed-strings \
+	--ignore-case \
+	--hidden \
+	--follow \
+	--glob '!.git/*' "$1" \
+	| awk -F  ":" '/1/ {start = $2<5 ? 0 : $2 - 5; end = $2 + 5; print $1 " " $2 " " start ":" end}' \
+    | fzf --preview 'bat --wrap character --color always {1} --highlight-line {2} --line-range {3}' --preview-window=right:50%:wrap); then
         setopt sh_word_split
         cols=(${out//:/  })
         unsetopt sh_word_split

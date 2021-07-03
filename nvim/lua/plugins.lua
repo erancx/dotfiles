@@ -75,7 +75,7 @@ return require('packer').startup(function()
         require("plugins.formatter")
       end
   }
-  use {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
+  use {'lukas-reineke/indent-blankline.nvim'}
   use {
     'lewis6991/gitsigns.nvim',
     requires = {

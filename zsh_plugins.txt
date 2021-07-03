@@ -3,3 +3,5 @@ zsh-users/zsh-completions
 zsh-users/zsh-history-substring-search
 tysonwolker/iterm-tab-colors
 zdharma/fast-syntax-highlighting
+rupa/z
+changyuheng/fz

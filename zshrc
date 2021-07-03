@@ -55,38 +55,17 @@ export FZF_DEFAULT_OPTS='-m
 --color fg:-1,bg:-1,hl:120,fg+:3,bg+:233,hl+:229
 --color info:140,prompt:120,spinner:150,pointer:167,marker:174'
 
-# fe - Open the selected files with the default editor
-fe() {
-    local files=$(fzf --query="$1" --select-1 --exit-0 | sed -e "s/\(.*\)/\'\1\'/")
-    local command="${EDITOR:-vim} -p $files"
-    [ -n "$files" ] && eval $command
-}
-
+# fep - find and edit file
 fep() {
-    local files=$(fzf --query="$1" --select-1 --exit-0 --preview="bat --wrap character --color always {1} --highlight-line {2} --line-range {3}" --preview-window=right:50%:wrap | sed -e "s/\(.*\)/\'\1\'/")
+    local files=$(fzf --query="$1" --select-1 --exit-0 --preview="bat --color=always {}" --preview-window=right:50%:wrap | sed -e "s/\(.*\)/\'\1\'/")
     local command="${EDITOR:-vim} -p $files"
     [ -n "$files" ] && eval $command
 }
 
 # fag - find an argument with rg and fzf and open with vim
 fag() {
-	if out=$(rg  \
-	--column \
-	--line-number \
-	--no-column \
-	--no-heading \
-	--fixed-strings \
-	--ignore-case \
-	--hidden \
-	--follow \
-	--glob '!.git/*' "$1" \
-	| awk -F  ":" '/1/ {start = $2<5 ? 0 : $2 - 5; end = $2 + 5; print $1 " " $2 " " start ":" end}' \
-    | fzf --preview 'bat --wrap character --color always {1} --highlight-line {2} --line-range {3}' --preview-window=right:50%:wrap); then
-        setopt sh_word_split
-        cols=(${out//:/  })
-        unsetopt sh_word_split
-        vim ${cols[1]} +"normal! ${cols[2]}zz"
-    fi
+  if [ ! "$#" -gt 0 ]; then echo "Need a string to search for!"; return 1; fi
+  rg --files-with-matches --no-messages "$1" | fzf --preview "highlight -O ansi -l {} 2> /dev/null | rg --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '$1' || rg --ignore-case --pretty --context 10 '$1' {}"
 }
 
 # cdf - cd into the directory of the selected file
@@ -94,6 +73,25 @@ cdf() {
     local file
     local dir
     file=$(fzf +m -q "$1") && dir=$(dirname "$file") && cd "$dir"
+}
+
+# fshow - git commit browser
+fshow() {
+  git log --graph --color=always \
+      --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
+  fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
+      --bind "ctrl-m:execute:
+                (grep -o '[a-f0-9]\{7\}' | head -1 |
+                xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
+                {}
+FZF-EOF"
+}
+
+# z - jump to directory with with z and fzf
+unalias z 2> /dev/null
+z() {
+  [ $# -gt 0 ] && _z "$*" && return
+  cd "$(_z -l 2>&1 | fzf --height 40% --nth 2.. --reverse --inline-info +s --tac --query "${*##-* }" | sed 's/^[0-9,.]* *//')"
 }
 #####################################
 

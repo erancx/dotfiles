@@ -36,7 +36,10 @@
 	autosetuprebase = always
 	autosetupmerge = always
 [pager]
-	show = nvim -c '%sm/\\e.\\{-}m//g' -c 'set ft=diff' +1 -
+    show = delta
+    log = delta
+    reflog = delta
+    diff = delta
 [merge]
   tool = vimdiff
 [mergetool]
@@ -46,7 +49,7 @@
 [difftool]
   prompt = false
 [diff]
-  tool = vimdiff
+	tool = vimdiff
 [user]
 	name = Eran Davidovich
 	email = erandav@google.com

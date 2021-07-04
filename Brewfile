@@ -38,10 +38,10 @@ brew "irssi"
 brew "jq"
 brew "jsonnet"
 brew "kubectx"
-brew "luajit", args: ["HEAD"]
+brew "luajit"
 brew "ncdu"
 brew "ncurses"
-brew "neovim", args: ["HEAD"]
+brew "neovim"
 brew "node@14"
 brew "prettier"
 brew "pulumi"

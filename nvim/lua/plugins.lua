@@ -49,7 +49,6 @@ return require('packer').startup(function()
             {'rafamadriz/friendly-snippets'}
         }
   }
-  use 'romgrk/barbar.nvim'
   use 'glepnir/galaxyline.nvim'
   use 'kevinhwang91/nvim-bqf'
   use 'ahmedkhalf/lsp-rooter.nvim'
@@ -64,6 +63,7 @@ return require('packer').startup(function()
   use 'nvim-lua/diagnostic-nvim'
   use 'windwp/nvim-autopairs'
   use 'sindrets/diffview.nvim'
+  use 'akinsho/nvim-bufferline.lua'
   use 'glepnir/lspsaga.nvim'
   use 'lewis6991/spellsitter.nvim'
   use 'norcalli/nvim-colorizer.lua'

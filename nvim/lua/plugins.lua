@@ -33,14 +33,33 @@ vim.cmd "autocmd BufWritePost plugins.lua PackerCompile" -- Auto compile when th
 return require('packer').startup(function()
   -- Packer can manage itself as an optional plugin
   use {'wbthomason/packer.nvim'}
-  use {
-    'iamcco/markdown-preview.nvim', run = function() vim.fn['mkdp#util#install']() end
-  }
+  use 'ahmedkhalf/lsp-rooter.nvim'
+  use 'akinsho/nvim-bufferline.lua'
+  use 'alexaandru/nvim-lspupdate'
+  use 'b3nj5m1n/kommentary'
+  use 'folke/tokyonight.nvim'
+  use 'glepnir/galaxyline.nvim'
+  use 'glepnir/lspsaga.nvim'
+  use 'jiangmiao/auto-pairs'
+  use 'kabouzeid/nvim-lspinstall'
+  use 'kevinhwang91/nvim-bqf'
+  use 'kyazdani42/nvim-web-devicons'
+  use 'lewis6991/spellsitter.nvim'
+  use 'martinda/Jenkinsfile-vim-syntax'
+  use 'neovim/nvim-lspconfig'
+  use 'norcalli/nvim-colorizer.lua'
+  use 'ntpeters/vim-better-whitespace'
+  use 'nvim-lua/diagnostic-nvim'
+  use 'nvim-lua/lsp-status.nvim'
+  use 'sindrets/diffview.nvim'
+  use 'tpope/vim-fugitive'
+  use 'windwp/nvim-autopairs'
+  use {'ray-x/lsp_signature.nvim'}
+  use {'lukas-reineke/indent-blankline.nvim'}
   use {
     'kkoomen/vim-doge',
     run = ':call doge#install()'
   }
-  use 'b3nj5m1n/kommentary'
   use {
   'hrsh7th/nvim-compe',
   requires = {
@@ -49,40 +68,18 @@ return require('packer').startup(function()
             {'rafamadriz/friendly-snippets'}
         }
   }
-  use 'glepnir/galaxyline.nvim'
-  use 'kevinhwang91/nvim-bqf'
-  use 'ahmedkhalf/lsp-rooter.nvim'
-  use 'jiangmiao/auto-pairs'
-  use 'kyazdani42/nvim-web-devicons'
-  use 'martinda/Jenkinsfile-vim-syntax'
-  use 'neovim/nvim-lspconfig'
-  use 'kabouzeid/nvim-lspinstall'
-  use 'ntpeters/vim-better-whitespace'
-  use 'folke/tokyonight.nvim'
-  use 'nvim-lua/lsp-status.nvim'
-  use 'nvim-lua/diagnostic-nvim'
-  use 'windwp/nvim-autopairs'
-  use 'sindrets/diffview.nvim'
-  use 'akinsho/nvim-bufferline.lua'
-  use 'glepnir/lspsaga.nvim'
-  use 'lewis6991/spellsitter.nvim'
-  use 'norcalli/nvim-colorizer.lua'
-  use 'tpope/vim-fugitive'
-  use {"ray-x/lsp_signature.nvim"}
   use {
       "mhartington/formatter.nvim",
       config = function()
         require("plugins.formatter")
       end
   }
-  use {'lukas-reineke/indent-blankline.nvim'}
   use {
     'lewis6991/gitsigns.nvim',
     requires = {
       'nvim-lua/plenary.nvim'
     }
   }
-
   use {
     'nvim-telescope/telescope.nvim',
     requires = {

@@ -64,8 +64,21 @@ fep() {
 
 # fag - find an argument with rg and fzf and open with vim
 fag() {
-  if [ ! "$#" -gt 0 ]; then echo "Need a string to search for!"; return 1; fi
-  rg --files-with-matches --no-messages "$1" | fzf --preview "highlight -O ansi -l {} 2> /dev/null | rg --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '$1' || rg --ignore-case --pretty --context 10 '$1' {}"
+  out=$(rg \
+	--column \
+	--line-number \
+	--no-column \
+	--no-heading \
+	--fixed-strings \
+	--ignore-case \
+	--hidden \
+	--follow \
+	--glob '!.git/*' "$1" \
+	| awk -F  ":" '/1/ {start = $2<5 ? 0 : $2 - 5; end = $2 + 5; print $1 " " $2}' \
+    | fzf --preview 'bat --wrap character --color always {1} --highlight-line {2}' --preview-window wrap)
+
+    read -r filename line <<< "${out}"
+    ${EDITOR:-vim} "${filename}" +"normal! ${line}zz"
 }
 
 # cdf - cd into the directory of the selected file

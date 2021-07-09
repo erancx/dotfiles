@@ -37,6 +37,7 @@ return require('packer').startup(function()
   use 'akinsho/nvim-bufferline.lua'
   use 'alexaandru/nvim-lspupdate'
   use 'b3nj5m1n/kommentary'
+  use 'google/vim-jsonnet'
   use 'folke/tokyonight.nvim'
   use 'glepnir/galaxyline.nvim'
   use 'glepnir/lspsaga.nvim'
@@ -85,7 +86,8 @@ return require('packer').startup(function()
     requires = {
       {'nvim-lua/popup.nvim'},
       {'nvim-lua/plenary.nvim'},
-      {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
+      {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'},
+      {'nvim-telescope/telescope-project.nvim'},
     }
   }
 

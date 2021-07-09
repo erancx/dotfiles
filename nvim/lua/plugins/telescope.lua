@@ -30,7 +30,7 @@ require('telescope').setup{
         preview_cutoff = 120
     },
     file_sorter =  require'telescope.sorters'.get_fuzzy_file,
-    file_ignore_patterns = {},
+    file_ignore_patterns = {".git/*"},
     generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
     shorten_path = true,
     winblend = 0,
@@ -53,7 +53,13 @@ require('telescope').setup{
             override_file_sorter = true, -- override the file sorter
             case_mode = "smart_case" -- or "ignore_case" or "respect_case"
             -- the default case_mode is "smart_case"
-        }
+        },
+        project = {
+          base_dirs = {
+            '~/workspace/repo',
+          }
+      }
     }
 }
 require("telescope").load_extension("fzf")
+require("telescope").load_extension("project")

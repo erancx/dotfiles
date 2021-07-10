@@ -2,12 +2,12 @@
 require('general.settings')
 require('general.mappings')
 require('general.autocmd')
-require('general.eviline')
 
 -- Plugins
 require('plugins')
 
 -- Plugins configs
+require('plugins.galaxyline')
 require('plugins.autopairs')
 require('plugins.compe')
 require('plugins.doge')

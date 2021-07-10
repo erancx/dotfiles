@@ -55,6 +55,7 @@ export FZF_DEFAULT_OPTS='-m
 --color fg:-1,bg:-1,hl:120,fg+:3,bg+:233,hl+:229
 --color info:140,prompt:120,spinner:150,pointer:167,marker:174'
 
+
 # fep - find and edit file
 fep() {
     local files=$(fzf --query="$1" --select-1 --exit-0 --preview="bat --color=always {}" --preview-window=right:50%:wrap | sed -e "s/\(.*\)/\'\1\'/")
@@ -98,13 +99,6 @@ fshow() {
             --ansi --preview="$_viewGitLogLine" \
             --bind "enter:execute:$_viewGitLogLine | less -Ri" \
             --preview-window=right:50%:wrap
-}
-
-# z - jump to directory with with z and fzf
-unalias z 2> /dev/null
-z() {
-  [ $# -gt 0 ] && _z "$*" && return
-  cd "$(_z -l 2>&1 | fzf --height 40% --nth 2.. --reverse --inline-info +s --tac --query "${*##-* }" | sed 's/^[0-9,.]* *//')"
 }
 #####################################
 

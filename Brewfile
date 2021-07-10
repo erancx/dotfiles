@@ -62,7 +62,6 @@ brew "watch"
 brew "wget"
 brew "yank"
 brew "yq"
-brew "z"
 brew "zsh-completions"
 brew "boz/repo/kail"
 brew "homebrew/cask/tree-sitter@0.18.3", link: false

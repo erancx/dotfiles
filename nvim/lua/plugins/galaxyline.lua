@@ -1,20 +1,5 @@
 local gl = require('galaxyline')
-local colors = { -- similar to tokyonight
-    bg = '#24283b',
-    line_bg = '#364A82',
-    fg = '#c0caf5',
-    fg_green = '#65a380',
-    yellow = '#fabd2f',
-    cyan = '#008080',
-    darkblue = '#081633',
-    green = '#afd700',
-    orange = '#FF8800',
-    purple = '#5d4d7a',
-    magenta = '#c678dd',
-    blue = '#51afef';
-    red = '#ec5f67'
-}
-
+local colors = require("tokyonight.colors").setup()
 local condition = require('galaxyline.condition')
 local gls = gl.section
 gl.short_line_list = {'NvimTree','vista','dbui'}

@@ -56,6 +56,7 @@ require('telescope').setup{
         project = {
           base_dirs = {
             '~/workspace/repo',
+            '~/dotfiles',
           }
       }
     }

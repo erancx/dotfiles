@@ -68,3 +68,4 @@ brew "homebrew/cask/tree-sitter@0.18.3", link: false
 brew "homebrew/cask/tree-sitter@0.19.0"
 brew "pulumi/tap/tf2pulumi"
 brew "teamookla/speedtest/speedtest"
+cask "kitty"

@@ -1,10 +1,10 @@
+-- Plugins
+require('plugins')
+
 -- General
 require('general.settings')
 require('general.mappings')
 require('general.autocmd')
-
--- Plugins
-require('plugins')
 
 -- Plugins configs
 require('plugins.galaxyline')

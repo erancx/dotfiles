@@ -5,3 +5,4 @@ tysonwolker/iterm-tab-colors
 zdharma/fast-syntax-highlighting
 rupa/z
 changyuheng/fz
+romkatv/powerlevel10k

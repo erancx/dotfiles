@@ -47,7 +47,6 @@ source ~/.zshrc_google
 
 source <(antibody init)
 antibody bundle < ~/.zsh_plugins.txt
-antibody bundle romkatv/powerlevel10k
 
 ### fzf ############################
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -90,7 +89,7 @@ cdf() {
 }
 
 # fshow - git commit browser
-alias glNoGraph='git log --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr% C(auto)%an" "$@"'
+alias glNoGraph='git log --color=always --format="%C(auto)%h%d %s %C(cyan)%C(bold)%cr% C(auto)%an" "$@"'
 _gitLogLineToHash="echo {} | grep -o '[a-f0-9]\{7\}' | head -1"
 _viewGitLogLine="$_gitLogLineToHash | xargs -I % sh -c 'git show --color=always % | delta'"
 fshow() {
@@ -112,8 +111,6 @@ fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-
 #### FIG ENV VARIABLES ####
 [ -s ~/.fig/fig.sh ] && source ~/.fig/fig.sh
 #### END FIG ENV VARIABLES ####
@@ -123,16 +120,13 @@ autoload -Uz compinit
 compinit
 # Completion for kitty
 kitty + complete setup zsh | source /dev/stdin
-
 # Kitty tab name
 function set-title-precmd() {
   printf "\e]2;%s\a" "${PWD/#$HOME/~}"
 }
-
 function set-title-preexec() {
   printf "\e]2;%s\a" "$1"
 }
-
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd set-title-precmd
 add-zsh-hook preexec set-title-preexec

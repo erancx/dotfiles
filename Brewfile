@@ -42,7 +42,7 @@ brew "luajit"
 brew "ncdu"
 brew "ncurses"
 brew "neovim"
-brew "node@14", link: true
+brew "node@14"
 brew "prettier"
 brew "pulumi"
 brew "python@2", link: false

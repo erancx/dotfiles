@@ -9,7 +9,7 @@ export LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 export GOPATH=$HOME/workspace/go
 export PATH=/usr/local/opt/openssl/bin:$PATH:$GOPATH/bin:~/workspace/repo/utilities/list_instances/aws/:~/tmp/roer
-export EDITOR=nvim
+export EDITOR=${EDITOR:-nvim}
 export LESS=-Ri
 export MANPAGER="nvim -c 'set ft=man' -"
 export KUBE_EDITOR="nvim"
@@ -63,22 +63,36 @@ fep() {
 }
 
 # fag - find an argument with rg and fzf and open with vim
-fag() {
-  out=$(rg \
-	--column \
-	--line-number \
-	--no-column \
-	--no-heading \
-	--fixed-strings \
-	--ignore-case \
-	--hidden \
-	--follow \
-	--glob '!.git/*' "$1" \
-	| awk -F  ":" '/1/ {start = $2<5 ? 0 : $2 - 5; end = $2 + 5; print $1 " " $2}' \
-    | fzf --preview 'bat --wrap character --color always {1} --highlight-line {2}' --preview-window wrap)
+# fag() {
+#   out=$(rg \
+# 	--column \
+# 	--line-number \
+# 	--no-column \
+# 	--no-heading \
+# 	--fixed-strings \
+# 	--ignore-case \
+# 	--hidden \
+#     -s \
+# 	--follow \
+# 	--glob '!.git/*' "$1" \
+# 	| awk -F  ":" '/1/ {start = $2<5 ? 0 : $2 - 5; end = $2 + 5; print $1 " " $2}' \
+#     | fzf --preview 'bat --wrap character --color always {1} --highlight-line {2}' --preview-window wrap)
 
-    read -r filename line <<< "${out}"
-    ${EDITOR:-vim} "${filename}" +"normal! ${line}zz"
+#     read -r filename line <<< "${out}"
+#     ${EDITOR:-vim} "${filename}" +"normal! ${line}zz"
+# }
+#
+
+# fag - find an argument with ag and fzf and open with vim
+fag() {
+    [ $# -eq 0  ] && return
+    local out cols
+    if out=$(ag --nogroup --color "$@" | fzf --ansi); then
+        setopt sh_word_split
+        cols=(${out//:/  })
+        unsetopt sh_word_split
+        vim ${cols[1]} +"normal! ${cols[2]}zz"
+    fi
 }
 
 # cdf - cd into the directory of the selected file

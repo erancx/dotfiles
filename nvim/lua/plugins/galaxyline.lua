@@ -144,11 +144,13 @@ gls.right[6] = {
   }
 }
 
-gls.right[8] = {
-  RainbowBlue = {
-    provider = function() return ' ▊' end,
+gls.right[7] = {
+  FileNameType = {
+    provider = 'FileTypeName',
+    separator = ' ',
+    separator_highlight = {'NONE',colors.bg},
     highlight = {colors.blue,colors.bg}
-  },
+  }
 }
 
 local get_lsp_client = function(msg)
@@ -189,7 +191,8 @@ gls.right[8] = {
             if tbl[vim.bo.filetype] then return false end
             return true
         end,
-    highlight = {colors.blue,colors.bg}
+    separator = ' ',
+    highlight = {colors.blue,colors.bg, 'bold'}
     }
 }
 

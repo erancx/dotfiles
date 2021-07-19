@@ -36,6 +36,7 @@ colorama==0.4.3
 commonmark==0.9.1
 cookiecutter==1.7.2
 cryptography==3.3.1
+debugpy==1.3.0
 decorator==4.4.2
 dill==0.3.3
 distlib==0.3.1
@@ -53,13 +54,14 @@ future==0.18.2
 gcloud==0.18.3
 gitdb==4.0.5
 GitPython==3.1.11
-google-api-core==1.22.2
+google-api-core==1.31.0
 google-api-python-client==1.12.1
-google-auth==1.21.2
+google-auth==1.33.0
 google-auth-httplib2==0.0.4
 google-cloud==0.34.0
 google-cloud-access-context-manager==0.1.3
 google-cloud-asset==3.1.0
+google-cloud-bigquery-datatransfer==3.3.0
 google-cloud-core==1.4.3
 google-cloud-monitoring==2.0.0
 google-cloud-org-policy==0.3.0
@@ -121,7 +123,7 @@ pluggy==0.13.1
 poyo==0.5.0
 present==0.6.0
 prompt-toolkit==3.0.7
-proto-plus==1.13.0
+proto-plus==1.19.0
 protobuf==3.13.0
 psutil==5.7.2
 psycopg2-binary==2.9.1
@@ -149,8 +151,7 @@ pytest==6.1.2
 python-dateutil==2.8.1
 python-editor==1.0.4
 python-json-logger==2.0.1
-python-jsonrpc-server==0.3.4
-python-language-server==0.34.1
+python-jsonrpc-server==0.4.0
 python-magic==0.4.24
 python-slugify==4.0.1
 pytz==2020.1
@@ -180,9 +181,10 @@ traitlets==5.0.4
 tree-sitter==0.2.2
 typed-ast==1.4.1
 types-PyYAML==0.1.7
+types-requests==2.25.0
 typing-extensions==3.7.4.3
 typing-inspect==0.6.0
-ujson==1.35
+ujson==4.0.2
 untokenize==0.1.1
 uritemplate==3.0.1
 urllib3==1.25.10

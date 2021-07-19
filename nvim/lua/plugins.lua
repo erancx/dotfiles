@@ -32,7 +32,7 @@ vim.cmd "autocmd BufWritePost plugins.lua PackerCompile" -- Auto compile when th
 
 return require('packer').startup(function()
   -- Packer can manage itself as an optional plugin
-  use {'wbthomason/packer.nvim'}
+  use 'wbthomason/packer.nvim'
   use 'ahmedkhalf/lsp-rooter.nvim'
   use 'akinsho/nvim-bufferline.lua'
   use 'alexaandru/nvim-lspupdate'
@@ -55,6 +55,8 @@ return require('packer').startup(function()
   use 'sindrets/diffview.nvim'
   use 'tpope/vim-fugitive'
   use 'windwp/nvim-autopairs'
+  use 'mfussenegger/nvim-dap'
+  use 'lepture/vim-jinja'
   use {'ray-x/lsp_signature.nvim'}
   use {'lukas-reineke/indent-blankline.nvim'}
   use {

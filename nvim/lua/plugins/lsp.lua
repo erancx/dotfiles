@@ -89,4 +89,3 @@ configs.ciderlsp = {
    settings = {};
  };
 }
-nvim_lsp.ciderlsp.setup{}

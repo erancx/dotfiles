@@ -54,4 +54,6 @@ api.nvim_set_keymap('n', '<leader>rn', ':lua vim.lsp.buf.rename()<CR>', { norema
 api.nvim_set_keymap('n', '<leader>ca', ':lua vim.lsp.buf.code_action()<CR>', { noremap = true })
 api.nvim_set_keymap('n', 'gr', ':lua vim.lsp.buf.references()<CR>', { noremap = true })
 api.nvim_set_keymap('n', '<leader>q', ':lua vim.lsp.diagnostic.set_loclist()<CR>', { noremap = true })
+api.nvim_set_keymap('n', '<leader>+', ':vertical resize +5<CR>', { noremap = true })
+api.nvim_set_keymap('n', '<leader>-', ':vertical resize -5<CR>', { noremap = true })
 -- https://github.com/mjlbach/defaults.nvim/blob/master/init.lua

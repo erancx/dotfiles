@@ -2,6 +2,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+
 export ZSH=$HOME/.oh-my-zsh
 plugins=(git docker osx common-aliases virtualenv kubectl)
 source $ZSH/oh-my-zsh.sh

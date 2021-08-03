@@ -55,10 +55,10 @@ return require('packer').startup(function()
   use 'sindrets/diffview.nvim'
   use 'tpope/vim-fugitive'
   use 'windwp/nvim-autopairs'
-  use 'mfussenegger/nvim-dap'
   use 'lepture/vim-jinja'
-  use {'ray-x/lsp_signature.nvim'}
-  use {'lukas-reineke/indent-blankline.nvim'}
+  use 'ray-x/lsp_signature.nvim'
+  use 'lukas-reineke/indent-blankline.nvim'
+  use 'Pocco81/AutoSave.nvim'
   use {
     'kkoomen/vim-doge',
     run = ':call doge#install()'

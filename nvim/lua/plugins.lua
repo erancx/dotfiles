@@ -31,7 +31,6 @@ end
 vim.cmd "autocmd BufWritePost plugins.lua PackerCompile" -- Auto compile when there are changes in plugins.lua
 
 return require('packer').startup(function()
-  -- Packer can manage itself as an optional plugin
   use 'wbthomason/packer.nvim'
   use 'ahmedkhalf/lsp-rooter.nvim'
   use 'akinsho/nvim-bufferline.lua'
@@ -45,12 +44,6 @@ return require('packer').startup(function()
   use 'kabouzeid/nvim-lspinstall'
   use 'kevinhwang91/nvim-bqf'
   use 'kyazdani42/nvim-web-devicons'
-use {
-  'lewis6991/spellsitter.nvim',
-  config = function()
-    require('spellsitter').setup()
-  end
-}
   use 'martinda/Jenkinsfile-vim-syntax'
   use 'neovim/nvim-lspconfig'
   use 'norcalli/nvim-colorizer.lua'
@@ -63,10 +56,17 @@ use {
   use 'lepture/vim-jinja'
   use 'ray-x/lsp_signature.nvim'
   use 'lukas-reineke/indent-blankline.nvim'
+
+  use {
+    "folke/trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+  }
+
   use {
     'kkoomen/vim-doge',
     run = ':call doge#install()'
   }
+
   use {
   'hrsh7th/nvim-compe',
   requires = {
@@ -75,18 +75,21 @@ use {
             {'rafamadriz/friendly-snippets'}
         }
   }
+
   use {
       "mhartington/formatter.nvim",
       config = function()
         require("plugins.formatter")
       end
   }
+
   use {
     'lewis6991/gitsigns.nvim',
     requires = {
       'nvim-lua/plenary.nvim'
     }
   }
+
   use {
     'nvim-telescope/telescope.nvim',
     requires = {
@@ -100,5 +103,12 @@ use {
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate'
+  }
+
+  use {
+    'lewis6991/spellsitter.nvim',
+    config = function()
+      require('spellsitter').setup()
+    end
   }
 end)

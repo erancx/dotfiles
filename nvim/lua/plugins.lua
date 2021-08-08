@@ -45,7 +45,12 @@ return require('packer').startup(function()
   use 'kabouzeid/nvim-lspinstall'
   use 'kevinhwang91/nvim-bqf'
   use 'kyazdani42/nvim-web-devicons'
-  use 'lewis6991/spellsitter.nvim'
+use {
+  'lewis6991/spellsitter.nvim',
+  config = function()
+    require('spellsitter').setup()
+  end
+}
   use 'martinda/Jenkinsfile-vim-syntax'
   use 'neovim/nvim-lspconfig'
   use 'norcalli/nvim-colorizer.lua'
@@ -58,7 +63,6 @@ return require('packer').startup(function()
   use 'lepture/vim-jinja'
   use 'ray-x/lsp_signature.nvim'
   use 'lukas-reineke/indent-blankline.nvim'
-  use 'Pocco81/AutoSave.nvim'
   use {
     'kkoomen/vim-doge',
     run = ':call doge#install()'

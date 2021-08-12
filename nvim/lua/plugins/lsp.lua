@@ -55,12 +55,18 @@ lspSymbol("Warning", "")
 lspSymbol("Information", "")
 lspSymbol("Hint", "")
 
-local servers = { "yamlls", "bashls", "vimls", "jsonls", "dockerls", "gopls" }
+local servers = { "yamlls", "bashls", "vimls", "jsonls", "dockerls" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup { on_attach = on_attach }
 end
 
 nvim_lsp.pyright.setup {
+    on_attach = function(client)
+        require'lsp_signature'.on_attach()
+    end,
+}
+
+nvim_lsp.gopls.setup {
     on_attach = function(client)
         require'lsp_signature'.on_attach()
     end,

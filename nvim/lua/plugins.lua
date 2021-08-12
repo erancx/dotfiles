@@ -34,26 +34,24 @@ return require('packer').startup(function()
   use 'wbthomason/packer.nvim'
   use 'ahmedkhalf/lsp-rooter.nvim'
   use 'akinsho/nvim-bufferline.lua'
-  use 'alexaandru/nvim-lspupdate'
   use 'b3nj5m1n/kommentary'
   use 'google/vim-jsonnet'
   use 'folke/tokyonight.nvim'
   use 'glepnir/galaxyline.nvim'
   use 'jiangmiao/auto-pairs'
-  use 'kabouzeid/nvim-lspinstall'
   use 'kyazdani42/nvim-web-devicons'
   use 'martinda/Jenkinsfile-vim-syntax'
   use 'neovim/nvim-lspconfig'
   use 'norcalli/nvim-colorizer.lua'
   use 'ntpeters/vim-better-whitespace'
-  use 'nvim-lua/diagnostic-nvim'
-  use 'nvim-lua/lsp-status.nvim'
   use 'sindrets/diffview.nvim'
   use 'tpope/vim-fugitive'
   use 'windwp/nvim-autopairs'
-  use 'lepture/vim-jinja'
   use 'ray-x/lsp_signature.nvim'
   use 'lukas-reineke/indent-blankline.nvim'
+  use "mhartington/formatter.nvim"
+  use 'lewis6991/spellsitter.nvim'
+  use 'nvim-lua/lsp-status.nvim'
 
   use {
     "folke/trouble.nvim",
@@ -72,13 +70,6 @@ return require('packer').startup(function()
             {'hrsh7th/vim-vsnip-integ'},
             {'rafamadriz/friendly-snippets'}
         }
-  }
-
-  use {
-      "mhartington/formatter.nvim",
-      config = function()
-        require("plugins.formatter")
-      end
   }
 
   use {
@@ -101,12 +92,5 @@ return require('packer').startup(function()
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate'
-  }
-
-  use {
-    'lewis6991/spellsitter.nvim',
-    config = function()
-      require('spellsitter').setup()
-    end
   }
 end)

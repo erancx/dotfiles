@@ -32,7 +32,7 @@ vim.cmd "autocmd BufWritePost plugins.lua PackerCompile" -- Auto compile when th
 
 return require('packer').startup(function()
   use 'wbthomason/packer.nvim'
-  use 'ahmedkhalf/lsp-rooter.nvim'
+  use 'ahmedkhalf/project.nvim'
   use 'akinsho/nvim-bufferline.lua'
   use 'b3nj5m1n/kommentary'
   use 'google/vim-jsonnet'

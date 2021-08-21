@@ -52,6 +52,7 @@ return require('packer').startup(function()
   use "mhartington/formatter.nvim"
   use 'lewis6991/spellsitter.nvim'
   use 'nvim-lua/lsp-status.nvim'
+  use 'David-Kunz/treesitter-unit'
 
   use {
     "folke/trouble.nvim",

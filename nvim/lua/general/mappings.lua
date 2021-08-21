@@ -56,4 +56,7 @@ api.nvim_set_keymap('n', 'gr', ':lua vim.lsp.buf.references()<CR>', { noremap = 
 api.nvim_set_keymap('n', '<leader>q', ':LspTroubleToggle<CR>', { noremap = true })
 api.nvim_set_keymap('n', '<leader>+', ':vertical resize +5<CR>', { noremap = true })
 api.nvim_set_keymap('n', '<leader>-', ':vertical resize -5<CR>', { noremap = true })
+api.nvim_set_keymap('n', 'vx', ':lua require"treesitter-unit".select()<CR>', {noremap=true})
+api.nvim_set_keymap('n', 'dx', ':lua require"treesitter-unit".delete()<CR>', {noremap=true})
+api.nvim_set_keymap('n', 'cx', ':lua require"treesitter-unit".change()<CR>', {noremap=true})
 -- https://github.com/mjlbach/defaults.nvim/blob/master/init.lua

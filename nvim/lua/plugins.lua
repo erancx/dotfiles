@@ -37,6 +37,7 @@ return require('packer').startup(function()
   use 'b3nj5m1n/kommentary'
   use 'google/vim-jsonnet'
   use 'folke/tokyonight.nvim'
+  use 'monsonjeremy/onedark.nvim'
   use 'glepnir/galaxyline.nvim'
   use 'jiangmiao/auto-pairs'
   use 'kyazdani42/nvim-web-devicons'

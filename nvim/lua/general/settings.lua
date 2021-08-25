@@ -1,9 +1,9 @@
-local g = vim.g
 local cmd = vim.cmd
 
 -- colorscheme
-g.tokyonight_style = "storm"
-vim.cmd[[colorscheme tokyonight]]
+require('onedark').setup({
+  functionStyle = "italic",
+})
 
 -- General settings
 cmd "set autoindent"
@@ -66,4 +66,3 @@ cmd "set wildoptions=pum"
 cmd "set wrap"
 cmd "syntax enable"
 cmd "syntax on"
-cmd "highlight Comment cterm=italic gui=italic guifg=#2E8BCC"

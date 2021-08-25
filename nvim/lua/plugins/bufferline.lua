@@ -1,4 +1,4 @@
-local colors = require("tokyonight.colors").setup()
+local colors = require("onedark.colors").setup()
 
 require('bufferline').setup {
   options = {

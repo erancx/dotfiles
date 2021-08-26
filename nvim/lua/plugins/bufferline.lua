@@ -12,6 +12,7 @@ require('bufferline').setup {
     max_prefix_length = 20,
     tab_size = 25,
     always_show_bufferline = true,
+    show_tab_indicators = false,
     separator_style = "thick",
   },
   -- tokyonight background

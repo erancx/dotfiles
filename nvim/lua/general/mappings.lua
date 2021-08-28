@@ -7,8 +7,7 @@ function run_formatter()
   local formatters = require("formatter.config").values.filetype[filetype]
 
   if vim.bo.modifiable then
-    if not require("formatter.util").isEmpty(formatters) then
-      vim.api.nvim_command("Format")
+    if not require("formatter.util").isEmpty(formatters) then vim.api.nvim_command("Format")
     else
       vim.lsp.buf.formatting()
     end
@@ -59,4 +58,3 @@ api.nvim_set_keymap('n', '<leader>-', ':vertical resize -5<CR>', { noremap = tru
 api.nvim_set_keymap('n', 'vx', ':lua require"treesitter-unit".select()<CR>', {noremap=true})
 api.nvim_set_keymap('n', 'dx', ':lua require"treesitter-unit".delete()<CR>', {noremap=true})
 api.nvim_set_keymap('n', 'cx', ':lua require"treesitter-unit".change()<CR>', {noremap=true})
--- https://github.com/mjlbach/defaults.nvim/blob/master/init.lua

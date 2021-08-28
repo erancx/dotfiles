@@ -1,2 +1,5 @@
 # nvim
-Neovim Configuration based  on Lua
+
+My personal dotfiles.
+
+Use at own risk.

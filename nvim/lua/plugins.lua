@@ -54,16 +54,10 @@ return require('packer').startup(function()
   use 'lewis6991/spellsitter.nvim'
   use 'nvim-lua/lsp-status.nvim'
   use 'David-Kunz/treesitter-unit'
-
-  use {
-    "folke/trouble.nvim",
-    requires = "kyazdani42/nvim-web-devicons",
-  }
-
-  use {
-    'kkoomen/vim-doge',
-    run = ':call doge#install()'
-  }
+  use {"folke/trouble.nvim", requires = "kyazdani42/nvim-web-devicons"}
+  use {'kkoomen/vim-doge', run = ':call doge#install()'}
+  use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+  use {'lewis6991/gitsigns.nvim', requires = 'nvim-lua/plenary.nvim'}
 
   use {
   'hrsh7th/nvim-compe',
@@ -75,13 +69,6 @@ return require('packer').startup(function()
   }
 
   use {
-    'lewis6991/gitsigns.nvim',
-    requires = {
-      'nvim-lua/plenary.nvim'
-    }
-  }
-
-  use {
     'nvim-telescope/telescope.nvim',
     requires = {
       {'nvim-lua/popup.nvim'},
@@ -89,10 +76,5 @@ return require('packer').startup(function()
       {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'},
       {'nvim-telescope/telescope-project.nvim'},
     }
-  }
-
-  use {
-    'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate'
   }
 end)

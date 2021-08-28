@@ -1,5 +1,3 @@
--- vim: ts=2 sw=2 et:
-
 local g = vim.g
 
 g.indent_blankline_char             = '▏'

@@ -1,5 +1,5 @@
 # nvim
 
-My personal dotfiles.
+My personal Neovim LUA config files.
 
 Use at own risk.

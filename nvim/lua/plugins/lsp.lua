@@ -1,95 +1,78 @@
-local nvim_lsp = require('lspconfig')
-local lsp_status = require("lsp-status")
-local on_attach = function(client, bufnr)
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+local lspconfig = require('lspconfig')
+local lspinstall = require("lsp-status")
 
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-  -- Set autocommands conditional on server_capabilities
-  if client.resolved_capabilities.document_highlight then
-    vim.api.nvim_exec([[
-      hi LspReferenceRead cterm=bold ctermbg=red guibg=LightYellow
-      hi LspReferenceText cterm=bold ctermbg=red guibg=LightYellow
-      hi LspReferenceWrite cterm=bold ctermbg=red guibg=LightYellow
-      augroup lsp_document_highlight
-        autocmd! * <buffer>
-        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-      augroup END
-    ]], false)
-  end
-end
-
-nvim_lsp.efm.setup {
-  filetypes = {"yaml", "python", "sh", "json", "markdown"},
-  init_options = {documentFormatting = true},
-  cmd = {
-    "efm-langserver",
-    "-c",
-    vim.fn.stdpath("config") .. "/lua/plugins/efm.yml"
-  },
-  root_dir = function()
-    return vim.fn.getcwd()
-  end
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.documentationFormat = { "markdown", "plaintext" }
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.completion.completionItem.preselectSupport = true
+capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
+capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
+capabilities.textDocument.completion.completionItem.deprecatedSupport = true
+capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
+capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+   properties = {
+      "documentation",
+      "detail",
+      "additionalTextEdits",
+   },
 }
 
--- Enable diagnostics
-vim.lsp.handlers["textDocument/publishDiagnostics"] =
-    vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics,
-    {
-        underline = true,
-        virtual_text = true,
-        signs = true,
-        update_in_insert = true
-    }
-)
-
-function lspSymbol(name, icon)
-    vim.fn.sign_define("LspDiagnosticsSign" .. name, {text = icon, numhl = "LspDiagnosticsDefaul" .. name})
-end
-
-lspSymbol("Error", "")
-lspSymbol("Warning", "")
-lspSymbol("Information", "")
-lspSymbol("Hint", "")
-
+-- lspInstall + lspconfig stuff
 local servers = { "yamlls", "bashls", "vimls", "jsonls", "dockerls" }
 for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup { on_attach = on_attach }
+  lspconfig[lsp].setup {on_attach = on_attach, capabilities = capabilities}
 end
 
-nvim_lsp.pyright.setup {
+lspconfig.pyright.setup {
+    capabilities = capabilities,
     on_attach = function(client)
         require'lsp_signature'.on_attach()
     end,
 }
 
-nvim_lsp.gopls.setup {
+lspconfig.gopls.setup {
+    capabilities = capabilities,
     on_attach = function(client)
         require'lsp_signature'.on_attach()
     end,
 }
 
-nvim_lsp.terraformls.setup {
+lspconfig.terraformls.setup {
     on_attach = on_attach_common,
+    capabilities = capabilities,
     cmd = {"terraform-ls", "serve"},
     filetypes = {"tf"}
 }
 
-nvim_lsp.jsonls.setup {
+lspconfig.jsonls.setup {
     on_attach = on_attach,
+    capabilities = capabilities,
     cmd = {"vscode-json-languageserver", "--stdio"}
 }
 
-local nvim_lsp = require'lspconfig'
-local configs = require'lspconfig/configs'
-configs.ciderlsp = {
- default_config = {
-   cmd = {'/google/bin/releases/cider/ciderlsp/ciderlsp', '--tooltag=nvim-lsp' , '--noforward_sync_responses'};
-   filetypes = {'c', 'cpp', 'java', 'proto', 'textproto', 'go', 'python', 'bzl'};
-   root_dir = nvim_lsp.util.root_pattern('BUILD');
-   settings = {};
- };
-}
+-- replace the default lsp diagnostic symbols
+local function lspSymbol(name, icon)
+   vim.fn.sign_define("LspDiagnosticsSign" .. name, { text = icon, numhl = "LspDiagnosticsDefaul" .. name })
+end
+
+lspSymbol("Error", "")
+lspSymbol("Information", "")
+lspSymbol("Hint", "")
+lspSymbol("Warning", "")
+
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+   virtual_text = {
+      prefix = "",
+      spacing = 0,
+   },
+   signs = true,
+   underline = true,
+   update_in_insert = false, -- update diagnostics insert mode
+})
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+   border = "single",
+})
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+   border = "single",
+})

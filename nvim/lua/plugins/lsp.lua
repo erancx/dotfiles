@@ -40,6 +40,7 @@ lspconfig.efm.setup {
 
 
 lspconfig.pyright.setup {
+    root_dir = lspconfig.util.root_pattern('.git', vim.fn.getcwd()),
     capabilities = capabilities,
     on_attach = function(client)
         require'lsp_signature'.on_attach()

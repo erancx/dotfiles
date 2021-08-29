@@ -12,9 +12,7 @@ g.indent_blankline_filetype_exclude = {
   'tex',
   'txt',
 }
-g.indent_blankline_buftype_exclude = {
-  'terminal',
-}
+g.indent_blankline_buftype_exclude = {'terminal'}
 g.indent_blankline_context_patterns = {
   'class',
   'funtion',

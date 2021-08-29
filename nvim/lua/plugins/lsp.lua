@@ -24,6 +24,21 @@ for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {on_attach = on_attach, capabilities = capabilities}
 end
 
+lspconfig.efm.setup {
+  filetypes = {"yaml", "python", "sh", "json", "markdown"},
+  capabilities = capabilities,
+  init_options = {documentFormatting = true},
+  cmd = {
+    "efm-langserver",
+    "-c",
+    vim.fn.stdpath("config") .. "/lua/plugins/efm.yml"
+  },
+  root_dir = function()
+    return vim.fn.getcwd()
+  end
+}
+
+
 lspconfig.pyright.setup {
     capabilities = capabilities,
     on_attach = function(client)

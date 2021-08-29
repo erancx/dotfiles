@@ -32,7 +32,6 @@ vim.cmd 'autocmd BufWritePost plugins.lua PackerCompile' -- Auto compile when th
 
 return require('packer').startup(function()
   use 'wbthomason/packer.nvim'
-  use 'ahmedkhalf/project.nvim'
   use 'akinsho/nvim-bufferline.lua'
   use 'b3nj5m1n/kommentary'
   use 'monsonjeremy/onedark.nvim'
@@ -56,16 +55,15 @@ return require('packer').startup(function()
   use {'kkoomen/vim-doge', run = ':call doge#install()'}
   use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
   use {'lewis6991/gitsigns.nvim', requires = 'nvim-lua/plenary.nvim'}
-  use {'hrsh7th/nvim-cmp'}
-  use {'L3MON4D3/LuaSnip', wants = 'friendly-snippets', after = 'nvim-cmp'}
-  use {'saadparwaiz1/cmp_luasnip', after = 'LuaSnip'}
-  use {'hrsh7th/cmp-nvim-lua', after = 'cmp_luasnip'}
-  use {'hrsh7th/cmp-nvim-lsp', after = 'cmp-nvim-lua'}
-  use {'hrsh7th/cmp-buffer', after = 'cmp-nvim-lsp'}
-  use {'rafamadriz/friendly-snippets', after = 'cmp-buffer'}
+  use {'hrsh7th/nvim-compe',
+  requires = {
+            {'hrsh7th/vim-vsnip'},
+            {'hrsh7th/vim-vsnip-integ'},
+            {'rafamadriz/friendly-snippets'}
+        }
+  }
 
-  use {
-    'nvim-telescope/telescope.nvim',
+  use {'nvim-telescope/telescope.nvim',
     requires = {
       {'nvim-lua/popup.nvim'},
       {'nvim-lua/plenary.nvim'},

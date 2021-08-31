@@ -136,6 +136,7 @@ pyasn1==0.4.8
 pyasn1-modules==0.2.8
 pycodestyle==2.6.0
 pycparser==2.20
+pycritty==0.3.5
 pycrypto==2.6.1
 pydocstyle==5.1.1
 pyfiglet==0.8.post1

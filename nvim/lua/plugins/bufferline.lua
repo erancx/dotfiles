@@ -12,6 +12,23 @@ require('bufferline').setup {
     always_show_bufferline = true,
     show_tab_indicators = false,
     separator_style = "thick",
+    custom_filter = function(buf_number)
+       local present_type, type = pcall(function()
+          return vim.api.nvim_buf_get_var(buf_number, "term_type")
+       end)
+
+       if present_type then
+          if type == "vert" then
+             return false
+          elseif type == "hori" then
+             return false
+          else
+             return true
+          end
+       else
+          return true
+       end
+    end,
   },
   highlights = {
     fill = {guibg = colors.bg},

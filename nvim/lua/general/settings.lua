@@ -81,7 +81,6 @@ local disabled_built_ins = {
    "tar",
    "tarPlugin",
    "rrhelper",
-   "spellfile_plugin",
    "vimball",
    "vimballPlugin",
    "zip",

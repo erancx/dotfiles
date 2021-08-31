@@ -1,6 +1,6 @@
 require("spellsitter").setup {
-  hl = "SpellBad",
-  captures = {} -- set to {} to spellcheck everything
+    hl = "SpellBad",
+    captures = {"comment"}
 }
 
 vim.spell = false

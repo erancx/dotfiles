@@ -9,7 +9,6 @@ require('general.autocmd')
 -- Plugins configs
 require('plugins.galaxyline')
 -- require('plugins.autopairs')
-require('plugins.compe')
 require('plugins.doge')
 require('plugins.formatter')
 require('plugins.gitsigns')

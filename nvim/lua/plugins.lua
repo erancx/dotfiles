@@ -44,25 +44,19 @@ return require('packer').startup(function()
   use 'ntpeters/vim-better-whitespace'
   use 'sindrets/diffview.nvim'
   use 'tpope/vim-fugitive'
-  use 'windwp/nvim-autopairs'
   use 'ray-x/lsp_signature.nvim'
   use 'lukas-reineke/indent-blankline.nvim'
   use 'mhartington/formatter.nvim'
   use 'lewis6991/spellsitter.nvim'
   use 'nvim-lua/lsp-status.nvim'
   use 'David-Kunz/treesitter-unit'
+  use 'kabouzeid/nvim-lspinstall'
   use {'folke/trouble.nvim', requires = 'kyazdani42/nvim-web-devicons'}
   use {'kkoomen/vim-doge', run = ':call doge#install()'}
   use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
   use {'lewis6991/gitsigns.nvim', requires = 'nvim-lua/plenary.nvim'}
-  use {'hrsh7th/nvim-compe',
-  requires = {
-            {'hrsh7th/vim-vsnip'},
-            {'hrsh7th/vim-vsnip-integ'},
-            {'rafamadriz/friendly-snippets'}
-        }
-  }
-
+  use {'ms-jpq/coq_nvim', branch = 'coq'}
+  use {'ms-jpq/coq.artifacts', branch= 'artifacts'}
   use {'nvim-telescope/telescope.nvim',
     requires = {
       {'nvim-lua/popup.nvim'},

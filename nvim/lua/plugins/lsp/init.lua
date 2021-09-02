@@ -18,7 +18,7 @@ for _, server in pairs(servers) do
 end
 
 lsp.efm.setup {
-  filetypes = {"yaml", "python", "sh", "json", "markdown"},
+  filetypes = {"sh"},
   capabilities = capabilities,
   init_options = {documentFormatting = true},
   cmd = {

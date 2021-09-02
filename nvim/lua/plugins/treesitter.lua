@@ -11,6 +11,6 @@ tsconf.setup {
     refactor = {
       highlight_definitions = { enable = true },
       highlight_current_scope = { enable = false },
-      smart_rename = { enable = true},
+      smart_rename = { enable = true },
     },
 }

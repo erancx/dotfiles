@@ -10,27 +10,26 @@ end
 vim.cmd 'autocmd BufWritePost plugins.lua PackerCompile' -- Auto compile when there are changes in plugins.lua
 
 return require('packer').startup(function(use)
-  use 'David-Kunz/treesitter-unit'
   use 'akinsho/nvim-bufferline.lua'
   use 'b3nj5m1n/kommentary'
+  use 'David-Kunz/treesitter-unit'
+  use 'folke/trouble.nvim'
   use 'glepnir/galaxyline.nvim'
   use 'jiangmiao/auto-pairs'
   use 'kabouzeid/nvim-lspinstall'
   use 'kyazdani42/nvim-web-devicons'
+  use 'lewis6991/gitsigns.nvim'
   use 'lukas-reineke/indent-blankline.nvim'
-  use 'mhartington/formatter.nvim'
   use 'monsonjeremy/onedark.nvim'
+  use 'ms-jpq/coq.artifacts'
+  use 'ms-jpq/coq_nvim'
   use 'neovim/nvim-lspconfig'
   use 'ntpeters/vim-better-whitespace'
   use 'nvim-lua/lsp-status.nvim'
   use 'ray-x/lsp_signature.nvim'
   use 'tpope/vim-fugitive'
   use 'wbthomason/packer.nvim'
-  use {'folke/trouble.nvim', requires = 'kyazdani42/nvim-web-devicons'}
   use {'kkoomen/vim-doge', run = ':call doge#install()'}
-  use {'lewis6991/gitsigns.nvim', requires = 'nvim-lua/plenary.nvim'}
-  use {'ms-jpq/coq_nvim', branch = 'coq'}
-  use {'ms-jpq/coq.artifacts', branch= 'artifacts'}
   use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
   use {'nvim-telescope/telescope.nvim',
     requires = {
@@ -38,5 +37,8 @@ return require('packer').startup(function(use)
       {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'},
       {'nvim-telescope/telescope-project.nvim'},
     }
+  }
+  use {"jose-elias-alvarez/null-ls.nvim",
+    requires = {"nvim-lua/plenary.nvim", "neovim/nvim-lspconfig"}
   }
 end)

@@ -8,9 +8,9 @@ require('general.autocmd')
 
 -- Plugins configs
 require('plugins.galaxyline')
-require('plugins.formatter')
 require('plugins.gitsigns')
 require('plugins.indent_blank_line')
+require('plugins.lsp.null-ls')
 require('plugins.kommentary')
 require('plugins.lsp')
 require('plugins.telescope')

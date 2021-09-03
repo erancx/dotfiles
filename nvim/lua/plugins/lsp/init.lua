@@ -1,5 +1,6 @@
 local vim = vim
 local lsp = require("lspconfig")
+local null_ls = require("plugins.lsp.null-ls")
 require("plugins.lsp.globals")
 local coq = require("coq") -- must be loaded after globals
 
@@ -17,26 +18,14 @@ for _, server in pairs(servers) do
   end
 end
 
-lsp.efm.setup {
-  filetypes = {"sh"},
-  capabilities = capabilities,
-  init_options = {documentFormatting = true},
-  cmd = {
-    "efm-langserver",
-    "-c",
-    vim.fn.stdpath("config") .. "/lua/plugins/efm.yml"
-  },
-  root_dir = function()
-    return vim.fn.getcwd()
-  end
-}
-
 lsp.terraformls.setup {
     on_attach = on_attach_common,
     capabilities = capabilities,
     cmd = {"terraform-ls", "serve"},
     filetypes = {"tf"}
 }
+
+null_ls.setup(on_attach)
 
 vim.fn.sign_define(
   "LspDiagnosticsSignError",

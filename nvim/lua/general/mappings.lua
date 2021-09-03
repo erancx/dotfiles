@@ -1,19 +1,6 @@
 local g = vim.g
 local api = vim.api
 
--- Formatter
-function run_formatter()
-  local filetype = vim.bo.filetype
-  local formatters = require("formatter.config").values.filetype[filetype]
-
-  if vim.bo.modifiable then
-    if not require("formatter.util").isEmpty(formatters) then vim.api.nvim_command("Format")
-    else
-      vim.lsp.buf.formatting()
-    end
-  end
-end
-
 g.mapleader = ','
 api.nvim_set_keymap('n', '<Tab>', '%', { noremap = true })
 api.nvim_set_keymap('v', '<Tab>', '%', { noremap = true })
@@ -39,7 +26,7 @@ api.nvim_set_keymap('n', '<leader>ft', ':Telescope filetypes<cr>', { noremap = t
 api.nvim_set_keymap( 'n', '<leader>fp', ":lua require'telescope'.extensions.project.project{}<CR>", {noremap = true, silent = true})
 api.nvim_set_keymap('n', '<S-x>', ':bd!<cr>', { noremap = true })
 api.nvim_set_keymap('n', '<esc>', ':nohlsearch<return><esc>', { noremap = true })
-api.nvim_set_keymap('n', '<leader>f', ':lua run_formatter()<CR>', { noremap = true })
+api.nvim_set_keymap('n', '<leader>f', ':lua vim.lsp.buf.formatting()<CR>', { noremap = true })
 api.nvim_set_keymap('n', 'gD', ':lua vim.lsp.buf.declaration()<CR>', { noremap = true })
 api.nvim_set_keymap('n', 'gd', ':lua vim.lsp.buf.definition()<CR>', { noremap = true })
 api.nvim_set_keymap('n', 'K', ':lua vim.lsp.buf.hover()<CR>', { noremap = true })

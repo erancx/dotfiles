@@ -7,7 +7,7 @@ require("general.mappings")
 require("general.autocmd")
 
 -- Plugins configs
-require("plugins.galaxyline")
+require("plugins.lualine")
 require("plugins.gitsigns")
 require("plugins.indent_blank_line")
 require("plugins.lsp.null-ls")

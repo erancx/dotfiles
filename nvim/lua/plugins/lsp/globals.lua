@@ -11,7 +11,10 @@ vim.g.lsp_config = {
 }
 
 vim.g.coq_settings = {
-    auto_start = 'shut-up',
+    auto_start = "shut-up",
+    keymap = {
+        jump_to_mark = "<c-q>",
+    },
     clients = {
         tabnine = {
             enabled = true,

@@ -194,7 +194,7 @@ local get_lsp_client = function(msg)
     if lsps == "" then
         return msg
     else
-        return "LSP: " .. lsps
+        return lsps
     end
 end
 
@@ -210,7 +210,7 @@ gls.right[8] = {
         end,
         separator = " ",
         highlight = { colors.purple, colors.bg, "bold" },
-        icon = "  ",
+        icon = 'LSP: ',
     },
 }
 

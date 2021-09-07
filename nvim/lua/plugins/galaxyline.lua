@@ -171,46 +171,34 @@ gls.right[7] = {
     },
 }
 
-local get_lsp_client = function(msg)
-    msg = msg or "LSP Inactive"
-    local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
-    local clients = vim.lsp.get_active_clients()
-    if next(clients) == nil then
-        return msg
-    end
-    local lsps = ""
-    for _, client in ipairs(clients) do
-        local filetypes = client.config.filetypes
-        if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-            if lsps == "" then
-                lsps = client.name
-            else
-                if not string.find(lsps, client.name) then
-                    lsps = lsps .. ", " .. client.name
-                end
-            end
+local function getclientnames()
+    local bufnr = vim.api.nvim_get_current_buf()
+    local clients = vim.lsp.buf_get_clients(bufnr)
+    local clientnames_tbl = {}
+    for _, v in pairs(clients) do
+        if v.name then
+            table.insert(clientnames_tbl, v.name)
         end
     end
-    if lsps == "" then
-        return msg
-    else
-        return lsps
+    return table.concat(clientnames_tbl, ",")
+end
+
+local lsp_text_provider = function()
+    local bufnr = vim.api.nvim_get_current_buf()
+    local clients = vim.lsp.buf_get_clients(bufnr)
+    if vim.tbl_isempty(clients) then
+        return ""
     end
+    local names = getclientnames()
+    return string.format("[%s]", names)
 end
 
 gls.right[8] = {
     ShowLspClient = {
-        provider = get_lsp_client,
-        condition = function()
-            local tbl = { ["dashboard"] = true, [" "] = true }
-            if tbl[vim.bo.filetype] then
-                return false
-            end
-            return true
-        end,
+        provider = lsp_text_provider,
         separator = " ",
         highlight = { colors.purple, colors.bg, "bold" },
-        icon = 'LSP: ',
+        icon = "LSP: ",
     },
 }
 

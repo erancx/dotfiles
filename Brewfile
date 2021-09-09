@@ -19,6 +19,7 @@ brew "cmatrix"
 brew "coreutils"
 brew "curl"
 brew "efm-langserver"
+brew "libuv"
 brew "node"
 brew "python@3.9", link: false
 brew "findutils"

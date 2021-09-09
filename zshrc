@@ -9,30 +9,22 @@ source $ZSH/oh-my-zsh.sh
 export LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 export GOPATH=$HOME/workspace/go
-export PATH=/usr/local/opt/openssl/bin:$PATH:$GOPATH/bin:~/workspace/repo/utilities/list_instances/aws/:~/tmp/roer
 export EDITOR=${EDITOR:-nvim}
 export LESS=-Ri
 export MANPAGER="nvim -c 'set ft=man' -"
 export KUBE_EDITOR="nvim"
-export CLOUDSDK_PYTHON_SITEPACKAGES=1
 export PATH=$PATH:$HOME/workspace/venv/default/bin/:/usr/local/bin
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=180'
 
 
 alias ls='gls --color=auto'
-alias gitlog='git log --pretty=format:"%h %ad | %s%d [%an]" --graph --all'
-alias dockerdeli='docker rm $(docker ps -q -f status=exited)'
 alias vim="nvim"
 alias vimdiff="nvim -d"
 alias vi=nvim
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv="mv -i"
-alias repo='cd ~/workspace/repo'
-alias dep='cd ~/workspace/repo/deployment'
-alias spin='cd ~/workspace/repo/spinnaker/'
-alias gsso='gcert'
 alias less="bat --theme=TwoDark"
 alias cat="bat --theme=TwoDark"
 alias vimrc="$EDITOR ~/.vimrc"
@@ -40,7 +32,6 @@ alias reload="exec ${SHELL} -l"
 alias kx='kubectx'
 alias afk="pmset displaysleepnow"
 
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 unsetopt inc_append_history
 unsetopt share_history
 
@@ -126,9 +117,6 @@ fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-#### FIG ENV VARIABLES ####
-[ -s ~/.fig/fig.sh ] && source ~/.fig/fig.sh
-#### END FIG ENV VARIABLES ####
 
 ### Kitty #########################
 autoload -Uz compinit

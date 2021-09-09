@@ -1,2 +1,2 @@
-nvim/autoload
-nvim/plugin/packer_compiled.lua
+.config/nvim/autoload
+.config/nvim/plugin/packer_compiled.lua

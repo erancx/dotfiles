@@ -13,7 +13,7 @@ export EDITOR=${EDITOR:-nvim}
 export LESS=-Ri
 export MANPAGER="nvim -c 'set ft=man' -"
 export KUBE_EDITOR="nvim"
-export PATH=$PATH:$HOME/workspace/venv/default/bin/:/usr/local/bin
+export PATH=$PATH:$HOME/workspace/venv/default/bin/:/usr/local/bin:$GOPATH/bin
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=180'
 
@@ -34,8 +34,6 @@ alias afk="pmset displaysleepnow"
 
 unsetopt inc_append_history
 unsetopt share_history
-
-source ~/.zshrc_google
 
 source <(antibody init)
 antibody bundle < ~/.zsh_plugins.txt
@@ -109,9 +107,6 @@ fshow() {
 
 export VIRTUAL_ENV="$HOME/workspace/venv/default3"
 if [[ -n $VIRTUAL_ENV && -e "${VIRTUAL_ENV}/bin/activate" ]]; then
-    export VIRTUALENVWRAPPER_PYTHON="$VIRTUAL_ENV/bin/python3"
-    export WORKON_HOME="$HOME/workspace/venv"
-    source $HOME/workspace/venv/default3/bin/virtualenvwrapper.sh
     source "${VIRTUAL_ENV}/bin/activate"
 fi
 

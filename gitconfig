@@ -52,7 +52,7 @@
   tool = vimdiff
 [user]
   name = Eran Davidovich
-  email = erandav@google.com
+  email = edavidovich@jumptrading.com
 [difftool]
   prompt = false
 [color "diff-highlight"]

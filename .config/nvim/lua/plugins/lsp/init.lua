@@ -8,18 +8,29 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.textDocument.formatting = true
 
+local function on_attach()
+    require("lsp_signature").on_attach()
+end
+
 require("lspinstall").setup()
 local servers = require("lspinstall").installed_servers()
 for _, server in pairs(servers) do
     if vim.g.lsp_config[server] then
-        lsp[server].setup(coq.lsp_ensure_capabilities(vim.g.lsp_config[server]))
+        lsp[server].setup(coq.lsp_ensure_capabilities({
+            vim.g.lsp_config[server],
+            on_attach = on_attach,
+            capabilities = capabilities,
+        }))
     else
-        lsp[server].setup(coq.lsp_ensure_capabilities())
+        lsp[server].setup(coq.lsp_ensure_capabilities({
+            on_attach = on_attach,
+            capabilities = capabilities,
+        }))
     end
 end
 
 lsp.terraformls.setup({
-    on_attach = on_attach_common,
+    on_attach = on_attach,
     capabilities = capabilities,
     cmd = { "terraform-ls", "serve" },
     filetypes = { "tf" },

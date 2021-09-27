@@ -12,7 +12,6 @@ vim.cmd("autocmd BufWritePost plugins.lua PackerCompile") -- Auto compile when t
 return require("packer").startup(function(use)
     use("akinsho/nvim-bufferline.lua")
     use("b3nj5m1n/kommentary")
-    use("David-Kunz/treesitter-unit")
     use("folke/trouble.nvim")
     use("glepnir/galaxyline.nvim")
     use("jiangmiao/auto-pairs")

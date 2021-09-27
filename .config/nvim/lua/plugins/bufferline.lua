@@ -15,6 +15,6 @@ require("bufferline").setup({
     highlights = {
         fill = { guibg = colors.bg },
         background = { guibg = colors.bg },
-        buffer_selected = { guibg = colors.bg_highlight, guifg = colors.orange },
+        buffer_selected = { guibg = colors.bg_highlight, guifg = "#61AFEF" },
     },
 })

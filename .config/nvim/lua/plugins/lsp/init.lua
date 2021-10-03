@@ -31,9 +31,8 @@ end
 
 lsp.terraformls.setup({
     on_attach = on_attach,
-    capabilities = capabilities,
     cmd = { "terraform-ls", "serve" },
-    filetypes = { "tf" },
+    filetypes = { "terraform" },
 })
 
 null_ls.setup(on_attach)

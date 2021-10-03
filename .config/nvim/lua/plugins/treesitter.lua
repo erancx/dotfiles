@@ -1,16 +1,10 @@
-local tsconf = require("nvim-treesitter.configs")
-if not tsconf then
-    vim.cmd([[ echom 'Cannot load `nvim-treesitter.configs`' ]])
-    return
-end
-
-tsconf.setup({
-    ensure_installed = { "bash", "go", "java", "javascript", "json", "lua", "python", "yaml" },
+require("nvim-treesitter.configs").setup({
+    ensure_installed = { "bash", "go", "java", "javascript", "json", "lua", "python", "yaml", "hcl" },
     highlight = { enable = true, use_languagetree = true },
     indent = { enable = true },
     refactor = {
         highlight_definitions = { enable = true },
-        highlight_current_scope = { enable = false },
+        highlight_current_scope = { enable = true },
         smart_rename = { enable = true },
     },
 })

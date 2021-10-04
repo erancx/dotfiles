@@ -2,8 +2,6 @@ local g = vim.g
 local api = vim.api
 
 g.mapleader = ","
-api.nvim_set_keymap("n", "<Tab>", "%", { noremap = true })
-api.nvim_set_keymap("v", "<Tab>", "%", { noremap = true })
 api.nvim_set_keymap("x", "<C-c>", '"+y', { noremap = true })
 api.nvim_set_keymap("n", "<C-h>", "<C-W>h", { noremap = true })
 api.nvim_set_keymap("n", "<C-j>", "<C-W>j", { noremap = true })
@@ -14,6 +12,7 @@ api.nvim_set_keymap("n", "<S-TAB>", ":BufferLineCyclePrev<CR>", { noremap = true
 api.nvim_set_keymap("n", "<C-t>", ":tabnew<CR>", { noremap = true })
 api.nvim_set_keymap("n", "<C-p>", ":Telescope find_files cwd=~/workspace/repo<CR>", { noremap = true })
 api.nvim_set_keymap("n", "<leader>=", "<C-W>=<CR>", { noremap = true })
+api.nvim_set_keymap("n", "<leader>md", ":MarkdownPreviewToggle<CR>", { noremap = true })
 api.nvim_set_keymap("n", "Q", "<nop>", { noremap = true })
 api.nvim_set_keymap("n", "q:", "<nop>", { noremap = true })
 api.nvim_set_keymap("n", "<leader>b", ":Telescope buffers<cr>", { noremap = true })

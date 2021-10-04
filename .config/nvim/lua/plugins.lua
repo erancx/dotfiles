@@ -35,6 +35,10 @@ return require("packer").startup(function(use)
     use({ "kkoomen/vim-doge", run = ":call doge#install()" })
     use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
     use({
+        "jose-elias-alvarez/null-ls.nvim",
+        requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    })
+    use({
         "nvim-telescope/telescope.nvim",
         requires = {
             { "nvim-lua/plenary.nvim" },
@@ -42,5 +46,12 @@ return require("packer").startup(function(use)
             { "nvim-telescope/telescope-project.nvim" },
         },
     })
-    use({ "jose-elias-alvarez/null-ls.nvim", requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" } })
+    use({
+        "iamcco/markdown-preview.nvim",
+        run = "cd app && npm install",
+        setup = function()
+            vim.g.mkdp_filetypes = { "markdown" }
+        end,
+        ft = { "markdown" },
+    })
 end)

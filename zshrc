@@ -4,7 +4,7 @@ fi
 
 
 export ZSH=$HOME/.oh-my-zsh
-plugins=(git docker osx common-aliases virtualenv kubectl)
+plugins=(git docker osx common-aliases virtualenv kubectl terraform)
 source $ZSH/oh-my-zsh.sh
 export LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
 export SSH_KEY_PATH="~/.ssh/rsa_id"
@@ -15,6 +15,7 @@ export MANPAGER="nvim -c 'set ft=man' -"
 export KUBE_EDITOR="nvim"
 export PATH=$PATH:$HOME/workspace/venv/default/bin/:/usr/local/bin:$GOPATH/bin
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=180'
 
 

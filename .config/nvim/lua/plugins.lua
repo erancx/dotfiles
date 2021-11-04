@@ -32,6 +32,7 @@ return require("packer").startup(function(use)
     use("nvim-telescope/telescope-dap.nvim")
     use("mfussenegger/nvim-dap-python")
     use("theHamsta/nvim-dap-virtual-text")
+    use("kyazdani42/nvim-tree.lua")
     use({ "kkoomen/vim-doge", run = ":call doge#install()" })
     use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
     use({

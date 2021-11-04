@@ -1,6 +1,5 @@
 local g = vim.g
 local api = vim.api
-
 g.mapleader = ","
 api.nvim_set_keymap("x", "<C-c>", '"+y', { noremap = true })
 api.nvim_set_keymap("n", "<C-h>", "<C-W>h", { noremap = true })
@@ -30,9 +29,10 @@ api.nvim_set_keymap("n", "gD", ":lua vim.lsp.buf.declaration()<CR>", { noremap =
 api.nvim_set_keymap("n", "gd", ":lua vim.lsp.buf.definition()<CR>", { noremap = true })
 api.nvim_set_keymap("n", "K", ":lua vim.lsp.buf.hover()<CR>", { noremap = true })
 api.nvim_set_keymap("n", "gi", ":lua vim.lsp.buf.implementation()<CR>", { noremap = true })
-api.nvim_set_keymap("n", "<C-k>", ":lua vim.lsp.buf.signature_help()<CR>", { noremap = true })
+api.nvim_set_keymap("n", "<C-s>", ":lua vim.lsp.buf.signature_help()<CR>", { noremap = true })
 api.nvim_set_keymap("n", "<leader>wa", ":lua vim.lsp.buf.add_workspace_folder()<CR>", { noremap = true })
 api.nvim_set_keymap("n", "<leader>wr", ":lua vim.lsp.buf.remove_workspace_folder()<CR>", { noremap = true })
+api.nvim_set_keymap("n", "<C-n>", ":NvimTreeToggle<CR>", { noremap = true })
 api.nvim_set_keymap(
     "n",
     "<leader>wl",

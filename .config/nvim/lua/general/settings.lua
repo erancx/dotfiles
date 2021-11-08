@@ -1,4 +1,6 @@
-local cmd = vim.cmd
+local exec  = vim.api.nvim_exec -- execute Vimscript
+local set   = vim.opt           -- global options
+local cmd   = vim.cmd           -- execute Vim commands
 
 -- set python interpreter
 vim.g.python3_host_prog = "~/workspace/venv/default3/bin/python"
@@ -8,67 +10,86 @@ require("onedark").setup({
     functionStyle = "italic",
 })
 
--- General settings
-cmd("set autoindent")
-cmd("set autowrite")
-cmd("set backspace=indent,eol,start")
-cmd("set cc=120")
-cmd("set cmdheight=1")
-cmd("set completeopt=menuone,noinsert,noselect")
-cmd("set cpoptions+=$")
-cmd("set cursorcolumn")
-cmd("set cursorline")
-cmd("set encoding=UTF-8")
-cmd("set inccommand=nosplit")
-cmd("set expandtab")
-cmd("set fileencoding=utf-8")
-cmd("set foldlevel=99")
-cmd("set foldmethod=marker")
-cmd("set foldmethod=syntax")
-cmd("set guicursor=i-c-ci:ver25,o-v-ve:hor20,cr-sm-n-r:block")
-cmd("set hidden")
-cmd("set hlsearch")
-cmd("set ignorecase smartcase")
-cmd("set incsearch")
-cmd("set laststatus=2")
-cmd("set lazyredraw")
-cmd("set list")
-cmd("set matchpairs+=<:>")
-cmd("set modelines=0")
-cmd("set mouse=v")
-cmd("set nocompatible")
-cmd("set noerrorbells")
-cmd("set nofoldenable")
-cmd("set noshowmode")
-cmd("set number")
-cmd("set noswapfile")
-cmd("set pastetoggle=<C-k>")
-cmd("set scrolloff=5")
-cmd("set shell=bash")
-cmd("set shiftwidth=4")
-cmd("set shortmess=aIc")
-cmd("set showcmd")
-cmd("set showmatch")
-cmd("set signcolumn=yes")
-cmd("set smartcase")
-cmd("set smartindent")
-cmd("set smarttab")
-cmd("set softtabstop=4")
-cmd("set splitbelow")
-cmd("set splitright")
-cmd("set statusline+=%F")
-cmd("set tabstop=4")
-cmd("set termguicolors")
-cmd("set textwidth=0")
-cmd("set ttyfast")
-cmd("set undodir=~/.vim/undodir")
-cmd("set undofile")
-cmd("set updatetime=250")
-cmd("set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.rpm,*.o,*.obj,.git,*.rbc,*.pyc,__pycache__")
-cmd("set wildoptions=pum")
-cmd("set wrap")
-cmd("syntax enable")
-cmd("syntax on")
+cmd('autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=grey') --to Show whitespace, MUST be inserted BEFORE the colorscheme command
+set.guifont		      = 'DroidSansMono Nerd Font 11'
+set.termguicolors   = true      -- Enable GUI colors for the terminal to get truecolor
+set.list            = false      -- show whitespace
+set.listchars = {
+         nbsp       = '⦸',      -- CIRCLED REVERSE SOLIDUS (U+29B8, UTF-8: E2 A6 B8)
+         extends    = '»',      -- RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK (U+00BB, UTF-8: C2 BB)
+         precedes   = '«',      -- LEFT-POINTING DOUBLE ANGLE QUOTATION MARK (U+00AB, UTF-8: C2 AB)
+         tab        = '▷─',     -- WHITE RIGHT-POINTING TRIANGLE (U+25B7, UTF-8: E2 96 B7) + BOX DRAWINGS HEAVY TRIPLE DASH HORIZONTAL (U+2505, UTF-8: E2 94 85)
+         trail      = '•',      -- BULLET (U+2022, UTF-8: E2 80 A2)
+         space      = ' ',
+}
+set.fillchars = {
+        diff        = '∙',      -- BULLET OPERATOR (U+2219, UTF-8: E2 88 99)
+        eob         = ' ',      -- NO-BREAK SPACE (U+00A0, UTF-8: C2 A0) to suppress ~ at EndOfBuffer
+        fold        = '·',      -- MIDDLE DOT (U+00B7, UTF-8: C2 B7)
+        vert        = ' ',      -- remove ugly vertical lines on window division
+}
+set.wrap            = false         -- don't automatically wrap on load
+set.showmatch       = true 	        -- show the matching part of the pair for [] {} and ()
+set.cursorline      = true 	        -- highlight current line
+set.number          = true          -- show line numbers
+set.incsearch       = true 	        -- incremental search
+set.hlsearch        = true 	        -- highlighted search results
+set.ignorecase      = true 	        -- ignore case sensetive while searching
+set.smartcase       = true
+set.scrolloff       = 1             -- when scrolling, keep cursor 1 lines away from screen border
+set.sidescrolloff   = 2             -- keep 30 columns visible left and right of the cursor at all times
+set.backspace       = 'indent,start,eol' -- make backspace behave like normal again
+set.updatetime      = 250              -- CursorHold interval
+set.softtabstop     = 2
+set.softtabstop     = 2
+set.shiftwidth      = 2             -- spaces per tab (when shifting), when using the >> or << commands, shift lines by 4 spaces
+set.tabstop         = 2             -- spaces per tab
+set.smarttab        = true          -- <tab>/<BS> indent/dedent in leading whitespace
+set.autoindent      = true          -- maintain indent of current line
+set.expandtab       = false         -- don't expand tabs into spaces
+set.shiftround      = true
+set.splitbelow      = true      -- open horizontal splits below current window
+set.splitright      = true      -- open vertical splits to the right of the current window
+set.laststatus      = 2         -- always show status line
+set.undofile        = true
+set.undodir         = os.getenv("HOME") .. "/.vim" -- vim.options do not expand "~"
+set.hidden          = true      -- allows you to hide buffers with unsaved changes without being prompted
+set.inccommand      = 'split'   -- live preview of :s results
+set.shell           = 'zsh'     -- shell to use for `!`, `:!`, `system()` etc.
+--set.colorcolumn = "79"        -- vertical word limit line
+
+-- highlight on yank
+exec([[
+  augroup YankHighlight
+    autocmd!
+    autocmd TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=500, on_visual=true}
+  augroup end
+]], false)
+
+-- jump to the last position when reopening a file
+cmd([[
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+endif
+]])
+
+-- patterns to ignore during file-navigation
+set.wildignore  = set.wildignore + '*.o,*.rej,*.so'
+-- remove whitespace on save
+cmd([[au BufWritePre * :%s/\s\+$//e]])
+-- faster scrolling
+set.lazyredraw = true
+-- don't auto commenting new lines
+cmd([[au BufEnter * set fo-=c fo-=r fo-=o]])
+-- completion options
+set.completeopt = 'menuone,noselect,noinsert'
+
+
+
+-- 2 spaces for selected filetypes
+cmd([[ autocmd FileType xml,html,xhtml,css,scssjavascript,lua,dart setlocal shiftwidth=2 tabstop=2 ]])
+-- json
+cmd([[ au BufEnter *.json set ai expandtab shiftwidth=2 tabstop=2 sta fo=croql ]])
 
 local disabled_built_ins = {
     "2html_plugin",

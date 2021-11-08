@@ -1,22 +1,15 @@
-local present, nvimtree = pcall(require, "nvim-tree")
-
-if not present then
-    return
-end
-
 local g = vim.g
 
-vim.o.termguicolors = true
-
-g.nvim_tree_add_trailing = 0
+g.nvim_tree_add_trailing = 0 -- append a trailing slash to folder names
 g.nvim_tree_gitignore = 0
 g.nvim_tree_highlight_opened_files = 0
 g.nvim_tree_indent_markers = 1
-g.nvim_tree_quit_on_open = 0
+g.nvim_tree_quit_on_open = 0 -- closes tree when file's opened
 g.nvim_tree_root_folder_modifier = table.concat({ ":t:gs?$?/..", string.rep(" ", 1000), "?:gs?^??" })
 --
 g.nvim_tree_show_icons = {
     folders = 1,
+    -- folder_arrows= 1
     files = 1,
 }
 
@@ -33,6 +26,9 @@ g.nvim_tree_icons = {
         untracked = "★",
     },
     folder = {
+        -- disable indent_markers option to get arrows working or if you want both arrows and indent then just add the arrow icons in front            ofthe default and opened folders below!
+        -- arrow_open = "",
+        -- arrow_closed = "",
         default = "",
         empty = "", -- 
         empty_open = "",
@@ -42,7 +38,7 @@ g.nvim_tree_icons = {
     },
 }
 
-nvimtree.setup({
+require("nvim-tree").setup({
     diagnostics = {
         enable = false,
         icons = {
@@ -57,24 +53,23 @@ nvimtree.setup({
     },
     disable_netrw = true,
     hijack_netrw = true,
+    update_to_buf_dir = {
+        enable = true,
+        auto_open = true,
+    },
     ignore_ft_on_setup = { "dashboard" },
-    auto_close = true,
+    auto_close = false,
     open_on_tab = true,
     hijack_cursor = true,
+    nvim_tree_ignore = { ".git", "node_modules", ".cache" },
     update_cwd = true,
     update_focused_file = {
         enable = true,
         update_cwd = false,
     },
     view = {
-        width = 30,
-        height = 30,
-        hide_root_folder = false,
+        allow_resize = true,
         side = "left",
-        auto_resize = false,
-        mappings = {
-            custom_only = false,
-            list = {},
-        },
+        width = 25,
     },
 })

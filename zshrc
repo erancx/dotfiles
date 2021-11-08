@@ -4,7 +4,7 @@ fi
 
 
 export ZSH=$HOME/.oh-my-zsh
-plugins=(git docker osx common-aliases virtualenv kubectl terraform)
+plugins=(git docker macos common-aliases virtualenv kubectl terraform)
 source $ZSH/oh-my-zsh.sh
 export LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
 export SSH_KEY_PATH="~/.ssh/rsa_id"

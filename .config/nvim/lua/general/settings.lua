@@ -15,7 +15,6 @@ set.backspace       = 'indent,start,eol' -- make backspace behave like normal ag
 set.completeopt     = 'menuone,noselect,noinsert' -- completion options
 set.cursorline      = true 	        -- highlight current line
 set.expandtab       = false         -- don't expand tabs into spaces
-set.guifont		      = 'DroidSansMono Nerd Font 11'
 set.hidden          = true      -- allows you to hide buffers with unsaved changes without being prompted
 set.hlsearch        = true 	        -- highlighted search results
 set.ignorecase      = true 	        -- ignore case sensetive while searching

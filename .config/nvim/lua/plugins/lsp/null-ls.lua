@@ -8,6 +8,7 @@ local sources = {
     b.diagnostics.shellcheck.with({ diagnostics_format = "[#{c}] #{m} (#{s})" }),
     b.diagnostics.flake8,
     b.diagnostics.misspell,
+    b.diagnostics.hadolint,
     b.formatting.black,
     b.formatting.prettier.with({
         filetypes = { "html", "json", "yaml", "markdown" },

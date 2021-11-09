@@ -33,14 +33,9 @@ return require("packer").startup(function(use)
     use("mfussenegger/nvim-dap-python")
     use("theHamsta/nvim-dap-virtual-text")
     use("kyazdani42/nvim-tree.lua")
+    use("viebel/halonot")
     use({ "kkoomen/vim-doge", run = ":call doge#install()" })
     use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
-    use({
-        "viebel/halonot",
-        config = function()
-            require("halonot").setup({ main_key = "w" })
-        end,
-    })
     use({
         "jose-elias-alvarez/null-ls.nvim",
         requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },

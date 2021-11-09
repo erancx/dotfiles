@@ -21,9 +21,14 @@ api.nvim_set_keymap("n", "<leader>fw", ":Telescope grep_string<cr>", { noremap =
 api.nvim_set_keymap("n", "<leader>fb", ":Telescope file_browser<CR>", { noremap = true })
 api.nvim_set_keymap("n", "<leader>ff", ":Telescope find_files hidden=true<cr>", { noremap = true })
 api.nvim_set_keymap("n", "<leader>ft", ":Telescope filetypes<cr>", { noremap = true })
-api.nvim_set_keymap("n", "<leader>fp", ":lua require'telescope'.extensions.project.project{}<CR>", { noremap = true, silent = true})
+api.nvim_set_keymap(
+    "n",
+    "<leader>fp",
+    ":lua require'telescope'.extensions.project.project{}<CR>",
+    { noremap = true, silent = true }
+)
 api.nvim_set_keymap("n", "<S-x>", ":bd!<cr>", { noremap = true })
-api.nvim_set_keymap("n", "<esc>", ":nohlsearch<return><esc>", { noremap = true })
+api.nvim_set_keymap("n", "<esc>", ":nohlsearch<return><esc>", { noremap = true, silent = true })
 api.nvim_set_keymap("n", "<leader>f", ":lua vim.lsp.buf.formatting()<CR>", { noremap = true })
 api.nvim_set_keymap("n", "gD", ":lua vim.lsp.buf.declaration()<CR>", { noremap = true })
 api.nvim_set_keymap("n", "gd", ":lua vim.lsp.buf.definition()<CR>", { noremap = true })

@@ -8,6 +8,16 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.textDocument.formatting = true
 
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+    underline = true,
+    signs = true,
+    update_in_insert = true,
+    virtual_text = {
+        true,
+        spacing = 6,
+    },
+})
+
 local function on_attach()
     require("lsp_signature").on_attach()
 end
@@ -41,14 +51,6 @@ vim.fn.sign_define("LspDiagnosticsSignError", { text = "", numhl = "LspDiagno
 vim.fn.sign_define("LspDiagnosticsSignWarning", { text = "", numhl = "LspDiagnosticsDefaultWarning" })
 vim.fn.sign_define("LspDiagnosticsSignInformation", { text = "", numhl = "LspDiagnosticsDefaultInformation" })
 vim.fn.sign_define("LspDiagnosticsSignHint", { text = "", numhl = "LspDiagnosticsDefaultHint" })
-
--- set default prefix.
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-    -- virtual_text = false,
-    virtual_text = { prefix = "" },
-    signs = true,
-    update_in_insert = false,
-})
 
 -- symbols for autocomplete
 vim.lsp.protocol.CompletionItemKind = {

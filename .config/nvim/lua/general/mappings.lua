@@ -27,7 +27,7 @@ api.nvim_set_keymap(
     ":lua require'telescope'.extensions.project.project{}<CR>",
     { noremap = true, silent = true }
 )
-api.nvim_set_keymap("n", "<S-x>", ":bd!<cr>", { noremap = true })
+api.nvim_set_keymap("n", "<S-x>", ":Bdelete<cr>", { noremap = true })
 api.nvim_set_keymap("n", "<esc>", ":nohlsearch<return><esc>", { noremap = true, silent = true })
 api.nvim_set_keymap("n", "<leader>f", ":lua vim.lsp.buf.formatting()<CR>", { noremap = true })
 api.nvim_set_keymap("n", "gD", ":lua vim.lsp.buf.declaration()<CR>", { noremap = true })
@@ -38,7 +38,6 @@ api.nvim_set_keymap("n", "<C-s>", ":lua vim.lsp.buf.signature_help()<CR>", { nor
 api.nvim_set_keymap("n", "<leader>wa", ":lua vim.lsp.buf.add_workspace_folder()<CR>", { noremap = true })
 api.nvim_set_keymap("n", "<leader>wr", ":lua vim.lsp.buf.remove_workspace_folder()<CR>", { noremap = true })
 api.nvim_set_keymap("n", "<C-n>", ":NvimTreeToggle<CR>", { noremap = true })
-api.nvim_set_keymap("n", "<leader>c", ":close<CR>", { noremap = true })
 api.nvim_set_keymap(
     "n",
     "<leader>wl",

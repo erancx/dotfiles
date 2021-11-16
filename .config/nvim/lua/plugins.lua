@@ -35,6 +35,7 @@ return require("packer").startup(function(use)
     use("kyazdani42/nvim-tree.lua")
     use("viebel/halonot")
     use("folke/which-key.nvim")
+    use("famiu/bufdelete.nvim")
     use({ "kkoomen/vim-doge", run = ":call doge#install()" })
     use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
     use({

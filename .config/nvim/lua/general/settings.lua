@@ -2,13 +2,11 @@ local exec  = vim.api.nvim_exec -- execute Vimscript
 local set   = vim.opt           -- global options
 local cmd   = vim.cmd           -- execute Vim commands
 
+local present, base16 = pcall(require, "base16")
+base16(base16.themes("onedark"), true)
+
 -- set python interpreter
 vim.g.python3_host_prog = "~/workspace/venv/default3/bin/python"
-
--- colorscheme
-require("onedark").setup({
-    functionStyle = "italic",
-})
 
 set.autoindent      = true          -- maintain indent of current line
 set.backspace       = 'indent,start,eol' -- make backspace behave like normal again

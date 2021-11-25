@@ -37,7 +37,7 @@ api.nvim_set_keymap("n", "gi", ":lua vim.lsp.buf.implementation()<CR>", { norema
 api.nvim_set_keymap("n", "<C-s>", ":lua vim.lsp.buf.signature_help()<CR>", { noremap = true })
 api.nvim_set_keymap("n", "<leader>wa", ":lua vim.lsp.buf.add_workspace_folder()<CR>", { noremap = true })
 api.nvim_set_keymap("n", "<leader>wr", ":lua vim.lsp.buf.remove_workspace_folder()<CR>", { noremap = true })
-api.nvim_set_keymap("n", "<C-n>", ":NvimTreeToggle<CR>", { noremap = true })
+api.nvim_set_keymap("n", "<C-n>", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
 api.nvim_set_keymap(
     "n",
     "<leader>wl",

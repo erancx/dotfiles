@@ -11,7 +11,6 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 export GOPATH=$HOME/workspace/go
 export EDITOR=${EDITOR:-nvim}
 export LESS=-Ri
-export MANPAGER="nvim -c 'set ft=man' -"
 export KUBE_EDITOR="nvim"
 export PATH=$PATH:$HOME/workspace/venv/default/bin/:/usr/local/bin:$GOPATH/bin
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

@@ -9,6 +9,7 @@ require("general.settings")
 -- Plugins configs
 require("plugins.autopairs")
 require("plugins.bufferline")
+require("plugins.cmp")
 require("plugins.dbg")
 require("plugins.galaxyline")
 require("plugins.gitsigns")

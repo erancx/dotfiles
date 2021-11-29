@@ -1,6 +1,5 @@
 local colors = require("onedarkpro").get_colors("onedarkpro")
 
-
 require("bufferline").setup({
     options = {
         offsets = { { filetype = "NvimTree", text = "" } },

@@ -2,7 +2,6 @@ local vim = vim
 local lsp = require("lspconfig")
 local null_ls = require("plugins.lsp.null-ls")
 require("plugins.lsp.globals")
-local coq = require("coq") -- must be loaded after globals
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.documentationFormat = { "markdown", "plaintext" }
@@ -14,11 +13,11 @@ capabilities.textDocument.completion.completionItem.deprecatedSupport = true
 capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
 capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
 capabilities.textDocument.completion.completionItem.resolveSupport = {
-   properties = {
-      "documentation",
-      "detail",
-      "additionalTextEdits",
-   },
+    properties = {
+        "documentation",
+        "detail",
+        "additionalTextEdits",
+    },
 }
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
@@ -35,22 +34,32 @@ local function on_attach()
     require("lsp_signature").on_attach()
 end
 
-require("lspinstall").setup()
-local servers = require("lspinstall").installed_servers()
-for _, server in pairs(servers) do
-    if vim.g.lsp_config[server] then
-        lsp[server].setup(coq.lsp_ensure_capabilities({
-            vim.g.lsp_config[server],
-            on_attach = on_attach,
-            capabilities = capabilities,
-        }))
-    else
-        lsp[server].setup(coq.lsp_ensure_capabilities({
-            on_attach = on_attach,
-            capabilities = capabilities,
-        }))
+local lsp_installer = require("nvim-lsp-installer")
+
+local on_attach = function(client, bufnr)
+    local function buf_set_option(...)
+        vim.api.nvim_buf_set_option(bufnr, ...)
     end
+    buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 end
+
+lsp_installer.on_server_ready(function(server)
+    local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+    local opts = {
+        on_attach = on_attach,
+        capabilities = capabilities,
+    }
+
+    server:setup(opts)
+    vim.cmd([[ do User LspAttachBuffers ]])
+    local signs = { Error = " 🞮", Warn = " ▲", Hint = " ", Info = " " }
+
+    for type, icon in pairs(signs) do
+        local hl = "DiagnosticSign" .. type
+        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+    end
+end)
 
 lsp.terraformls.setup({
     on_attach = on_attach,
@@ -59,37 +68,3 @@ lsp.terraformls.setup({
 })
 
 null_ls.setup(on_attach)
-
-vim.fn.sign_define("LspDiagnosticsSignError", { text = "", numhl = "LspDiagnosticsDefaultError" })
-vim.fn.sign_define("LspDiagnosticsSignWarning", { text = "", numhl = "LspDiagnosticsDefaultWarning" })
-vim.fn.sign_define("LspDiagnosticsSignInformation", { text = "", numhl = "LspDiagnosticsDefaultInformation" })
-vim.fn.sign_define("LspDiagnosticsSignHint", { text = "", numhl = "LspDiagnosticsDefaultHint" })
-
--- symbols for autocomplete
-vim.lsp.protocol.CompletionItemKind = {
-    "   (Text) ",
-    "   (Method)",
-    "   (Function)",
-    "   (Constructor)",
-    " ﴲ  (Field)",
-    "[] (Variable)",
-    "   (Class)",
-    " ﰮ  (Interface)",
-    "   (Module)",
-    " 襁 (Property)",
-    "   (Unit)",
-    "   (Value)",
-    " 練 (Enum)",
-    "   (Keyword)",
-    "   (Snippet)",
-    "   (Color)",
-    "   (File)",
-    "   (Reference)",
-    "   (Folder)",
-    "   (EnumMember)",
-    " ﲀ  (Constant)",
-    " ﳤ  (Struct)",
-    "   (Event)",
-    "   (Operator)",
-    "   (TypeParameter)",
-}

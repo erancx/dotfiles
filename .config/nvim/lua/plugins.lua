@@ -9,21 +9,32 @@ end
 
 vim.cmd("autocmd BufWritePost plugins.lua PackerCompile") -- Auto compile when there are changes in plugins.lua
 
-return require("packer").startup(function(use)
+local packer = require("packer")
+packer.init({
+    display = {
+        open_fn = function()
+            return require("packer.util").float({ border = "single" })
+        end,
+        prompt_border = "single",
+    },
+    git = {
+        clone_timeout = 600,
+    },
+    auto_clean = true,
+    compile_on_sync = true,
+})
+
+packer.startup(function(use)
     use("akinsho/nvim-bufferline.lua")
     use("b3nj5m1n/kommentary")
     use("folke/trouble.nvim")
     use("glepnir/galaxyline.nvim")
     use("windwp/nvim-autopairs")
-    use("kabouzeid/nvim-lspinstall")
+    use("williamboman/nvim-lsp-installer")
     use("kyazdani42/nvim-web-devicons")
     use("lewis6991/gitsigns.nvim")
     use("lukas-reineke/indent-blankline.nvim")
-    use("monsonjeremy/onedark.nvim")
     use("olimorris/onedarkpro.nvim")
-    use("NvChad/nvim-base16.lua")
-    use("ms-jpq/coq.artifacts")
-    use("ms-jpq/coq_nvim")
     use("neovim/nvim-lspconfig")
     use("ntpeters/vim-better-whitespace")
     use("nvim-lua/lsp-status.nvim")
@@ -59,5 +70,24 @@ return require("packer").startup(function(use)
             vim.g.mkdp_filetypes = { "markdown" }
         end,
         ft = { "markdown" },
+    })
+    -- auto-completion
+    use({
+        "hrsh7th/nvim-cmp",
+        requires = {
+            "hrsh7th/cmp-nvim-lsp",
+            "hrsh7th/cmp-nvim-lua",
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-path",
+            "hrsh7th/cmp-calc",
+            "saadparwaiz1/cmp_luasnip",
+        },
+    })
+    use({ "onsails/lspkind-nvim", config = [[ require('plugins/lspkind') ]] })
+    use({
+        "L3MON4D3/LuaSnip",
+        requires = {
+            "rafamadriz/friendly-snippets",
+        },
     })
 end)

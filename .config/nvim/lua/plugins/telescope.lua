@@ -1,7 +1,22 @@
 require("telescope").setup({
     defaults = {
         prompt_prefix = "   ",
-        file_ignore_patterns = { ".git/" },
+        file_ignore_patterns = {
+            ".git/",
+            "%.csv",
+            "%.jpg",
+            "%.jpeg",
+            "%.png",
+            "%.svg",
+            "%.otf",
+            "%.ttf",
+            "%.lock",
+            "__pycache__/*",
+            "%.sqlite3",
+            "%.ipynb",
+            "vendor/*",
+            "node_modules/*",
+        },
     },
     extensions = {
         fzf = {

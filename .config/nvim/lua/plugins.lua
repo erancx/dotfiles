@@ -83,7 +83,7 @@ packer.startup(function(use)
             "saadparwaiz1/cmp_luasnip",
         },
     })
-    use({ "onsails/lspkind-nvim", config = [[ require('plugins/lspkind') ]] })
+    use({ "onsails/lspkind-nvim", config = [[ require('plugins.lsp.lspkind') ]] })
     use({
         "L3MON4D3/LuaSnip",
         requires = {

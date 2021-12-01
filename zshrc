@@ -31,6 +31,7 @@ alias vimrc="$EDITOR ~/.vimrc"
 alias reload="exec ${SHELL} -l"
 alias kx='kubectx'
 alias afk="pmset displaysleepnow"
+alias l='ls -lrth'
 
 unsetopt inc_append_history
 unsetopt share_history

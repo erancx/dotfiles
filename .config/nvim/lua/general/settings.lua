@@ -67,6 +67,7 @@ set.undofile        = true
 set.updatetime      = 250              -- CursorHold interval
 set.wildignore      = set.wildignore + '*/tmp/*,*.so,*.swp,*.zip,*.rpm,*.o,*.obj,.git,*.rbc,*.pyc,__pycache__' -- patterns to ignore during file-navigation
 set.wrap            = false         -- don't automatically wrap on load
+set.shortmess:append "sI"
 set.listchars = {
          nbsp       = '⦸',      -- CIRCLED REVERSE SOLIDUS (U+29B8, UTF-8: E2 A6 B8)
          extends    = '»',      -- RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK (U+00BB, UTF-8: C2 BB)

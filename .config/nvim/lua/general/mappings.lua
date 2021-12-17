@@ -48,7 +48,7 @@ api.nvim_set_keymap("n", "<leader>D", ":lua vim.lsp.buf.type_definition()<CR>", 
 api.nvim_set_keymap("n", "<leader>rn", ":lua vim.lsp.buf.rename()<CR>", { noremap = true })
 api.nvim_set_keymap("n", "<leader>ca", ":lua vim.lsp.buf.code_action()<CR>", { noremap = true })
 api.nvim_set_keymap("n", "gr", ":lua vim.lsp.buf.references()<CR>", { noremap = true })
-api.nvim_set_keymap("n", "<leader>q", ":LspTroubleToggle<CR>", { noremap = true })
+api.nvim_set_keymap("n", "<leader>q", ":TroubleToggle<CR>", { noremap = true })
 api.nvim_set_keymap("n", "<leader>+", ":vertical resize +5<CR>", { noremap = true })
 api.nvim_set_keymap("n", "<leader>-", ":vertical resize -5<CR>", { noremap = true })
 api.nvim_set_keymap("n", "vx", ':lua require"treesitter-unit".select()<CR>', { noremap = true })

@@ -1,11 +1,17 @@
 require("nvim-treesitter.configs").setup({
     --ensure_installed = "maintained",
-    highlight = {
-        enable = true,
-    },
+    highlight = { enable = true, use_languagetree = true },
+    indent = { enable = false },
+    context_commentstring = { enable = true, enable_autocmd = false },
+
     refactor = {
         highlight_current_scope = { enable = false },
         highlight_definitions = { enable = true },
+    },
+    query_linter = {
+        enable = true,
+        use_virtual_text = true,
+        lint_events = { "BufWrite", "CursorHold" },
     },
     incremental_selection = {
         enable = true,

@@ -53,5 +53,3 @@ lsp_installer.on_server_ready(function(server)
         vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
     end
 end)
-
-null_ls.setup(on_attach)

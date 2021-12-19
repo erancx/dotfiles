@@ -22,7 +22,7 @@ exec(
     [[
   augroup YankHighlight
     autocmd!
-    autocmd TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=500, on_visual=true}
+    autocmd TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=200, on_visual=true}
   augroup end
 ]],
     false
@@ -61,4 +61,33 @@ augroup golang
   autocmd!
   au FileType go setlocal tabstop=4 shiftwidth=4 softtabstop=4 noexpandtab
 augroup END
+]])
+
+cmd([[
+augroup git
+  autocmd!
+  autocmd FileType gitcommit setlocal wrap
+  autocmd FileType gitcommit setlocal spell
+augroup END
+]])
+
+cmd([[
+augroup markdown
+  autocmd!
+  autocmd FileType gitcommit setlocal wrap
+  autocmd FileType gitcommit setlocal spell
+augroup END
+]])
+
+vim.cmd([[
+  augroup _general_settings
+    autocmd!
+    autocmd FileType qf,help,man,lspinfo nnoremap <silent> <buffer> q :close<CR>
+    autocmd BufWinEnter * :set formatoptions-=cro
+    autocmd FileType qf set nobuflisted
+  augroup end
+  augroup _auto_resize
+    autocmd!
+    autocmd VimResized * tabdo wincmd =
+  augroup end
 ]])

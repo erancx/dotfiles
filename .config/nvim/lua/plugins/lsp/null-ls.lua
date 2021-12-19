@@ -10,6 +10,7 @@ require("null-ls").setup({
         require("null-ls").builtins.formatting.black,
         require("null-ls").builtins.formatting.prettier.with({
             filetypes = { "html", "json", "yaml", "markdown" },
+            extra_args = { "--fast" },
         }),
         require("null-ls").builtins.formatting.isort,
         require("null-ls").builtins.formatting.goimports,

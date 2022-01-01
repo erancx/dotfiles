@@ -28,8 +28,8 @@ packer.startup(function(use)
     use("akinsho/nvim-bufferline.lua")
     use("b3nj5m1n/kommentary")
     use("folke/trouble.nvim")
-    use("glepnir/galaxyline.nvim")
     use("windwp/nvim-autopairs")
+    use("SmiteshP/nvim-gps")
     use("williamboman/nvim-lsp-installer")
     use("kyazdani42/nvim-web-devicons")
     use("lewis6991/gitsigns.nvim")
@@ -37,17 +37,15 @@ packer.startup(function(use)
     use("olimorris/onedarkpro.nvim")
     use("neovim/nvim-lspconfig")
     use("ntpeters/vim-better-whitespace")
+    use("akinsho/nvim-toggleterm.lua")
+    use("norcalli/nvim-colorizer.lua")
     use("nvim-lua/lsp-status.nvim")
     use("ray-x/lsp_signature.nvim")
     use("tpope/vim-fugitive")
     use("wbthomason/packer.nvim")
-    use("mfussenegger/nvim-dap")
-    use("nvim-telescope/telescope-dap.nvim")
-    use("mfussenegger/nvim-dap-python")
-    use("theHamsta/nvim-dap-virtual-text")
     use("kyazdani42/nvim-tree.lua")
-    use("viebel/halonot")
     use("folke/which-key.nvim")
+    use("nvim-lualine/lualine.nvim")
     use("famiu/bufdelete.nvim")
     use({ "kkoomen/vim-doge", run = ":call doge#install()" })
     use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
@@ -61,6 +59,7 @@ packer.startup(function(use)
             { "nvim-lua/plenary.nvim" },
             { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
             { "nvim-telescope/telescope-project.nvim" },
+            { "nvim-telescope/telescope-file-browser.nvim" },
         },
     })
     use({
@@ -81,6 +80,7 @@ packer.startup(function(use)
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-calc",
             "saadparwaiz1/cmp_luasnip",
+            {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'},
         },
     })
     use({ "onsails/lspkind-nvim", config = [[ require('plugins.lsp.lspkind') ]] })

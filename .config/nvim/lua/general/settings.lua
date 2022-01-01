@@ -2,36 +2,6 @@ local exec = vim.api.nvim_exec
 local set  = vim.opt
 local cmd  = vim.cmd
 
-local onedarkpro = require("onedarkpro")
-onedarkpro.setup({
-    styles = {
-        comments = "italic",
-        keywords = "italic",
-    },
-    colors = {
-        onedark = {
-            brackets = "#E33D1A", -- fg / red
-        },
-    },
-    hlgroups = {
-        ModeMsg = { link = "LineNr" },
-        TSPunctBracket = { fg = "${brackets}" }, -- Brackets
-        TSPunctSpecial = { fg = "${brackets}" }, -- Brackets
-        -- LSP plugin
-        LspDiagnosticsVirtualTextError = { fg = "${red}", style = "italic,underline" },
-        LspDiagnosticsVirtualTextWarning = { fg = "${yellow}", style = "italic,underline" },
-        LspDiagnosticsVirtualTextInformation = { fg = "${blue}", style = "italic,underline" },
-        LspDiagnosticsVirtualTextHint = { fg = "${cyan}", style = "italic,underline" },
-    },
-    options = {
-        cursorline = true,
-    },
-})
-onedarkpro.load()
-
---[[ local present, base16 = pcall(require, "base16")
-base16(base16.themes("onedark"), true) ]]
-
 -- set python interpreter
 vim.g.python3_host_prog = "~/workspace/venv/default3/bin/python"
 

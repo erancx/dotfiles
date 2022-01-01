@@ -91,3 +91,9 @@ vim.cmd([[
     autocmd VimResized * tabdo wincmd =
   augroup end
 ]])
+
+-- show cursor line only in active window
+cmd([[
+  autocmd InsertLeave,WinEnter * set cursorline
+  autocmd InsertEnter,WinLeave * set nocursorline
+]])

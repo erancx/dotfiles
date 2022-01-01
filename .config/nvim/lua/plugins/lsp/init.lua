@@ -46,7 +46,7 @@ lsp_installer.on_server_ready(function(server)
 
     server:setup(opts)
     vim.cmd([[ do User LspAttachBuffers ]])
-    local signs = { Error = " 🞮", Warn = " ▲", Hint = " ", Info = " " }
+    local signs = { Error = "", Warn = "", Hint = "", Info = "" }
 
     for type, icon in pairs(signs) do
         local hl = "DiagnosticSign" .. type

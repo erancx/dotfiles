@@ -110,7 +110,8 @@ local mappings = {
             "Undo Stage Hunk",
         },
         o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
-        b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
+        b = { "<cmd>G blame", "Git blame" },
+        B = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
         c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
         d = {
             "<cmd>Gitsigns diffthis HEAD<cr>",
@@ -121,7 +122,7 @@ local mappings = {
         name = "LSP",
         a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
         d = {
-            "<cmd>Telescope lsp_document_diagnostics<cr>",
+            "<cmd>Telescope diagnostics bufnr=<cr>",
             "Document Diagnostics",
         },
         w = {
@@ -151,6 +152,7 @@ local mappings = {
     t = {
         name = "Terminal",
         f = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
+        t = { "<cmd>ToggleTerm direction=tab<cr>", "Tab" },
         h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
         v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
     },

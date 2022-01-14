@@ -32,11 +32,9 @@ require("lualine").setup({
             { "mode", separator = { left = "" }, right_padding = 2 },
         },
         lualine_b = {
-            {
-                "filename",
-                { "branch", icons_enabled = true, icon = "" },
-                "filetype",
-            },
+            "filename",
+            { "branch", icons_enabled = true, icon = "" },
+            "filetype",
         },
         lualine_c = {
             {

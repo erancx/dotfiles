@@ -1,1 +1,1 @@
-require("nvim-gps").setup({ separator = " " })
+require("nvim-gps").setup({ separator = " > " })

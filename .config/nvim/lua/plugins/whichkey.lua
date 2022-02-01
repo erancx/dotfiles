@@ -156,6 +156,10 @@ local mappings = {
         h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
         v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
     },
+    p = {
+        name = "Plugins",
+        n = { "<cmd>Neogen<cr>", "Neogen" },
+    },
 }
 
 which_key.setup(setup)

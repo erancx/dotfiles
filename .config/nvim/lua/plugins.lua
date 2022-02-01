@@ -46,8 +46,9 @@ packer.startup(function(use)
     use("kyazdani42/nvim-tree.lua")
     use("folke/which-key.nvim")
     use("nvim-lualine/lualine.nvim")
+    use("beauwilliams/focus.nvim")
     use("famiu/bufdelete.nvim")
-    use({ "kkoomen/vim-doge", run = ":call doge#install()" })
+    use("danymat/neogen")
     use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
     use({
         "jose-elias-alvarez/null-ls.nvim",
@@ -80,7 +81,7 @@ packer.startup(function(use)
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-calc",
             "saadparwaiz1/cmp_luasnip",
-            {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'},
+            { "tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp" },
         },
     })
     use({ "onsails/lspkind-nvim", config = [[ require('plugins.lsp.lspkind') ]] })

@@ -156,9 +156,13 @@ local mappings = {
         h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
         v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
     },
-    p = {
-        name = "Plugins",
-        n = { "<cmd>Neogen<cr>", "Neogen" },
+    w = {
+        name = "Windows",
+        s = { "<cmd>FocusSplitDown<cr>", "Focus Split Down" },
+        w = { "<cmd>FocusSplitUp<cr>", "Focus Split Up" },
+        a = { "<cmd>FocusSplitLeft<cr>", "Focus Split Left" },
+        d = { "<cmd>FocusSplitRight<cr>", "Focus Split Right" },
+        m = { "<cmd>FocusMaximise<cr>", "Focus Maximase" },
     },
 }
 

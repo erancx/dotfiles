@@ -7,6 +7,7 @@ onedarkpro.setup({
     colors = {
         onedark = {
             brackets = "#E33D1A", -- fg / red
+            bg = "#1e1e1e", -- fg / red
         },
     },
     hlgroups = {

@@ -1,6 +1,3 @@
-local colors = require("onedarkpro").get_colors("onedarkpro")
-
-
 require("bufferline").setup({
     options = {
         offsets = { { filetype = "NvimTree", text = "" } },
@@ -10,9 +7,5 @@ require("bufferline").setup({
         separator_style = "slant",
         always_show_bufferline = true,
         show_tab_indicators = false,
-    },
-    highlights = {
-        buffer_selected = {
-          guibg = colors.bg_highlight },
     },
 })

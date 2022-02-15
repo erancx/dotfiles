@@ -1,5 +1,5 @@
 require("lspkind").init({
-    with_text = true,
+    mode = 'symbol_text',
 
     -- default symbol map can be either 'default' or 'codicons' for codicon preset (requires vscode-codicons font installed)
     preset = "codicons",

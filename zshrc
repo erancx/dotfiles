@@ -32,9 +32,9 @@ alias cp='cp -i'
 alias mv="mv -i"
 alias less="bat --theme=TwoDark"
 alias cat="bat --theme=TwoDark"
-alias vimrc="$EDITOR ~/.vimrc"
 alias reload="exec ${SHELL} -l"
 alias kx='kubectx'
+alias kn='kubens'
 alias afk="pmset displaysleepnow"
 alias l='ls -lrth'
 

@@ -22,7 +22,7 @@ end
 
 require("lualine").setup({
     options = {
-        theme = "vscode",
+        theme = "auto",
         component_separators = "",
         section_separators = { left = "", right = "" },
         disabled_filetypes = { "NvimTree" },

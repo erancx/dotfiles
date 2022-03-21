@@ -1,4 +1,3 @@
--- Buffer line setup
 require("bufferline").setup({
     options = {
         indicator_icon = " ",

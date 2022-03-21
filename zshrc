@@ -1,12 +1,6 @@
-
-#### FIG ENV VARIABLES ####
-# Please make sure this block is at the start of this file.
-[ -s ~/.fig/shell/pre.sh ] && source ~/.fig/shell/pre.sh
-#### END FIG ENV VARIABLES ####
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-
 
 export ZSH=$HOME/.oh-my-zsh
 plugins=(git docker macos common-aliases virtualenv kubectl terraform)
@@ -135,8 +129,3 @@ autoload -Uz add-zsh-hook
 add-zsh-hook precmd set-title-precmd
 add-zsh-hook preexec set-title-preexec
 ####################################
-
-#### FIG ENV VARIABLES ####
-# Please make sure this block is at the end of this file.
-[ -s ~/.fig/fig.sh ] && source ~/.fig/fig.sh
-#### END FIG ENV VARIABLES ####

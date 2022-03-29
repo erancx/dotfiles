@@ -5,6 +5,11 @@ local cmd  = vim.cmd
 -- set python interpreter
 vim.g.python3_host_prog = "~/workspace/venv/default3/bin/python"
 
+-- copilot
+vim.g.copilot_assume_mapped = true
+vim.g.copilot_no_tab_map = true
+vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
+
 set.autoindent      = true     -- maintain indent of current line
 set.backspace       = 'indent,start,eol' -- make backspace behave like normal again
 set.completeopt     = 'menuone,noselect,noinsert' -- completion options
@@ -36,6 +41,7 @@ set.undodir         = os.getenv("HOME") .. "/.vim" -- vim.options do not expand 
 set.undofile        = true
 set.updatetime      = 250              -- CursorHold interval
 set.wildignore      = set.wildignore + '*/tmp/*,*.so,*.swp,*.zip,*.rpm,*.o,*.obj,.git,*.rbc,*.pyc,__pycache__' -- patterns to ignore during file-navigation
+set.laststatus = 3
 set.wildmode = "longest:full,full" set.wrap            = false         -- don't automatically wrap on load
 set.shortmess:append "sI"
 set.listchars = {

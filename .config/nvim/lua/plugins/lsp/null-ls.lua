@@ -13,6 +13,7 @@ require("null-ls").setup({
             extra_args = { "--fast" },
         }),
         require("null-ls").builtins.formatting.isort,
+        require("null-ls").builtins.formatting.rustfmt,
         require("null-ls").builtins.formatting.goimports,
         require("null-ls").builtins.formatting.shfmt,
         require("null-ls").builtins.formatting.gofmt,

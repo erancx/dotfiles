@@ -92,4 +92,14 @@ packer.startup(function(use)
             "rafamadriz/friendly-snippets",
         },
     })
+    -- DAP
+    use({
+        "mfussenegger/nvim-dap",
+        requires = {
+            "nvim-telescope/telescope-dap.nvim",
+            "mfussenegger/nvim-dap-python",
+            "theHamsta/nvim-dap-virtual-text",
+            "rcarriga/nvim-dap-ui",
+        },
+    })
 end)

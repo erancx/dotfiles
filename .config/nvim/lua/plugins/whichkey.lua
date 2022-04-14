@@ -164,6 +164,12 @@ local mappings = {
         d = { "<cmd>FocusSplitRight<cr>", "Focus Split Right" },
         m = { "<cmd>FocusMaximise<cr>", "Focus Maximase" },
     },
+    d = {
+        name = "Debug Adapter Protocol",
+        c = { "<cmd>lua require'dap'.continue()<cr>", "DAP Continue or Launch" },
+        b = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Toggle Breakpoint" },
+        u = { "<cmd>lua require'dapui'.toggle()<cr>", "DAP UI" },
+    },
 }
 
 which_key.setup(setup)

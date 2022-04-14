@@ -6,7 +6,6 @@ local cmd  = vim.cmd
 vim.g.python3_host_prog = "~/workspace/venv/default3/bin/python"
 
 -- copilot
-vim.g.copilot_assume_mapped = true
 vim.g.copilot_no_tab_map = true
 vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
 

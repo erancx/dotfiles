@@ -15,7 +15,7 @@ local lsp_installer = require("nvim-lsp-installer")
 
 local on_attach = function(bufnr)
     local function buf_set_option(...)
-        vim.api.nvim_buf_set_option(bufnr, ...)
+        vim.api.nvim_buf_set_option(0, ...)
     end
     buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
     require("lsp_signature").on_attach()

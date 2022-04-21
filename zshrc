@@ -1,7 +1,5 @@
 # Fig pre block. Keep at the top of this file.
-export PATH="${PATH}:${HOME}/.local/bin"
-eval "$(fig init zsh pre)"
-
+. "$HOME/.fig/shell/zshrc.pre.zsh"
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
@@ -56,32 +54,11 @@ fep() {
     [ -n "$files" ] && eval $command
 }
 
-# fag - find an argument with rg and fzf and open with vim
-# fag() {
-#   out=$(rg \
-# 	--column \
-# 	--line-number \
-# 	--no-column \
-# 	--no-heading \
-# 	--fixed-strings \
-# 	--ignore-case \
-# 	--hidden \
-#     -s \
-# 	--follow \
-# 	--glob '!.git/*' "$1" \
-# 	| awk -F  ":" '/1/ {start = $2<5 ? 0 : $2 - 5; end = $2 + 5; print $1 " " $2}' \
-#     | fzf --preview 'bat --wrap character --color always {1} --highlight-line {2}' --preview-window wrap)
-
-#     read -r filename line <<< "${out}"
-#     ${EDITOR:-vim} "${filename}" +"normal! ${line}zz"
-# }
-#
-
 # fag - find an argument with ag and fzf and open with vim
-fag() {
+farg() {
     [ $# -eq 0  ] && return
     local out cols
-    if out=$(ag --nogroup --color "$@" | fzf --ansi); then
+    if out=$(rg --color always --line-number --no-heading "$@" | fzf --ansi); then
         setopt sh_word_split
         cols=(${out//:/  })
         unsetopt sh_word_split
@@ -135,4 +112,4 @@ add-zsh-hook preexec set-title-preexec
 ####################################
 
 # Fig post block. Keep at the bottom of this file.
-eval "$(fig init zsh post)"
+. "$HOME/.fig/shell/zshrc.post.zsh"

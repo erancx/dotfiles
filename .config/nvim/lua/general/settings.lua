@@ -19,7 +19,6 @@ set.hlsearch        = true 	   -- highlighted search results
 set.ignorecase      = true 	   -- ignore case sensetive while searching
 set.inccommand      = 'split'  -- live preview of :s results
 set.incsearch       = true 	   -- incremental search
-set.laststatus      = 2        -- always show status line
 set.lazyredraw      = true -- faster scrolling
 set.list            = false    -- show whitespace
 set.number          = true     -- show line numbers

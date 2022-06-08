@@ -50,7 +50,14 @@ packer.startup(function(use)
     use("wbthomason/packer.nvim")
     use("williamboman/nvim-lsp-installer")
     use("windwp/nvim-autopairs")
-    use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+    use({
+        "nvim-treesitter/nvim-treesitter",
+        run = ":TSUpdate",
+        requires = {
+            "nvim-treesitter/nvim-treesitter-textobjects",
+            "nvim-treesitter/nvim-treesitter-context",
+        },
+    })
     use({
         "jose-elias-alvarez/null-ls.nvim",
         requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },

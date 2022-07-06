@@ -1,4 +1,5 @@
 local vim = vim
+local navic = require("nvim-navic")
 local null_ls = require("plugins.lsp.null-ls")
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
@@ -13,12 +14,10 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagn
 
 local lsp_installer = require("nvim-lsp-installer")
 
-local on_attach = function(bufnr)
-    local function buf_set_option(...)
-        vim.api.nvim_buf_set_option(0, ...)
-    end
-    buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
-    require("lsp_signature").on_attach()
+local on_attach = function(client, bufnr)
+    vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+    vim.api.nvim_buf_set_option(0, "formatexpr", "v:lua.vim.lsp.formatexpr()")
+    navic.attach(client, bufnr)
 end
 
 lsp_installer.on_server_ready(function(server)

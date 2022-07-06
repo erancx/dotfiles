@@ -1,3 +1,5 @@
+local navic = require("nvim-navic")
+
 local function getclientnames()
     local bufnr = vim.api.nvim_get_current_buf()
     local clients = vim.lsp.buf_get_clients(bufnr)
@@ -37,17 +39,7 @@ require("lualine").setup({
             "filetype",
         },
         lualine_c = {
-            {
-                function()
-                    local gps = require("nvim-gps")
-                    return gps.get_location()
-                end,
-                cond = function()
-                    local gps = require("nvim-gps")
-                    return pcall(require, "nvim-treesitter.parsers") and gps.is_available()
-                end,
-                color = { fg = "#ff9e64" },
-            },
+            { navic.get_location, cond = navic.is_available },
         },
         lualine_x = {
             {

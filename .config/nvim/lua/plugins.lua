@@ -25,11 +25,11 @@ packer.init({
 })
 
 packer.startup(function(use)
-    use("SmiteshP/nvim-gps")
+    use("SmiteshP/nvim-navic")
     use("akinsho/nvim-bufferline.lua")
+    use("jvirtanen/vim-hcl")
     use("akinsho/nvim-toggleterm.lua")
     use("b3nj5m1n/kommentary")
-    use("github/copilot.vim")
     use("beauwilliams/focus.nvim")
     use("danymat/neogen")
     use("famiu/bufdelete.nvim")
@@ -45,11 +45,11 @@ packer.startup(function(use)
     use("ntpeters/vim-better-whitespace")
     use("nvim-lua/lsp-status.nvim")
     use("nvim-lualine/lualine.nvim")
-    use("ray-x/lsp_signature.nvim")
     use("tpope/vim-fugitive")
     use("wbthomason/packer.nvim")
     use("williamboman/nvim-lsp-installer")
     use("windwp/nvim-autopairs")
+    use("jjo/vim-cue")
     use({
         "nvim-treesitter/nvim-treesitter",
         run = ":TSUpdate",
@@ -71,13 +71,12 @@ packer.startup(function(use)
             { "nvim-telescope/telescope-file-browser.nvim" },
         },
     })
+    -- install without yarn or npm
     use({
         "iamcco/markdown-preview.nvim",
-        run = "cd app && npm install",
-        setup = function()
-            vim.g.mkdp_filetypes = { "markdown" }
+        run = function()
+            vim.fn["mkdp#util#install"]()
         end,
-        ft = { "markdown" },
     })
     -- auto-completion
     use({
@@ -85,12 +84,11 @@ packer.startup(function(use)
         requires = {
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-nvim-lua",
+            "hrsh7th/cmp-nvim-lsp-signature-help",
             "hrsh7th/cmp-buffer",
-            "hrsh7th/cmp-copilot",
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-calc",
             "saadparwaiz1/cmp_luasnip",
-            { "tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp" },
         },
     })
     use({ "onsails/lspkind-nvim", config = [[ require('plugins.lsp.lspkind') ]] })
@@ -109,5 +107,17 @@ packer.startup(function(use)
             "theHamsta/nvim-dap-virtual-text",
             "rcarriga/nvim-dap-ui",
         },
+    })
+    use({
+        "nyngwang/NeoNoName.lua",
+        config = function()
+            vim.keymap.set("n", "<S-t>", function()
+                vim.cmd("NeoNoName")
+            end, { silent = true, noremap = true, nowait = true })
+            -- If you are using bufferline.nvim
+            vim.keymap.set("n", "<S-t>", function()
+                vim.cmd("NeoNoNameBufferline")
+            end, { silent = true, noremap = true, nowait = true })
+        end,
     })
 end)

@@ -6,3 +6,4 @@ rupa/z
 changyuheng/fz
 changyuheng/zsh-interactive-cd
 romkatv/powerlevel10k
+joshskidmore/zsh-fzf-history-search

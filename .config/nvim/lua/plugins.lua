@@ -108,16 +108,4 @@ packer.startup(function(use)
             "rcarriga/nvim-dap-ui",
         },
     })
-    use({
-        "nyngwang/NeoNoName.lua",
-        config = function()
-            vim.keymap.set("n", "<S-t>", function()
-                vim.cmd("NeoNoName")
-            end, { silent = true, noremap = true, nowait = true })
-            -- If you are using bufferline.nvim
-            vim.keymap.set("n", "<S-t>", function()
-                vim.cmd("NeoNoNameBufferline")
-            end, { silent = true, noremap = true, nowait = true })
-        end,
-    })
 end)

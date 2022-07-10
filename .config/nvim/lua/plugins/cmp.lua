@@ -1,5 +1,4 @@
 local cmp = require("cmp")
-local luasnip = require("luasnip")
 
 --   פּ ﯟ   some other good icons
 local kind_icons = {
@@ -29,12 +28,11 @@ local kind_icons = {
     Operator = "",
     TypeParameter = "",
 }
--- find more here: https://www.nerdfonts.com/cheat-sheet
 
 cmp.setup({
     snippet = {
         expand = function(args)
-            luasnip.lsp_expand(args.body) -- For `luasnip` users.
+            require("luasnip").lsp_expand(args.body)
         end,
     },
     mapping = {
@@ -90,8 +88,8 @@ cmp.setup({
     },
     sources = {
         { name = "nvim_lsp" },
-        { name = "luasnip" },
         { name = "buffer" },
+        { name = "luasnip" },
         { name = "nvim_lsp_signature_help" },
         { name = "path" },
     },
@@ -100,7 +98,10 @@ cmp.setup({
         select = false,
     },
     window = {
-        documentation = cmp.config.window.bordered(),
+        documentation = {
+            border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+            winhighlight = "Normal:CmpPmenu,CursorLine:PmenuSel,Search:None",
+        },
     },
     experimental = {
         ghost_text = false,

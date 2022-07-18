@@ -44,11 +44,18 @@ packer.startup(function(use)
     use("norcalli/nvim-colorizer.lua")
     use("ntpeters/vim-better-whitespace")
     use("nvim-lua/lsp-status.nvim")
+    use("lewis6991/impatient.nvim")
     use("nvim-lualine/lualine.nvim")
     use("tpope/vim-fugitive")
     use("wbthomason/packer.nvim")
     use("williamboman/nvim-lsp-installer")
     use("windwp/nvim-autopairs")
+    use({
+        "kylechui/nvim-surround",
+        config = function()
+            require("nvim-surround").setup({})
+        end,
+    })
     use("jjo/vim-cue")
     use({
         "nvim-treesitter/nvim-treesitter",

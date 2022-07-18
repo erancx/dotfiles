@@ -1,5 +1,5 @@
 export ZSH=$HOME/.oh-my-zsh
-plugins=(git docker macos common-aliases virtualenv kubectl terraform)
+plugins=(git docker macos common-aliases kubectl terraform)
 source $ZSH/oh-my-zsh.sh
 export LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
 export SSH_KEY_PATH="~/.ssh/rsa_id"
@@ -82,10 +82,6 @@ fshow() {
 }
 #####################################
 
-if [[ -e "$HOME/workspace/venv/default3/bin/activate" ]]; then
-    source "$HOME/workspace/venv/default3/bin/activate"
-fi
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
@@ -116,3 +112,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 export PATH="/opt/homebrew/sbin:$HOME/Library/Python/3.8/bin:$PATH"
+
+if [[ -e "$HOME/workspace/venv/default3/bin/activate" ]]; then
+    source "$HOME/workspace/venv/default3/bin/activate"
+fi

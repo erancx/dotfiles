@@ -1,4 +1,6 @@
 -- Plugins
+pcall(require, "impatient")
+
 require("plugins")
 
 -- General

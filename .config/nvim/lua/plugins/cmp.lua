@@ -1,6 +1,7 @@
 local cmp = require("cmp")
+local select_opts = { behavior = cmp.SelectBehavior.Select }
+local luasnip = require("luasnip")
 
---   פּ ﯟ   some other good icons
 local kind_icons = {
     Text = "",
     Method = "m",
@@ -32,41 +33,56 @@ local kind_icons = {
 cmp.setup({
     snippet = {
         expand = function(args)
-            require("luasnip").lsp_expand(args.body)
+            luasnip.lsp_expand(args.body)
         end,
     },
     mapping = {
-        ["<C-p>"] = cmp.mapping.select_prev_item(),
-        ["<C-n>"] = cmp.mapping.select_next_item(),
-        ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-p>"] = cmp.mapping.select_prev_item(select_opts),
+        ["<C-n>"] = cmp.mapping.select_next_item(select_opts),
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
         ["<C-Space>"] = cmp.mapping.complete(),
-        ["<C-e>"] = cmp.mapping.close(),
+        -- toggle completion
+        ["<C-e>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.close()
+                fallback()
+            else
+                cmp.complete()
+            end
+        end),
+        -- go to next placeholder in the snippet
+        ["<C-d>"] = cmp.mapping(function(fallback)
+            if luasnip.jumpable(1) then
+                luasnip.jump(1)
+            else
+                fallback()
+            end
+        end, { "i", "s" }),
+
+        ["<C-b>"] = cmp.mapping(function(fallback)
+            if luasnip.jumpable(-1) then
+                luasnip.jump(-1)
+            else
+                fallback()
+            end
+        end, { "i", "s" }),
         ["<CR>"] = cmp.mapping.confirm({ select = true }),
         ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
-                cmp.select_next_item()
-            elseif require("luasnip").expand_or_jumpable() then
-                vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
-            else
+                cmp.select_next_item(select_opts)
+            elseif s.check_back_space() then
                 fallback()
+            else
+                cmp.complete()
             end
-        end, {
-            "i",
-            "s",
-        }),
+        end, { "i", "s" }),
         ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
-                cmp.select_prev_item()
-            elseif require("luasnip").jumpable(-1) then
-                vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
+                cmp.select_prev_item(select_opts)
             else
                 fallback()
             end
-        end, {
-            "i",
-            "s",
-        }),
+        end, { "i", "s" }),
     },
     formatting = {
         fields = { "kind", "abbr", "menu" },
@@ -88,13 +104,6 @@ cmp.setup({
         { name = "nvim_lsp_signature_help" },
         { name = "path" },
     },
-    duplicates = {
-        buffer = 1,
-        path = 1,
-        nvim_lsp = 0,
-        luasnip = 1,
-    },
-    duplicates_default = 0,
 
     confirm_opts = {
         behavior = cmp.ConfirmBehavior.Replace,
@@ -104,6 +113,10 @@ cmp.setup({
         documentation = {
             border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
             winhighlight = "Normal:CmpPmenu,CursorLine:PmenuSel,Search:None",
+            {
+                max_height = 15,
+                max_width = 60,
+            },
         },
     },
     experimental = {

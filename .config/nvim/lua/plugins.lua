@@ -29,8 +29,8 @@ packer.startup(function(use)
     use("akinsho/nvim-bufferline.lua")
     use("jvirtanen/vim-hcl")
     use("akinsho/nvim-toggleterm.lua")
-    use("b3nj5m1n/kommentary")
     use("beauwilliams/focus.nvim")
+    use("numToStr/Comment.nvim")
     use("danymat/neogen")
     use("famiu/bufdelete.nvim")
     use("folke/trouble.nvim")
@@ -96,6 +96,7 @@ packer.startup(function(use)
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-calc",
             "saadparwaiz1/cmp_luasnip",
+            "JoosepAlviste/nvim-ts-context-commentstring",
         },
     })
     use({ "onsails/lspkind-nvim", config = [[ require('plugins.lsp.lspkind') ]] })

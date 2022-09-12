@@ -102,12 +102,6 @@ add-zsh-hook precmd set-title-precmd
 add-zsh-hook preexec set-title-preexec
 ####################################
 
-load_gcp() {
- # The next line updates PATH for the Google Cloud SDK.
-  if [ -f '/Users/edavidovich/.google-cloud-sdk/path.zsh.inc' ]; then . '/Users/edavidovich/.google-cloud-sdk/path.zsh.inc'; fi
-  if [ -f '/Users/edavidovich/.google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/edavidovich/.google-cloud-sdk/completion.zsh.inc'; fi
-}
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
@@ -116,3 +110,11 @@ export PATH="/opt/homebrew/sbin:$HOME/Library/Python/3.8/bin:$PATH"
 if [[ -e "$HOME/workspace/venv/default3/bin/activate" ]]; then
     source "$HOME/workspace/venv/default3/bin/activate"
 fi
+
+load_gcp() {
+  # The next line updates PATH for the Google Cloud SDK.
+  if [ -f '/Users/edavidovich/.google-cloud-sdk/path.zsh.inc' ]; then . '/Users/edavidovich/.google-cloud-sdk/path.zsh.inc'; fi
+  # The next line enables shell command completion for gcloud.
+  if [ -f '/Users/edavidovich/.google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/edavidovich/.google-cloud-sdk/completion.zsh.inc'; fi
+  export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+}

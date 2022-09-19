@@ -1,6 +1,8 @@
 local cmp = require("cmp")
-local select_opts = { behavior = cmp.SelectBehavior.Select }
 local luasnip = require("luasnip")
+
+require("luasnip/loaders/from_snipmate").lazy_load { paths = "./snippets" }
+require("luasnip/loaders/from_vscode").lazy_load()
 
 local kind_icons = {
     Text = "",
@@ -37,52 +39,41 @@ cmp.setup({
         end,
     },
     mapping = {
-        ["<C-p>"] = cmp.mapping.select_prev_item(select_opts),
-        ["<C-n>"] = cmp.mapping.select_next_item(select_opts),
+        ["<C-p>"] = cmp.mapping.select_prev_item(),
+        ["<C-n>"] = cmp.mapping.select_next_item(),
+        ["<C-d>"] = cmp.mapping.scroll_docs(-4),
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
         ["<C-Space>"] = cmp.mapping.complete(),
-        -- toggle completion
-        ["<C-e>"] = cmp.mapping(function(fallback)
+        ["<C-e>"] = cmp.mapping.close(),
+        ["<CR>"] = cmp.mapping.confirm({
+            behavior = cmp.ConfirmBehavior.Replace,
+            select = true,
+        }),
+        ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
-                cmp.close()
-                fallback()
-            else
-                cmp.complete()
-            end
-        end),
-        -- go to next placeholder in the snippet
-        ["<C-d>"] = cmp.mapping(function(fallback)
-            if luasnip.jumpable(1) then
-                luasnip.jump(1)
+                cmp.select_next_item()
+            elseif luasnip.expandable() then
+                luasnip.expand()
+            elseif luasnip.expand_or_jumpable() then
+                luasnip.expand_or_jump()
             else
                 fallback()
-            end
-        end, { "i", "s" }),
-
-        ["<C-b>"] = cmp.mapping(function(fallback)
-            if luasnip.jumpable(-1) then
+            end end, {
+            "i",
+            "s",
+        }),
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_prev_item()
+            elseif luasnip.jumpable(-1) then
                 luasnip.jump(-1)
             else
                 fallback()
             end
-        end, { "i", "s" }),
-        ["<CR>"] = cmp.mapping.confirm({ select = true }),
-        ["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-                cmp.select_next_item(select_opts)
-            elseif s.check_back_space() then
-                fallback()
-            else
-                cmp.complete()
-            end
-        end, { "i", "s" }),
-        ["<S-Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-                cmp.select_prev_item(select_opts)
-            else
-                fallback()
-            end
-        end, { "i", "s" }),
+        end, {
+            "i",
+            "s",
+        }),
     },
     formatting = {
         fields = { "kind", "abbr", "menu" },
@@ -113,10 +104,6 @@ cmp.setup({
         documentation = {
             border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
             winhighlight = "Normal:CmpPmenu,CursorLine:PmenuSel,Search:None",
-            {
-                max_height = 15,
-                max_width = 60,
-            },
         },
     },
     experimental = {

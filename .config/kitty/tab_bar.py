@@ -1,4 +1,5 @@
 import datetime
+from datetime import timezone
 
 from kitty.fast_data_types import Screen
 from kitty.tab_bar import (
@@ -71,7 +72,9 @@ def draw_right_status(draw_data: DrawData, screen: Screen) -> None:
 
 def create_cells() -> list[str]:
     now = datetime.datetime.now()
+    utc = datetime.datetime.now(tz=timezone.utc)
     return [
-        now.strftime("%d %b"),
-        now.strftime("%H:%M"),
+        now.strftime("%d-%m-%y"),
+        utc.strftime("UTC: %H:%M"),
+        now.strftime("Local: %H:%M"),
     ]

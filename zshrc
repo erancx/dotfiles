@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 export ZSH=$HOME/.oh-my-zsh
 plugins=(git docker macos common-aliases kubectl terraform)
 source $ZSH/oh-my-zsh.sh
@@ -7,9 +14,7 @@ export GOPATH=$HOME/workspace/go
 export EDITOR=${EDITOR:-nvim}
 export LESS=-Ri
 export KUBE_EDITOR="nvim"
-export PATH=$PATH:$HOME/workspace/venv/default/bin/:/usr/local/bin:$GOPATH/bin
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+export PATH=$PATH:$HOME/workspace/venv/default/bin/:/usr/local/bin:$GOPATH/bin:${KREW_ROOT:-$HOME/.krew}/bin:/opt/homebrew/sbin:$HOME/Library/Python/3.8/bin
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=180'
 export TERM=xterm-256color
 
@@ -34,8 +39,8 @@ alias kshell='kubectl run -it --image bash --restart Never --rm shell'
 unsetopt inc_append_history
 unsetopt share_history
 
-source <(antibody init)
-antibody bundle < ~/.zsh_plugins.txt
+source ${ZDOTDIR:-~}/.antidote/antidote.zsh
+antidote load
 
 ### fzf ############################
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -106,7 +111,6 @@ add-zsh-hook preexec set-title-preexec
 export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-export PATH="/opt/homebrew/sbin:$HOME/Library/Python/3.8/bin:$PATH"
 
 if [[ -e "$HOME/workspace/venv/default3/bin/activate" ]]; then
     source "$HOME/workspace/venv/default3/bin/activate"

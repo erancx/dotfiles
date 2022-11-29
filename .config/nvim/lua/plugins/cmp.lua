@@ -1,7 +1,7 @@
 local cmp = require("cmp")
 local luasnip = require("luasnip")
 
-require("luasnip/loaders/from_snipmate").lazy_load { paths = "./snippets" }
+require("luasnip/loaders/from_snipmate").lazy_load({ paths = "./snippets" })
 require("luasnip/loaders/from_vscode").lazy_load()
 
 local kind_icons = {
@@ -58,7 +58,8 @@ cmp.setup({
                 luasnip.expand_or_jump()
             else
                 fallback()
-            end end, {
+            end
+        end, {
             "i",
             "s",
         }),

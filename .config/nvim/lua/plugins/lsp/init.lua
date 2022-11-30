@@ -22,9 +22,6 @@ mason_lspconfig.setup_handlers({
                 if client.server_capabilities.documentSymbolProvider then
                     require("nvim-navic").attach(client, bufnr)
                 end
-                if server_name == "terraformls" then
-                    require("treesitter-terraform-doc").setup()
-                end
             end,
         })
     end,

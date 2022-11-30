@@ -1,36 +1,9 @@
 local cmp = require("cmp")
 local luasnip = require("luasnip")
+local lspkind = require("lspkind")
 
 require("luasnip/loaders/from_snipmate").lazy_load({ paths = "./snippets" })
 require("luasnip/loaders/from_vscode").lazy_load()
-
-local kind_icons = {
-    Text = "",
-    Method = "m",
-    Function = "",
-    Constructor = "",
-    Field = "",
-    Variable = "",
-    Class = "",
-    Interface = "",
-    Module = "",
-    Property = "",
-    Unit = "",
-    Value = "",
-    Enum = "",
-    Keyword = "",
-    Snippet = "",
-    Color = "",
-    File = "",
-    Reference = "",
-    Folder = "",
-    EnumMember = "",
-    Constant = "",
-    Struct = "",
-    Event = "",
-    Operator = "",
-    TypeParameter = "",
-}
 
 cmp.setup({
     snippet = {
@@ -77,17 +50,10 @@ cmp.setup({
         }),
     },
     formatting = {
-        fields = { "kind", "abbr", "menu" },
-        format = function(entry, vim_item)
-            vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
-            vim_item.menu = ({
-                nvim_lsp = "[LSP]",
-                luasnip = "[Snippet]",
-                buffer = "[Buffer]",
-                path = "[Path]",
-            })[entry.source.name]
-            return vim_item
-        end,
+        format = lspkind.cmp_format({
+            mode = "text_symbol",
+            maxwidth = 100,
+        }),
     },
     sources = {
         { name = "nvim_lsp" },
@@ -102,10 +68,7 @@ cmp.setup({
         select = false,
     },
     window = {
-        documentation = {
-            border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-            winhighlight = "Normal:CmpPmenu,CursorLine:PmenuSel,Search:None",
-        },
+        documentation = cmp.config.window.bordered(),
     },
     experimental = {
         ghost_text = true,

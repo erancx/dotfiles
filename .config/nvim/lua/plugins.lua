@@ -32,7 +32,6 @@ packer.startup(function(use)
     use("williamboman/mason.nvim")
     use("williamboman/mason-lspconfig.nvim")
     use("beauwilliams/focus.nvim")
-    use("numToStr/Comment.nvim")
     use("danymat/neogen")
     use("famiu/bufdelete.nvim")
     use("folke/trouble.nvim")
@@ -52,6 +51,12 @@ packer.startup(function(use)
     use("wbthomason/packer.nvim")
     use("windwp/nvim-autopairs")
     use("jjo/vim-cue")
+    use({
+        "numToStr/Comment.nvim",
+        config = function()
+            require("Comment").setup()
+        end,
+    })
     use({
         "kylechui/nvim-surround",
         config = function()
@@ -107,7 +112,7 @@ packer.startup(function(use)
             "JoosepAlviste/nvim-ts-context-commentstring",
         },
     })
-    use({ "onsails/lspkind-nvim", config = [[ require('plugins.lsp.lspkind') ]] })
+    use({ "onsails/lspkind-nvim" })
     use({
         "L3MON4D3/LuaSnip",
         requires = {

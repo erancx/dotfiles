@@ -110,7 +110,7 @@ local mappings = {
             "Undo Stage Hunk",
         },
         o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
-        b = { "<cmd>G blame", "Git blame" },
+        b = { "<cmd>G blame<cr>", "Git blame" },
         B = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
         c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
         d = {

@@ -50,7 +50,7 @@ augroup END
 cmd([[
 augroup markdown
   autocmd!
-  autocmd FileType gitcommit setlocal wrap
-  autocmd FileType gitcommit setlocal spell
+  autocmd FileType markdown setlocal wrap
+  autocmd FileType markdown setlocal spell
 augroup END
 ]])

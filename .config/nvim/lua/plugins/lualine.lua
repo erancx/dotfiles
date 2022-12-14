@@ -1,5 +1,3 @@
-local navic = require("nvim-navic")
-
 local function getclientnames()
     local bufnr = vim.api.nvim_get_current_buf()
     local clients = vim.lsp.buf_get_clients(bufnr)
@@ -38,9 +36,7 @@ require("lualine").setup({
             { "branch", icons_enabled = true, icon = "" },
             "filetype",
         },
-        lualine_c = {
-            { navic.get_location, cond = navic.is_available },
-        },
+        lualine_c = {},
         lualine_x = {
             {
                 "diagnostics",

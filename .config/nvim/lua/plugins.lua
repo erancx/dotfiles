@@ -50,6 +50,12 @@ packer.startup(function(use)
     use("tpope/vim-fugitive")
     use("wbthomason/packer.nvim")
     use("windwp/nvim-autopairs")
+    use({
+        "utilyre/barbecue.nvim",
+        config = function()
+            require("barbecue").setup()
+        end,
+    })
     use("jjo/vim-cue")
     use({
         "numToStr/Comment.nvim",
@@ -91,11 +97,10 @@ packer.startup(function(use)
             { "nvim-telescope/telescope-file-browser.nvim" },
         },
     })
-    -- install without yarn or npm
     use({
         "iamcco/markdown-preview.nvim",
         run = function()
-            vim.fn["mkdp#util#install"]()
+            vim.fn["mkdp#util#install"]() -- install without yarn or npm
         end,
     })
     -- auto-completion

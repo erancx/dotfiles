@@ -1,3 +1,18 @@
+local LSP_SERVERS = {
+    "ansiblels",
+    "awk_ls",
+    "bashls",
+    "dagger",
+    "dockerls",
+    "gopls",
+    "jsonls",
+    "marksman",
+    "sumneko_lua",
+    "pyright",
+    "terraformls",
+    "yamlls",
+}
+
 require("mason").setup({
     providers = {
         "mason.providers.client",
@@ -13,7 +28,9 @@ local mason_lspconfig = require("mason-lspconfig")
 -- and will be called for each installed server that doesn't have
 -- a dedicated handler.
 -- :h mason-lspconfig-automatic-server-setup
-mason_lspconfig.setup()
+mason_lspconfig.setup({
+    ensure_installed = LSP_SERVERS,
+})
 
 mason_lspconfig.setup_handlers({
     function(server_name)

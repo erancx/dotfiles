@@ -1,5 +1,15 @@
 require("telescope").setup({
     defaults = {
+        layout_strategy = "vertical",
+        layout_config = {
+            vertical = {
+                height = 0.9,
+                preview_cutoff = 0,
+                preview_height = 0.6,
+                results_height = 0.3,
+                width = 0.7,
+            },
+        },
         prompt_prefix = "   ",
         file_ignore_patterns = {
             ".git/",
@@ -15,7 +25,12 @@ require("telescope").setup({
             "%.sqlite3",
             "%.ipynb",
             "vendor/*",
-            "node_modules/*",
+            "^node_modules/",
+            "^deps/",
+            "^plugin/packer_compiled.lua",
+            "^.next/",
+            "^.yarn/",
+            "yarn.lock",
         },
     },
     extensions = {

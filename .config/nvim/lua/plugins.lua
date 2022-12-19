@@ -50,6 +50,7 @@ packer.startup(function(use)
     use("tpope/vim-fugitive")
     use("wbthomason/packer.nvim")
     use("windwp/nvim-autopairs")
+    use("sindrets/diffview.nvim")
     use({
         "utilyre/barbecue.nvim",
         config = function()

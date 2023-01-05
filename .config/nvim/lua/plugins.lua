@@ -36,8 +36,8 @@ packer.startup(function(use)
     use("famiu/bufdelete.nvim")
     use("folke/trouble.nvim")
     use("folke/which-key.nvim")
-    use("kyazdani42/nvim-tree.lua")
-    use("kyazdani42/nvim-web-devicons")
+    use("nvim-tree/nvim-tree.lua")
+    use("nvim-tree/nvim-web-devicons")
     use("lewis6991/gitsigns.nvim")
     use("catppuccin/nvim")
     use("lukas-reineke/indent-blankline.nvim")
@@ -51,13 +51,14 @@ packer.startup(function(use)
     use("wbthomason/packer.nvim")
     use("windwp/nvim-autopairs")
     use("sindrets/diffview.nvim")
+    use("jjo/vim-cue")
+    use("onsails/lspkind-nvim")
     use({
         "utilyre/barbecue.nvim",
         config = function()
-            require("barbecue").setup()
+            require("barbecue").setup({})
         end,
     })
-    use("jjo/vim-cue")
     use({
         "numToStr/Comment.nvim",
         config = function()
@@ -68,14 +69,6 @@ packer.startup(function(use)
         "kylechui/nvim-surround",
         config = function()
             require("nvim-surround").setup({})
-        end,
-    })
-    use({
-        "jinh0/eyeliner.nvim",
-        config = function()
-            require("eyeliner").setup({
-                highlight_on_key = true,
-            })
         end,
     })
     use({
@@ -118,7 +111,6 @@ packer.startup(function(use)
             "JoosepAlviste/nvim-ts-context-commentstring",
         },
     })
-    use({ "onsails/lspkind-nvim" })
     use({
         "L3MON4D3/LuaSnip",
         requires = {

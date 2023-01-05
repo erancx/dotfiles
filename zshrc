@@ -123,3 +123,5 @@ load_gcp() {
   if [ -f '/Users/edavidovich/.google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/edavidovich/.google-cloud-sdk/completion.zsh.inc'; fi
   export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 }
+
+source /Users/edavidovich/.docker/init-zsh.sh || true # Added by Docker Desktop

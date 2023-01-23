@@ -6,7 +6,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 export ZSH=$HOME/.oh-my-zsh
-plugins=(git docker macos common-aliases kubectl terraform)
+plugins=(git docker macos common-aliases kubectl terraform colored-man-pages)
 source $ZSH/oh-my-zsh.sh
 export LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
 export SSH_KEY_PATH="~/.ssh/rsa_id"

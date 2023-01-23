@@ -54,6 +54,12 @@ packer.startup(function(use)
     use("jjo/vim-cue")
     use("onsails/lspkind-nvim")
     use({
+        "echasnovski/mini.move",
+        config = function()
+            require("mini.move").setup()
+        end,
+    })
+    use({
         "utilyre/barbecue.nvim",
         config = function()
             require("barbecue").setup({})

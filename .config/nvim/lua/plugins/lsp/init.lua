@@ -7,7 +7,6 @@ local LSP_SERVERS = {
     "gopls",
     "jsonls",
     "marksman",
-    "sumneko_lua",
     "pyright",
     "terraformls",
     "yamlls",

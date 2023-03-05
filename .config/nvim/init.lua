@@ -1,6 +1,3 @@
--- Plugins
-pcall(require, "impatient")
-
 require("plugins")
 
 -- General
@@ -26,4 +23,3 @@ require("plugins.treesitter")
 require("plugins.trouble")
 require("plugins.whichkey")
 require("plugins.toggleterm")
-require("plugins.dap")

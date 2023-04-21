@@ -14,7 +14,7 @@ export GOPATH=$HOME/workspace/go
 export EDITOR=${EDITOR:-nvim}
 export LESS=-Ri
 export KUBE_EDITOR="nvim"
-export PATH=$PATH:$HOME/workspace/venv/default/bin/:/usr/local/bin:$GOPATH/bin:${KREW_ROOT:-$HOME/.krew}/bin:/opt/homebrew/sbin:$HOME/Library/Python/3.8/bin:~/bin
+export PATH=$PATH:$HOME/workspace/venv/default/bin/:/usr/local/bin:$GOPATH/bin:${KREW_ROOT:-$HOME/.krew}/bin:/opt/homebrew/sbin:$HOME/Library/Python/3.8/bin:~/bin:${KREW_ROOT:-$HOME/.krew}/bin
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=180'
 export TERM=xterm-256color
 
@@ -123,3 +123,4 @@ load_gcp() {
   if [ -f '/Users/edavidovich/.google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/edavidovich/.google-cloud-sdk/completion.zsh.inc'; fi
   export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 }
+. <(flux completion zsh)

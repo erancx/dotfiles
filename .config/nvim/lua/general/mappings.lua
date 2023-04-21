@@ -11,7 +11,6 @@ api.nvim_set_keymap("n", "<S-TAB>", ":BufferLineCyclePrev<CR>", { noremap = true
 api.nvim_set_keymap("n", "<C-t>", ":tabnew<CR>", { noremap = true })
 api.nvim_set_keymap("n", "Q", "<nop>", { noremap = true })
 api.nvim_set_keymap("n", "q:", "<nop>", { noremap = true })
-api.nvim_set_keymap("n", "<S-x>", ":Bdelete<cr>", { noremap = true })
 api.nvim_set_keymap("n", "<esc>", ":nohlsearch<return><esc>", { noremap = true, silent = true })
 api.nvim_set_keymap("n", "gD", ":lua vim.lsp.buf.declaration()<CR>", { noremap = true })
 api.nvim_set_keymap("n", "gd", ":lua vim.lsp.buf.definition()<CR>", { noremap = true })

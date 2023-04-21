@@ -81,10 +81,10 @@ local opts = {
 local mappings = {
     ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
     ["md"] = { "<cmd>MarkdownPreviewToggle<CR>", "MarkdownPreviewToggle" },
+    ["j"] = { "<cmd>lua require('treesj').toggle()<CR>", "TSJToggle" },
     f = {
         name = "Find",
         a = { "<cmd>Telescope find_files cwd=~/workspace/repo<cr>", "Telescope find files in ~/workspace/repo" },
-        b = { "<cmd>lua require 'telescope'.extensions.file_browser.file_browser()<cr>", "File browser" },
         f = { "<cmd>Telescope find_files hidden=true<cr>", "Find files in current repo" },
         g = { "<cmd>Telescope live_grep<cr>", "Live grep" },
         h = { "<cmd>Telescope help_tags<cr>", "Find Help" },

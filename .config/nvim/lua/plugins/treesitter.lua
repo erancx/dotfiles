@@ -1,5 +1,17 @@
 require("nvim-treesitter.configs").setup({
-    --ensure_installed = "maintained",
+    ensure_installed = {
+        "bash",
+        "dockerfile",
+        "go",
+        "hcl",
+        "json",
+        "lua",
+        "markdown",
+        "python",
+        "regex",
+        "terraform",
+        "yaml",
+    },
     highlight = { enable = true, use_languagetree = true },
     indent = { enable = false },
     context_commentstring = { enable = true, enable_autocmd = false },

@@ -1,26 +1,43 @@
 local LSP_SERVERS = {
-    "ansiblels",
-    "awk_ls",
-    "bashls",
-    "dagger",
-    "dockerls",
-    "gopls",
-    "jsonls",
-    "marksman",
-    "pyright",
-    "terraformls",
-    "yamlls",
+  "ansiblels",
+  "awk_ls",
+  "bashls",
+  "dockerls",
+  "gopls",
+  "jsonls",
+  "pyright",
+  "terraformls",
+  "yamlls",
 }
 
 require("mason").setup({
-    providers = {
-        "mason.providers.client",
-        "mason.providers.registry-api",
-    },
+  providers = {
+    "mason.providers.client",
+    "mason.providers.registry-api",
+  },
 })
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+
+capabilities.textDocument.completion.completionItem = {
+  documentationFormat = { "markdown", "plaintext" },
+  snippetSupport = true,
+  preselectSupport = true,
+  insertReplaceSupport = true,
+  labelDetailsSupport = true,
+  deprecatedSupport = true,
+  commitCharactersSupport = true,
+  tagSupport = { valueSet = { 1 } },
+  resolveSupport = {
+    properties = {
+      "documentation",
+      "detail",
+      "additionalTextEdits",
+    },
+  },
+}
+
 local mason_lspconfig = require("mason-lspconfig")
 
 -- The first entry (without a key) will be the default handler
@@ -28,23 +45,60 @@ local mason_lspconfig = require("mason-lspconfig")
 -- a dedicated handler.
 -- :h mason-lspconfig-automatic-server-setup
 mason_lspconfig.setup({
-    ensure_installed = LSP_SERVERS,
+  ensure_installed = LSP_SERVERS,
 })
 
-mason_lspconfig.setup_handlers({
-    function(server_name)
-        require("lspconfig")[server_name].setup({
-            on_attach = function(client, bufnr)
-                if client.server_capabilities.documentSymbolProvider then
-                    require("nvim-navic").attach(client, bufnr)
-                end
-            end,
-        })
-    end,
-})
+local lspSettings = {}
+local lspFileTypes = {}
+
+lspSettings.lua_ls = {
+  settings = {
+    Lua = {
+      format = { enable = true },
+      completion = {
+        callSnippet = "Replace",
+        keywordSnippet = "Replace",
+        displayContext = 2,
+        postfix = ".",
+      },
+      diagnostics = {
+        globals = { "vim" },
+        disable = { "trailing-space" },
+      },
+      hint = {
+        enable = true,
+        setType = true,
+        paramName = "All",
+        paramType = true,
+        arrayIndex = "Disable",
+      },
+      telemetry = { enable = false },
+    },
+  },
+}
+
+lspSettings.jsonls = {
+  json = {
+    validate = { enable = true },
+    format = { enable = true },
+  },
+}
+
+lspSettings.yamlls = {
+  yaml = { keyOrdering = false }, -- FIX mapKeyOrder
+}
+
+for _, lsp in pairs(LSP_SERVERS) do
+  local config = {
+    capabilities = lspCapabilities,
+    settings = lspSettings[lsp],
+    filetypes = lspFileTypes[lsp],
+  }
+  require("lspconfig")[lsp].setup(config)
+end
 
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 for type, icon in pairs(signs) do
-    local hl = "DiagnosticSign" .. type
-    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 end

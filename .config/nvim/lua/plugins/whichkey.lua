@@ -1,220 +1,91 @@
 local status_ok, which_key = pcall(require, "which-key")
 if not status_ok then
-    return
+  return
 end
 
 local setup = {
-    plugins = {
-        marks = true, -- shows a list of your marks on ' and `
-        registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
-        spelling = {
-            enabled = true, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
-            suggestions = 20, -- how many suggestions should be shown in the list?
-        },
-        -- the presets plugin, adds help for a bunch of default keybindings in Neovim
-        -- No actual key bindings are created
-        presets = {
-            operators = false, -- adds help for operators like d, y, ... and registers them for motion / text object completion
-            motions = true, -- adds help for motions
-            text_objects = true, -- help for text objects triggered after entering an operator
-            windows = true, -- default bindings on <c-w>
-            nav = true, -- misc bindings to work with windows
-            z = true, -- bindings for folds, spelling and others prefixed with z
-            g = true, -- bindings for prefixed with g
-        },
-    },
-    -- add operators that will trigger motion and text object completion
-    -- to enable all native operators, set the preset / operators plugin above
-    -- operators = { gc = "Comments" },
-    key_labels = {
-        -- override the label used to display some keys. It doesn't effect WK in any other way.
-        -- For example:
-        -- ["<space>"] = "SPC",
-        -- ["<cr>"] = "RET",
-        -- ["<tab>"] = "TAB",
-    },
-    icons = {
-        breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
-        separator = "➜", -- symbol used between a key and it's label
-        group = "+", -- symbol prepended to a group
-    },
-    popup_mappings = {
-        scroll_down = "<c-d>", -- binding to scroll down inside the popup
-        scroll_up = "<c-u>", -- binding to scroll up inside the popup
-    },
-    window = {
-        border = "rounded", -- none, single, double, shadow
-        position = "bottom", -- bottom, top
-        margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
-        padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
-        winblend = 0,
-    },
-    layout = {
-        height = { min = 4, max = 25 }, -- min and max height of the columns
-        width = { min = 20, max = 50 }, -- min and max width of the columns
-        spacing = 3, -- spacing between columns
-        align = "left", -- align columns left, center or right
-    },
-    ignore_missing = true, -- enable this to hide mappings for which you didn't specify a label
-    hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
-    show_help = true, -- show help message on the command line when the popup is visible
-    triggers = "auto", -- automatically setup triggers
-    -- triggers = {"<leader>"} -- or specify a list manually
-    triggers_blacklist = {
-        -- list of mode / prefixes that should never be hooked by WhichKey
-        -- this is mostly relevant for key maps that start with a native binding
-        -- most people should not need to change this
-        i = { "j", "k" },
-        v = { "j", "k" },
-    },
+  plugins = {
+    marks = false,
+  },
+  window = {
+    border = "single", -- none, single, double, shadow
+  },
 }
 
 local opts = {
-    mode = "n", -- NORMAL mode
-    prefix = "<leader>",
-    buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-    silent = true, -- use `silent` when creating keymaps
-    noremap = true, -- use `noremap` when creating keymaps
-    nowait = true, -- use `nowait` when creating keymaps
+  prefix = "<leader>",
 }
 
 local mappings = {
-    ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
-    ["md"] = { "<cmd>MarkdownPreviewToggle<CR>", "MarkdownPreviewToggle" },
-    ["j"] = { "<cmd>lua require('treesj').toggle()<CR>", "TSJToggle" },
-    f = {
-        name = "Find",
-        a = { "<cmd>Telescope find_files cwd=~/workspace/repo<cr>", "Telescope find files in ~/workspace/repo" },
-        f = { "<cmd>Telescope find_files hidden=true<cr>", "Find files in current repo" },
-        g = { "<cmd>Telescope live_grep<cr>", "Live grep" },
-        h = { "<cmd>Telescope help_tags<cr>", "Find Help" },
-        k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
-        l = { "<cmd>Telescope oldfiles<cr>", "List old files" },
-        p = { "<cmd>lua require'telescope'.extensions.project.project{}<CR>", "List projects" },
-        t = { "<cmd>Telescope filetypes<cr>", "Set filetype" },
-        C = { "<cmd>Telescope commands<cr>", "Commands" },
-        M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
-        R = { "<cmd>Telescope registers<cr>", "Registers" },
+  ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
+  ["md"] = { "<cmd>MarkdownPreviewToggle<CR>", "MarkdownPreviewToggle" },
+  f = {
+    name = "Find",
+    a = { "<cmd>Telescope find_files cwd=~/workspace/repo<cr>", "Telescope find files in ~/workspace/repo" },
+    f = { "<cmd>Telescope find_files hidden=true<cr>", "Find files in current repo" },
+    g = { "<cmd>Telescope live_grep<cr>", "Live grep" },
+    h = { "<cmd>Telescope help_tags<cr>", "Find Help" },
+    k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
+    l = { "<cmd>Telescope oldfiles<cr>", "List old files" },
+    p = { "<cmd>lua require'telescope'.extensions.project.project{}<CR>", "List projects" },
+    t = { "<cmd>Telescope filetypes<cr>", "Set filetype" },
+    C = { "<cmd>Telescope commands<cr>", "Commands" },
+    R = { "<cmd>Telescope registers<cr>", "Registers" },
+  },
+  g = {
+    name = "Git",
+    l = { "<cmd>lua _lazygit_toggle()<cr>", "Lazygit" },
+    o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
+    b = { "<cmd>G blame<cr>", "Git blame" },
+    B = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
+    c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
+    d = {
+      "<cmd>Gitsigns diffthis HEAD<cr>",
+      "Diff",
     },
-    g = {
-        name = "Git",
-        h = {
-            name = "+Github",
-            c = {
-                name = "+Commits",
-                c = { "<cmd>GHCloseCommit<cr>", "Close" },
-                e = { "<cmd>GHExpandCommit<cr>", "Expand" },
-                o = { "<cmd>GHOpenToCommit<cr>", "Open To" },
-                p = { "<cmd>GHPopOutCommit<cr>", "Pop Out" },
-                z = { "<cmd>GHCollapseCommit<cr>", "Collapse" },
-            },
-            i = {
-                name = "+Issues",
-                p = { "<cmd>GHPreviewIssue<cr>", "Preview" },
-            },
-            l = {
-                name = "+Litee",
-                t = { "<cmd>LTPanel<cr>", "Toggle Panel" },
-            },
-            r = {
-                name = "+Review",
-                b = { "<cmd>GHStartReview<cr>", "Begin" },
-                c = { "<cmd>GHCloseReview<cr>", "Close" },
-                d = { "<cmd>GHDeleteReview<cr>", "Delete" },
-                e = { "<cmd>GHExpandReview<cr>", "Expand" },
-                s = { "<cmd>GHSubmitReview<cr>", "Submit" },
-                z = { "<cmd>GHCollapseReview<cr>", "Collapse" },
-            },
-            p = {
-                name = "+Pull Request",
-                c = { "<cmd>GHClosePR<cr>", "Close" },
-                d = { "<cmd>GHPRDetails<cr>", "Details" },
-                e = { "<cmd>GHExpandPR<cr>", "Expand" },
-                o = { "<cmd>GHOpenPR<cr>", "Open" },
-                p = { "<cmd>GHPopOutPR<cr>", "PopOut" },
-                r = { "<cmd>GHRefreshPR<cr>", "Refresh" },
-                t = { "<cmd>GHOpenToPR<cr>", "Open To" },
-                z = { "<cmd>GHCollapsePR<cr>", "Collapse" },
-            },
-            t = {
-                name = "+Threads",
-                c = { "<cmd>GHCreateThread<cr>", "Create" },
-                n = { "<cmd>GHNextThread<cr>", "Next" },
-                t = { "<cmd>GHToggleThread<cr>", "Toggle" },
-            },
-        },
-        j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
-        k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
-        l = { "<cmd>lua _lazygit_toggle()<cr>", "Lazygit" },
-        p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
-        r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
-        R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
-        s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
-        u = {
-            "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
-            "Undo Stage Hunk",
-        },
-        o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
-        b = { "<cmd>G blame<cr>", "Git blame" },
-        B = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
-        c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
-        d = {
-            "<cmd>Gitsigns diffthis HEAD<cr>",
-            "Diff",
-        },
-    },
-    l = {
-        name = "LSP",
-        a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
-        d = {
-            "<cmd>Telescope diagnostics bufnr=<cr>",
-            "Document Diagnostics",
-        },
-        w = {
-            "<cmd>Telescope lsp_workspace_diagnostics<cr>",
-            "Workspace Diagnostics",
-        },
-        f = { "<cmd>lua vim.lsp.buf.format{async = true}<cr>", "Format" },
-        i = { "<cmd>LspInfo<cr>", "Info" },
-        I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
-        j = {
-            "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>",
-            "Next Diagnostic",
-        },
-        k = {
-            "<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>",
-            "Prev Diagnostic",
-        },
-        l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
-        q = { "<cmd>TroubleToggle<CR>", "TroubleToggle" },
-        r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
-        s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
-        S = {
-            "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
-            "Workspace Symbols",
-        },
-    },
-    t = {
-        name = "Terminal",
-        f = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
-        t = { "<cmd>ToggleTerm direction=tab<cr>", "Tab" },
-        h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
-        v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
+  },
+  l = {
+    name = "LSP",
+    a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
+    d = {
+      "<cmd>Telescope diagnostics bufnr=<cr>",
+      "Document Diagnostics",
     },
     w = {
-        name = "Windows",
-        s = { "<cmd>FocusSplitDown<cr>", "Focus Split Down" },
-        w = { "<cmd>FocusSplitUp<cr>", "Focus Split Up" },
-        a = { "<cmd>FocusSplitLeft<cr>", "Focus Split Left" },
-        d = { "<cmd>FocusSplitRight<cr>", "Focus Split Right" },
-        m = { "<cmd>FocusMaximise<cr>", "Focus Maximase" },
+      "<cmd>Telescope lsp_workspace_diagnostics<cr>",
+      "Workspace Diagnostics",
     },
-    d = {
-        name = "Debug Adapter Protocol",
-        c = { "<cmd>lua require'dap'.continue()<cr>", "DAP Continue or Launch" },
-        b = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Toggle Breakpoint" },
-        u = { "<cmd>lua require'dapui'.toggle()<cr>", "DAP UI" },
+    f = { "<cmd>lua vim.lsp.buf.format{async = true}<cr>", "Format" },
+    i = { "<cmd>LspInfo<cr>", "Info" },
+    I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
+    j = {
+      "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>",
+      "Next Diagnostic",
     },
+    k = {
+      "<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>",
+      "Prev Diagnostic",
+    },
+    l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
+    q = { "<cmd>TroubleToggle<CR>", "TroubleToggle" },
+    r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
+    s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
+  },
+  t = {
+    name = "Terminal",
+    f = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
+    t = { "<cmd>ToggleTerm direction=tab<cr>", "Tab" },
+    h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
+    v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
+  },
+  w = {
+    name = "Windows",
+    s = { "<cmd>FocusSplitDown<cr>", "Focus Split Down" },
+    w = { "<cmd>FocusSplitUp<cr>", "Focus Split Up" },
+    a = { "<cmd>FocusSplitLeft<cr>", "Focus Split Left" },
+    d = { "<cmd>FocusSplitRight<cr>", "Focus Split Right" },
+    m = { "<cmd>FocusMaximise<cr>", "Focus Maximase" },
+  },
 }
 
 which_key.setup(setup)

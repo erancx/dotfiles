@@ -1,67 +1,67 @@
 local function getclientnames()
-    local bufnr = vim.api.nvim_get_current_buf()
-    local clients = vim.lsp.buf_get_clients(bufnr)
-    local clientnames_tbl = {}
-    for _, v in pairs(clients) do
-        if v.name then
-            table.insert(clientnames_tbl, v.name)
-        end
+  local bufnr = vim.api.nvim_get_current_buf()
+  local clients = vim.lsp.buf_get_clients(bufnr)
+  local clientnames_tbl = {}
+  for _, v in pairs(clients) do
+    if v.name then
+      table.insert(clientnames_tbl, v.name)
     end
-    return table.concat(clientnames_tbl, ",")
+  end
+  return table.concat(clientnames_tbl, ",")
 end
 
 local lsp_text_provider = function()
-    local bufnr = vim.api.nvim_get_current_buf()
-    local clients = vim.lsp.buf_get_clients(bufnr)
-    if vim.tbl_isempty(clients) then
-        return ""
-    end
-    local names = getclientnames()
-    return string.format("%s", names)
+  local bufnr = vim.api.nvim_get_current_buf()
+  local clients = vim.lsp.buf_get_clients(bufnr)
+  if vim.tbl_isempty(clients) then
+    return ""
+  end
+  local names = getclientnames()
+  return string.format("%s", names)
 end
 
 require("lualine").setup({
-    options = {
-        theme = "auto",
-        component_separators = "",
-        section_separators = { left = "", right = "" },
-        disabled_filetypes = { "NvimTree" },
+  options = {
+    theme = "auto",
+    component_separators = "",
+    section_separators = { left = "", right = "" },
+    disabled_filetypes = { "NvimTree" },
+  },
+  sections = {
+    lualine_a = {
+      { "mode", separator = { left = "" }, right_padding = 2 },
     },
-    sections = {
-        lualine_a = {
-            { "mode", separator = { left = "" }, right_padding = 2 },
-        },
-        lualine_b = {
-            "filename",
-            { "branch", icons_enabled = true, icon = "" },
-            "filetype",
-        },
-        lualine_c = {},
-        lualine_x = {
-            {
-                "diagnostics",
-                sources = { "nvim_diagnostic" },
-                sections = { "error", "warn" },
-                symbols = { error = " ", warn = " " },
-                colored = true,
-                update_in_insert = false,
-                always_visible = true,
-            },
-        },
-        lualine_y = { lsp_text_provider },
-        lualine_z = {
-            "location",
-            { "progress", separator = { right = "" } },
-        },
+    lualine_b = {
+      "filename",
+      { "branch", icons_enabled = true, icon = "" },
+      "filetype",
     },
-    inactive_sections = {
-        lualine_a = {},
-        lualine_b = {},
-        lualine_c = {},
-        lualine_x = {},
-        lualine_y = {},
-        lualine_z = {},
+    lualine_c = {},
+    lualine_x = {
+      {
+        "diagnostics",
+        sources = { "nvim_diagnostic" },
+        sections = { "error", "warn" },
+        symbols = { error = " ", warn = " " },
+        colored = true,
+        update_in_insert = false,
+        always_visible = true,
+      },
     },
-    tabline = {},
-    extensions = {},
+    lualine_y = { lsp_text_provider },
+    lualine_z = {
+      "location",
+      { "progress", separator = { right = "" } },
+    },
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {},
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = {},
+  },
+  tabline = {},
+  extensions = {},
 })

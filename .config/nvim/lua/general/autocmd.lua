@@ -16,19 +16,17 @@ vim.cmd([[
 ]])
 
 -- 2 spaces for selected filetypes
-cmd(
-    [[ autocmd FileType json,yaml,xml,html,xhtml,css,scssjavascript,lua,dart setlocal shiftwidth=2 tabstop=2 expandtab ]]
-)
+cmd([[ autocmd FileType json,yaml,xml,html,xhtml,css,scssjavascript,lua,dart setlocal shiftwidth=2 tabstop=2 expandtab ]])
 
 -- highlight on yank
 exec(
-    [[
+  [[
   augroup YankHighlight
     autocmd!
     autocmd TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=200, on_visual=true}
   augroup end
 ]],
-    false
+  false
 )
 
 -- go configurations
@@ -53,4 +51,9 @@ augroup markdown
   autocmd FileType markdown setlocal wrap
   autocmd FileType markdown setlocal spell
 augroup END
+]])
+
+cmd([[
+  hi TrailingWhitespace ctermbg=red guibg=red
+  call matchadd("TrailingWhitespace", '\v\s+$')
 ]])

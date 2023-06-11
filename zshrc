@@ -17,7 +17,12 @@ export KUBE_EDITOR="nvim"
 export PATH=$PATH:$HOME/workspace/venv/default/bin/:/usr/local/bin:$GOPATH/bin:${KREW_ROOT:-$HOME/.krew}/bin:/opt/homebrew/sbin:$HOME/Library/Python/3.8/bin:~/bin:${KREW_ROOT:-$HOME/.krew}/bin
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=180'
 export TERM=xterm-256color
-
+export HISTSIZE=10000000
+export SAVEHIST=10000000
+setopt INC_APPEND_HISTORY  # Write to the history file immediately, not when the shell exits.
+setopt SHARE_HISTORY
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_IGNORE_SPACE
 
 alias ls='gls --color=auto'
 alias vim="nvim"

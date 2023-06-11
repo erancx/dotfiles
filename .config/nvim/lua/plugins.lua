@@ -75,12 +75,8 @@ local opt = {
 local plugins = {
   { "catppuccin/nvim", lazy = true, priority = 1000 },
   { "SmiteshP/nvim-navic", lazy = true },
-  { "nvim-lua/plenary.nvim", lazy = true },
-  { "norcalli/nvim-colorizer.lua", event = "VeryLazy" },
   { "tpope/vim-fugitive" },
   { "sindrets/diffview.nvim", event = "VeryLazy" },
-  { "jjo/vim-cue" },
-  { "onsails/lspkind-nvim" },
   { "iamcco/markdown-preview.nvim" },
   {
     "nvim-treesitter/nvim-treesitter",
@@ -185,6 +181,7 @@ local plugins = {
     version = false,
     event = "InsertEnter",
     dependencies = {
+      "onsails/lspkind-nvim",
       "L3MON4D3/LuaSnip",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-calc",
@@ -326,12 +323,6 @@ local plugins = {
     "zbirenbaum/copilot-cmp",
     config = function()
       require("copilot_cmp").setup()
-    end,
-  },
-  {
-    "folke/neodev.nvim",
-    config = function()
-      require("neodev").setup()
     end,
   },
 }

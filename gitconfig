@@ -1,9 +1,22 @@
+[user]
+  name = Eran Davidovich
+  email = edavidovich@jumptrading.com
+[init]
+	defaultBranch = main
 [alias]
   co = checkout
-  add-commit = !git add -A && git commit
+  ac = !git add -A && git commit
   d = difftool
+[core]
+  whitespace = trailing-space,space-before-tab
+  editor = nvim
+  pager = delta
 [apply]
   whitespace = nowarn
+[push]
+  default = current
+[pull]
+  rebase = true
 [color]
   branch = auto
   diff = auto
@@ -24,14 +37,6 @@
   added = yellow
   changed = green
   untracked = cyan
-[core]
-  whitespace = trailing-space,space-before-tab
-  editor = nvim
-  pager = delta
-[push]
-  default = current
-[pull]
-  rebase = true
 [branch]
   autosetuprebase = always
   autosetupmerge = always
@@ -42,6 +47,7 @@
   diff = delta
 [merge]
   tool = vimdiff
+  conflictstyle = diff3
 [mergetool]
   prompt = true
 [mergetool "vimdiff"]
@@ -50,9 +56,6 @@
   prompt = false
 [diff]
   tool = vimdiff
-[user]
-  name = Eran Davidovich
-  email = edavidovich@jumptrading.com
 [difftool]
   prompt = false
 [color "diff-highlight"]
@@ -67,17 +70,8 @@
 [delta]
   features = side-by-side line-numbers decorations
   whitespace-error-style = 22 reverse
-  side-by-side = true
+  line-numbers = true
+  side-by-side = false
 [delta "decorations"]
   commit-decoration-style = bold yellow box ul
   file-style = bold yellow ul
-  file-decoration-style = none
-[delta]
-  plus-style = "syntax #012800"
-  minus-style = "syntax #340001"
-  syntax-theme = Monokai Extended
-  navigate = true
-[interactive]
-  diffFilter = delta --color-only
-[init]
-	defaultBranch = main

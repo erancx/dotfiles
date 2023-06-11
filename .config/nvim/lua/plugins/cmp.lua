@@ -50,6 +50,7 @@ cmp.setup({
     }),
   },
   formatting = {
+    fields = {'abbr', 'menu', 'kind'},
     format = lspkind.cmp_format({
       mode = "text",
       maxwidth = 100,
@@ -67,13 +68,12 @@ cmp.setup({
 
   confirm_opts = {
     behavior = cmp.ConfirmBehavior.Replace,
-    select = false,
+    select = true,
   },
   window = {
     documentation = cmp.config.window.bordered(),
   },
   experimental = {
-    ghost_text = false,
-    native_menu = false,
+    ghost_text = true,
   },
 })

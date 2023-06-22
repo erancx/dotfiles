@@ -24,13 +24,8 @@ local mappings = {
     a = { "<cmd>Telescope find_files cwd=~/workspace/repo<cr>", "Telescope find files in ~/workspace/repo" },
     f = { "<cmd>Telescope find_files hidden=true<cr>", "Find files in current repo" },
     g = { "<cmd>Telescope live_grep<cr>", "Live grep" },
-    h = { "<cmd>Telescope help_tags<cr>", "Find Help" },
-    k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
     l = { "<cmd>Telescope oldfiles<cr>", "List old files" },
     p = { "<cmd>lua require'telescope'.extensions.project.project{}<CR>", "List projects" },
-    t = { "<cmd>Telescope filetypes<cr>", "Set filetype" },
-    C = { "<cmd>Telescope commands<cr>", "Commands" },
-    R = { "<cmd>Telescope registers<cr>", "Registers" },
   },
   g = {
     name = "Git",

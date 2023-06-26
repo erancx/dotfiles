@@ -90,8 +90,12 @@ local plugins = {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
     config = function()
-      require("nvim-autopairs").setup()
-
+      require("nvim-autopairs").setup({
+        enable_check_bracket_line = true,
+        disable_filetype = { "TelescopePrompt", "vim" }, --
+        enable_afterquote = false,
+        enable_moveright = true,
+      })
       local cmp_autopairs = require("nvim-autopairs.completion.cmp")
       local cmp = require("cmp")
       cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
@@ -199,14 +203,25 @@ local plugins = {
   {
     "rcarriga/nvim-notify",
     config = function()
-      require("plugins.notify")
+      require("notify").setup({
+        background_colour = "#000000",
+        render = "simple",
+        stages = "fade_in_slide_out",
+      })
     end,
   },
   {
     "akinsho/nvim-bufferline.lua",
     lazy = false,
     config = function()
-      require("plugins.bufferline")
+      require("bufferline").setup({
+        options = {
+          modified_icon = "●",
+          offsets = { { filetype = "NvimTree", text = "" } },
+          show_tab_indicators = false,
+          show_close_icon = false,
+        },
+      })
     end,
   },
   {
@@ -228,13 +243,20 @@ local plugins = {
     "lukas-reineke/indent-blankline.nvim",
     event = { "BufReadPost", "BufNewFile" },
     config = function()
-      require("plugins.indent_blank_line")
+      require("indent_blankline").setup({
+        show_end_of_line = true,
+        space_char_blankline = " ",
+        show_current_context = true,
+        show_current_context_start = true,
+        colored_indent_levels = true,
+        use_treesitter = true,
+      })
     end,
   },
   {
     "beauwilliams/focus.nvim",
     config = function()
-      require("plugins.focus")
+      require("focus").setup({ autoresize = false })
     end,
   },
   {
@@ -246,9 +268,13 @@ local plugins = {
   },
   {
     "folke/trouble.nvim",
+    keys = { "<leader>lt" },
     event = "VeryLazy",
     config = function()
-      require("plugins.trouble")
+      require("trouble").setup({
+        mode = "document_diagnostics",
+        use_diagnostic_signs = true,
+      })
     end,
   },
   {

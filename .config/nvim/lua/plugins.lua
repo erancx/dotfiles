@@ -73,10 +73,10 @@ local opt = {
 }
 
 local plugins = {
-  { "catppuccin/nvim", lazy = true, priority = 1000 },
-  { "SmiteshP/nvim-navic", lazy = true },
+  { "catppuccin/nvim",             lazy = true,       priority = 1000 },
+  { "SmiteshP/nvim-navic",         lazy = true },
   { "tpope/vim-fugitive" },
-  { "sindrets/diffview.nvim", event = "VeryLazy" },
+  { "sindrets/diffview.nvim",      event = "VeryLazy" },
   { "iamcco/markdown-preview.nvim" },
   {
     "nvim-treesitter/nvim-treesitter",
@@ -92,7 +92,7 @@ local plugins = {
     config = function()
       require("nvim-autopairs").setup({
         enable_check_bracket_line = true,
-        disable_filetype = { "TelescopePrompt", "vim" }, --
+        disable_filetype = { "TelescopePrompt", "vim" },
         enable_afterquote = false,
         enable_moveright = true,
       })
@@ -140,12 +140,12 @@ local plugins = {
       local plugin = require("lazy.core.config").spec.plugins["mini.surround"]
       local opts = require("lazy.core.plugin").values(plugin, "opts", false)
       local mappings = {
-        { opts.mappings.add, desc = "Add surrounding", mode = { "n", "v" } },
-        { opts.mappings.delete, desc = "Delete surrounding" },
-        { opts.mappings.find, desc = "Find right surrounding" },
-        { opts.mappings.find_left, desc = "Find left surrounding" },
-        { opts.mappings.highlight, desc = "Highlight surrounding" },
-        { opts.mappings.replace, desc = "Replace surrounding" },
+        { opts.mappings.add,            desc = "Add surrounding",                     mode = { "n", "v" } },
+        { opts.mappings.delete,         desc = "Delete surrounding" },
+        { opts.mappings.find,           desc = "Find right surrounding" },
+        { opts.mappings.find_left,      desc = "Find left surrounding" },
+        { opts.mappings.highlight,      desc = "Highlight surrounding" },
+        { opts.mappings.replace,        desc = "Replace surrounding" },
         { opts.mappings.update_n_lines, desc = "Update `MiniSurround.config.n_lines`" },
       }
       mappings = vim.tbl_filter(function(m)
@@ -155,12 +155,12 @@ local plugins = {
     end,
     opts = {
       mappings = {
-        add = "gza", -- Add surrounding in Normal and Visual modes
-        delete = "gzd", -- Delete surrounding
-        find = "gzf", -- Find surrounding (to the right)
-        find_left = "gzF", -- Find surrounding (to the left)
-        highlight = "gzh", -- Highlight surrounding
-        replace = "gzr", -- Replace surrounding
+        add = "gza",            -- Add surrounding in Normal and Visual modes
+        delete = "gzd",         -- Delete surrounding
+        find = "gzf",           -- Find surrounding (to the right)
+        find_left = "gzF",      -- Find surrounding (to the left)
+        highlight = "gzh",      -- Highlight surrounding
+        replace = "gzr",        -- Replace surrounding
         update_n_lines = "gzn", -- Update `n_lines`
       },
     },
@@ -217,11 +217,37 @@ local plugins = {
       require("bufferline").setup({
         options = {
           modified_icon = "●",
-          offsets = { { filetype = "NvimTree", text = "" } },
+          offsets = { { filetype = "NeoTree", text = "" } },
           show_tab_indicators = false,
           show_close_icon = false,
         },
       })
+    end,
+    opts = function()
+      local Offset = require("bufferline.offset")
+      if not Offset.edgy then
+        local get = Offset.get
+        Offset.get = function()
+          if package.loaded.edgy then
+            local layout = require("edgy.config").layout
+            local ret = { left = "", left_size = 0, right = "", right_size = 0 }
+            for _, pos in ipairs({ "left", "right" }) do
+              local sb = layout[pos]
+              if sb and #sb.wins > 0 then
+                local title = " Sidebar" .. string.rep(" ", sb.bounds.width - 8)
+                ret[pos] = "%#EdgyTitle#" .. title .. "%*" .. "%#WinSeparator#│%*"
+                ret[pos .. "_size"] = sb.bounds.width
+              end
+            end
+            ret.total_size = ret.left_size + ret.right_size
+            if ret.total_size > 0 then
+              return ret
+            end
+          end
+          return get()
+        end
+        Offset.edgy = true
+      end
     end,
   },
   {
@@ -255,20 +281,15 @@ local plugins = {
   },
   {
     "beauwilliams/focus.nvim",
-    config = function()
-      require("focus").setup({ autoresize = false })
-    end,
-  },
-  {
-    "nvim-tree/nvim-tree.lua",
     version = false,
     config = function()
-      require("plugins.nvimtree")
+      require("focus").setup({
+        autoresize = { enable = false },
+      })
     end,
   },
   {
     "folke/trouble.nvim",
-    keys = { "<leader>lt" },
     event = "VeryLazy",
     config = function()
       require("trouble").setup({
@@ -287,7 +308,18 @@ local plugins = {
   {
     "akinsho/nvim-toggleterm.lua",
     config = function()
-      require("plugins.toggleterm")
+      require("toggleterm").setup({})
+
+      function _G.set_terminal_keymaps()
+        local opts = { noremap = true }
+        vim.api.nvim_buf_set_keymap(0, "t", "<esc>", [[<C-\><C-n>]], opts)
+        vim.api.nvim_buf_set_keymap(0, "t", "<C-h>", [[<C-\><C-n><C-W>h]], opts)
+        vim.api.nvim_buf_set_keymap(0, "t", "<C-j>", [[<C-\><C-n><C-W>j]], opts)
+        vim.api.nvim_buf_set_keymap(0, "t", "<C-k>", [[<C-\><C-n><C-W>k]], opts)
+        vim.api.nvim_buf_set_keymap(0, "t", "<C-l>", [[<C-\><C-n><C-W>l]], opts)
+      end
+
+      vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
     end,
   },
   {
@@ -363,6 +395,77 @@ local plugins = {
       end
     end,
   },
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+    },
+    opts = {
+      auto_clean_after_session_restore = true,
+      close_if_last_window = true,
+      follow_current_file = { enabled = true },
+      sources = { "filesystem", "git_status" },
+      source_selector = {
+        content_layout = "center",
+        winbar = true,
+        enable = true,
+      },
+      filesystem = {
+        filtered_items = {
+          hide_dotfiles = false,
+          hide_gitignored = false,
+        },
+      },
+    },
+  },
+  {
+    "folke/edgy.nvim",
+    event = "VeryLazy",
+    opts = {
+      bottom = {
+        {
+          ft = "toggleterm",
+          size = { height = 0.4 },
+          -- exclude floating windows
+          filter = function(buf, win)
+            return vim.api.nvim_win_get_config(win).relative == ""
+          end,
+        },
+        "Trouble",
+        { ft = "qf",            title = "QuickFix" },
+        {
+          ft = "help",
+          size = { height = 20 },
+          filter = function(buf)
+            return vim.bo[buf].buftype == "help"
+          end,
+        },
+        { ft = "spectre_panel", size = { height = 0.4 } },
+      },
+      left = {
+        {
+          title = "Explorer",
+          ft = "neo-tree",
+          filter = function(buf)
+            return vim.b[buf].neo_tree_source == "filesystem"
+          end,
+        },
+        {
+          title = "Git",
+          ft = "neo-tree",
+          filter = function(buf)
+            return vim.b[buf].neo_tree_source == "git_status"
+          end,
+          pinned = true,
+          open = "Neotree position=right git_status",
+        },
+        "neo-tree",
+      },
+    },
+  },
 }
 
 require("lazy").setup(plugins, opt)
+vim.opt.splitkeep = "screen"
+vim.opt.laststatus = 3

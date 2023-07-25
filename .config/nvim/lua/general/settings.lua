@@ -25,6 +25,7 @@ vim.o.smartcase = true
 vim.o.smarttab = true -- <tab>/<BS> indent/dedent in leading whitespace
 vim.o.softtabstop = 2
 vim.o.splitbelow = true -- open horizontal splits below current window
+vim.o.splitkeep = "screen"
 vim.o.splitright = true -- open vertical splits to the right of the current window
 vim.o.tabstop = 2 -- spaces per tab
 vim.o.termguicolors = true -- Enable GUI colors for the terminal to get truecolor

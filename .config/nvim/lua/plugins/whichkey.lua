@@ -17,7 +17,7 @@ local opts = {
 }
 
 local mappings = {
-  ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
+  ["e"] = { "<cmd>Neotree toggle reveal_force_cwd<cr>", "Explorer" },
   ["md"] = { "<cmd>MarkdownPreviewToggle<CR>", "MarkdownPreviewToggle" },
   f = {
     name = "Find",

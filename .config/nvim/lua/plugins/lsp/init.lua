@@ -3,11 +3,15 @@ local LSP_SERVERS = {
   "awk_ls",
   "bashls",
   "dockerls",
+  "grammarly",
+  "marksman",
   "gopls",
   "jsonls",
   "pyright",
-  "terraformls",
   "yamlls",
+  "lua_ls",
+  "terraform_lsp",
+  "jsonls",
 }
 
 require("mason").setup({
@@ -86,6 +90,10 @@ lspSettings.jsonls = {
 
 lspSettings.yamlls = {
   yaml = { keyOrdering = false }, -- FIX mapKeyOrder
+  schemas = {
+    ["https://github.com/instrumenta/kubernetes-json-schema/blob/master/v1.18.1/all.json"] = "/*.k8s.yaml",
+    ..., -- other schemas
+  },
 }
 
 for _, lsp in pairs(LSP_SERVERS) do

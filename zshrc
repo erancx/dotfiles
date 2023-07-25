@@ -56,7 +56,9 @@ export FZF_DEFAULT_OPTS='-m
 
 # fep - find and edit file
 fep() {
-    local files=$(fzf --query="$1" --select-1 --exit-0 --preview="bat --color=always {}" --preview-window=right:50%:wrap | sed -e "s/\(.*\)/\'\1\'/")
+    local files=$(fzf --query="$1" --select-1 --exit-0 --preview="bat \
+    --color=always {}" --preview-window=right:50%:wrap | sed -e \
+    "s/\(.*\)/\'\1\'/")
     local command="${EDITOR:-vim} -p $files"
     [ -n "$files" ] && eval $command
 }
@@ -128,4 +130,11 @@ load_gcp() {
   if [ -f '/Users/edavidovich/.google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/edavidovich/.google-cloud-sdk/completion.zsh.inc'; fi
   export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 }
+
+tshls() {
+  select host in $(tsh ls -f names --search="${*}"); do
+    ssh "${host}" ; break
+  done
+}
+
 . <(flux completion zsh)

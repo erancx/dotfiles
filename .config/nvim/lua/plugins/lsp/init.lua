@@ -10,7 +10,7 @@ local LSP_SERVERS = {
   "pyright",
   "yamlls",
   "lua_ls",
-  "terraform_lsp",
+  "terraformls",
   "jsonls",
 }
 

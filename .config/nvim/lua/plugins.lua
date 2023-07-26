@@ -204,9 +204,7 @@ local plugins = {
     "rcarriga/nvim-notify",
     config = function()
       require("notify").setup({
-        background_colour = "#000000",
-        render = "simple",
-        stages = "fade_in_slide_out",
+        stages = "slide",
       })
     end,
   },
@@ -406,12 +404,31 @@ local plugins = {
       close_if_last_window = true,
       follow_current_file = { enabled = true },
       sources = { "filesystem", "git_status" },
+      default_component_configs = {
+        git_status = {
+          symbols = {
+            added = "",
+            modified = "",
+            deleted = "⊖",
+            renamed = "➜",
+            untracked = "★",
+            ignored = "◌",
+            unstaged = "✗",
+            staged = "✓",
+            conflict = "",
+          },
+        },
+      },
       source_selector = {
         content_layout = "center",
         winbar = true,
         enable = true,
       },
       filesystem = {
+        follow_current_file = {
+          enabled = true,
+          leave_dirs_open = true,
+        },
         filtered_items = {
           hide_dotfiles = false,
           hide_gitignored = false,

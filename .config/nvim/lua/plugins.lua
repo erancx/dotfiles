@@ -1,3 +1,5 @@
+local opts = { silent = true }
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -203,8 +205,11 @@ local plugins = {
   {
     "rcarriga/nvim-notify",
     config = function()
+      vim.opt.termguicolors = true
+      vim.notify = require("notify")
       require("notify").setup({
-        stages = "slide",
+        stages = "fade",
+        background_colour = "#000000",
       })
     end,
   },
@@ -265,16 +270,10 @@ local plugins = {
   },
   {
     "lukas-reineke/indent-blankline.nvim",
-    event = { "BufReadPost", "BufNewFile" },
+    main = "ibl",
+    opts = {},
     config = function()
-      require("indent_blankline").setup({
-        show_end_of_line = true,
-        space_char_blankline = " ",
-        show_current_context = true,
-        show_current_context_start = true,
-        colored_indent_levels = true,
-        use_treesitter = true,
-      })
+      require("ibl").setup({})
     end,
   },
   {
@@ -484,5 +483,3 @@ local plugins = {
 }
 
 require("lazy").setup(plugins, opt)
-vim.opt.splitkeep = "screen"
-vim.opt.laststatus = 3

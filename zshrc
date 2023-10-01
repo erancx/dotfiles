@@ -40,6 +40,10 @@ alias afk="pmset displaysleepnow"
 alias l='ls -lrth'
 alias review='git push origin HEAD:refs/for/main'
 alias kshell='kubectl run -it --image bash --restart Never --rm shell'
+alias vd='ssh -L 8888:localhost:8888 vd'
+alias jlogin='tsh status || tsh_login'
+alias vir='nvim --server localhost:8888 --remote-ui'
+alias resetmouse='printf '"'"'\e[?1000l'"'"
 
 unsetopt inc_append_history
 unsetopt share_history

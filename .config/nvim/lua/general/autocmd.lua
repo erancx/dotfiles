@@ -16,7 +16,9 @@ vim.cmd([[
 ]])
 
 -- 2 spaces for selected filetypes
-cmd([[ autocmd FileType json,yaml,xml,html,xhtml,css,scssjavascript,lua,dart setlocal shiftwidth=2 tabstop=2 expandtab ]])
+cmd(
+  [[ autocmd FileType json,yaml,xml,html,xhtml,css,scssjavascript,lua,dart setlocal shiftwidth=2 tabstop=2 expandtab ]]
+)
 
 -- highlight on yank
 exec(

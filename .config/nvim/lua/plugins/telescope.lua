@@ -1,13 +1,12 @@
 require("telescope").setup({
   defaults = {
-    layout_strategy = "vertical",
-    layout_config = {
-      vertical = {
-        height = 0.9,
-        preview_cutoff = 0,
-        preview_height = 0.6,
-        results_height = 0.3,
-        width = 0.7,
+    mappings = {
+      n = {
+        ["<c-d>"] = require("telescope.actions").delete_buffer,
+      },
+      i = {
+        ["?"] = "which_key",
+        ["<c-d>"] = require("telescope.actions").delete_buffer,
       },
     },
     prompt_prefix = "   ",
@@ -36,7 +35,7 @@ require("telescope").setup({
   extensions = {
     fzf = {
       fuzzy = true,
-      override_generic_sorter = false,
+      override_generic_sorter = true,
       override_file_sorter = true,
       case_mode = "smart_case",
     },
@@ -48,3 +47,4 @@ require("telescope").setup({
 })
 require("telescope").load_extension("fzf")
 require("telescope").load_extension("project")
+require("telescope").load_extension("file_browser")

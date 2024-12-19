@@ -8,6 +8,7 @@ ln -sf "$PWD/tmux.conf.local" ~/.tmux.conf.local
 ln -sf "$PWD/zsh_plugins.txt" ~/.zsh_plugins.txt
 ln -sf "$PWD/zshrc" ~/.zshrc
 ln -sf "$PWD/.config/nvim" ~/.config/
+ln -sf "$PWD/.hammerspoon" ~/.hammerspoon
 
 #npm install -g \
 #    bash-language-server \

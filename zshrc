@@ -6,7 +6,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 export ZSH=$HOME/.oh-my-zsh
-plugins=(git docker macos common-aliases kubectl terraform colored-man-pages)
+plugins=(git macos common-aliases kubectl terraform colored-man-pages)
 source $ZSH/oh-my-zsh.sh
 export LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
 export SSH_KEY_PATH="~/.ssh/rsa_id"
@@ -126,19 +126,3 @@ export NVM_DIR="$HOME/.nvm"
 if [[ -e "$HOME/workspace/venv/default3/bin/activate" ]]; then
     source "$HOME/workspace/venv/default3/bin/activate"
 fi
-
-load_gcp() {
-  # The next line updates PATH for the Google Cloud SDK.
-  if [ -f '/Users/edavidovich/.google-cloud-sdk/path.zsh.inc' ]; then . '/Users/edavidovich/.google-cloud-sdk/path.zsh.inc'; fi
-  # The next line enables shell command completion for gcloud.
-  if [ -f '/Users/edavidovich/.google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/edavidovich/.google-cloud-sdk/completion.zsh.inc'; fi
-  export USE_GKE_GCLOUD_AUTH_PLUGIN=True
-}
-
-tshls() {
-  select host in $(tsh ls -f names --search="${*}"); do
-    ssh "${host}" ; break
-  done
-}
-
-. <(flux completion zsh)

@@ -14,7 +14,7 @@ export GOPATH=$HOME/workspace/go
 export EDITOR=${EDITOR:-nvim}
 export LESS=-Ri
 export KUBE_EDITOR="nvim"
-export PATH=$PATH:$HOME/workspace/venv/default/bin/:/usr/local/bin:$GOPATH/bin:${KREW_ROOT:-$HOME/.krew}/bin:/opt/homebrew/sbin:$HOME/Library/Python/3.8/bin:~/bin:${KREW_ROOT:-$HOME/.krew}/bin
+export PATH=$PATH:$HOME/workspace/venv/default/bin/:/usr/local/bin:$GOPATH/bin:${KREW_ROOT:-$HOME/.krew}/bin:/opt/homebrew/sbin::~/bin:${KREW_ROOT:-$HOME/.krew}/bin
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=180'
 export TERM=xterm-256color
 export HISTSIZE=10000000
@@ -124,5 +124,5 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 if [[ -e "$HOME/workspace/venv/default3/bin/activate" ]]; then
-    source "$HOME/workspace/venv/default3/bin/activate"
+  source "$HOME/workspace/venv/default3/bin/activate"
 fi

@@ -1,0 +1,9 @@
+copy-on-select = true
+font-family = "Fira Code Regular"
+font-size = 13
+font-thicken = true
+fullscreen = true
+macos-option-as-alt = true
+shell-integration = zsh
+theme = catppuccin-mocha
+window-save-state = always

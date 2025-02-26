@@ -42,4 +42,21 @@ return {
       },
     },
   },
+  {
+    "folke/snacks.nvim",
+    priority = 1000,
+    lazy = false,
+    opts = {
+      picker = {
+        sources = {
+          projects = {
+            confirm = "picker",
+          },
+          files = {
+            hidden = true,
+          },
+        },
+      },
+    },
+  },
 }

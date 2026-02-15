@@ -1,6 +1,7 @@
 [user]
-  name = Eran Davidovich
-  email = eran@eran.com
+	name = <Eran> <Davidovich>
+  email = eran.davidovich@auros.global
+	signingkey = C5677B278ABC08D7153382CB8885A6080581BD76
 [init]
 	defaultBranch = main
 [alias]
@@ -11,12 +12,15 @@
   whitespace = trailing-space,space-before-tab
   editor = nvim
   pager = delta
+	excludesfile = /Users/erandavidovich/.gitignore_global
+	fsmonitor = false
 [apply]
   whitespace = nowarn
 [push]
   default = current
+	autoSetupRemote = true
 [pull]
-  rebase = true
+	rebase = true
 [color]
   branch = auto
   diff = auto
@@ -40,6 +44,7 @@
 [branch]
   autosetuprebase = always
   autosetupmerge = always
+	sort = -committerdate
 [pager]
   show = delta
   log = delta
@@ -56,6 +61,7 @@
   prompt = false
 [diff]
   tool = vimdiff
+	algorithm = histogram
 [difftool]
   prompt = false
 [color "diff-highlight"]
@@ -65,6 +71,7 @@
   newHighlight = green bold 22
 [commit]
   verbose = true
+	gpgsign = true
 [interactive]
   diffFilter = delta --color-only
 [delta]
@@ -75,3 +82,16 @@
 [delta "decorations"]
   commit-decoration-style = bold yellow box ul
   file-style = bold yellow ul
+[gpg]
+	program = gpg
+[tag]
+	sort = -version:refname
+[status]
+	branch = true
+[http]
+	followRedirects = false
+	maxRequestBuffer = 1048576
+[gc]
+	auto = 0
+[advice]
+	detachedHead = false

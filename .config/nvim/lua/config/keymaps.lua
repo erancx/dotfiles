@@ -9,6 +9,7 @@ local lsp_utils = require("utils.lsp_utils")
 -- Add a keymap for toggling BasedPyright settings
 vim.keymap.set("n", "<leader>ut", function() lsp_utils.toggle_basedpyright_settings() end, { desc = "Toggle BasedPyright Settings" })
 
+
 vim.keymap.set("n", "<leader>ds", function() require("dap").continue() end, { desc = "Debugger: Start" })
 vim.keymap.set("n", "<leader>dpp", function() require("dap").pause() end, { desc = "Debugger: Pause" })
 vim.keymap.set("n", "<leader>db", function() require("dap").toggle_breakpoint() end, { desc = "Debugger: Toggle Breakpoint" })
@@ -16,3 +17,6 @@ vim.keymap.set("n", "<leader>do", function() require("dap").step_over() end, { d
 vim.keymap.set("n", "<leader>di", function() require("dap").step_into() end, { desc = "Debugger: Step Into" })
 vim.keymap.set("n", "<leader>ds", function() require("dap").terminate() end, { desc = "Debugger: Terminate" })
 vim.keymap.set("n", "<leader>dS", function() require("dap").step_out() end, { desc = "Debugger: Step Out" })
+
+vim.keymap.set("n", "<TAB>", "<cmd>BufferLineCycleNext<cr>", { desc = "BufferLineCycleNext" })
+vim.keymap.set("n", "<S-TAB>", "<cmd>BufferLineCyclePrev<cr>", { desc = "BufferLineCyclePrev" })

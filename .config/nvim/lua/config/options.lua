@@ -29,3 +29,10 @@ vim.o.mouse = "v"
 
 vim.g.lazyvim_picker = "snacks"
 vim.g.lazyvim_python_lsp = "basedpyright"
+
+vim.g.autoformat = false
+vim.lsp.set_log_level("off")
+vim.opt.wrap = true
+vim.opt.colorcolumn = "120"
+vim.g.codeium_os = "Darwin"
+vim.g.codeium_arch = "arm64"

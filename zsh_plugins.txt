@@ -2,8 +2,6 @@ zsh-users/zsh-autosuggestions
 zsh-users/zsh-completions
 zsh-users/zsh-history-substring-search
 zdharma-continuum/fast-syntax-highlighting
-rupa/z
-changyuheng/fz
 changyuheng/zsh-interactive-cd
 romkatv/powerlevel10k
 joshskidmore/zsh-fzf-history-search

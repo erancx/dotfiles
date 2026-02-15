@@ -14,13 +14,14 @@ export GOPATH=$HOME/workspace/go
 export EDITOR=${EDITOR:-nvim}
 export LESS=-Ri
 export KUBE_EDITOR="nvim"
-export PATH=$PATH:$HOME/workspace/venv/default/bin/:/usr/local/bin:$GOPATH/bin:${KREW_ROOT:-$HOME/.krew}/bin:/opt/homebrew/sbin::~/bin:${KREW_ROOT:-$HOME/.krew}/bin
+export PATH=$HOME/workspace/venv/default/bin:/usr/local/bin:$GOPATH/bin:${KREW_ROOT:-$HOME/.krew}/bin:/opt/homebrew/sbin:$HOME/bin:$HOME/.local/bin:$PATH
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=180'
-export TERM=xterm-256color
 export HISTSIZE=10000000
 export SAVEHIST=10000000
-setopt INC_APPEND_HISTORY  # Write to the history file immediately, not when the shell exits.
-setopt SHARE_HISTORY
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
+export FZF_CTRL_T_OPTS="--preview 'bat --color=always --line-range :500 {}'"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_IGNORE_SPACE
 
@@ -45,10 +46,8 @@ alias jlogin='tsh status || tsh_login'
 alias vir='nvim --server localhost:8888 --remote-ui'
 alias resetmouse='printf '"'"'\e[?1000l'"'"
 
-unsetopt inc_append_history
-unsetopt share_history
 
-source ${ZDOTDIR:-~}/.antidote/antidote.zsh
+source /opt/homebrew/opt/antidote/share/antidote/antidote.zsh
 antidote load
 
 ### fzf ############################
@@ -67,7 +66,7 @@ fep() {
     [ -n "$files" ] && eval $command
 }
 
-# fag - find an argument with ag and fzf and open with vim
+# fag - find an argument with rg and fzf and open with vim
 farg() {
     [ $# -eq 0  ] && return
     local out cols
@@ -97,32 +96,72 @@ fshow() {
             --bind "enter:execute:$_viewGitLogLine | less -Ri" \
             --preview-window=right:50%:wrap
 }
+
+cd() {
+  if [[ -f "$1" ]]; then
+    builtin cd "${1:h}"
+  else
+    builtin cd "$@"
+  fi
+}
 #####################################
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-### Kitty #########################
+eval "$(fnm env --use-on-cd)"
 autoload -Uz compinit
-compinit
-# Completion for kitty
-kitty + complete setup zsh | source /dev/stdin
-# Kitty tab name
-function set-title-precmd() {
-  printf "\e]2;%s\a" "${PWD/#$HOME/~}"
-}
-function set-title-preexec() {
-  printf "\e]2;%s\a" "$1"
-}
-autoload -Uz add-zsh-hook
-add-zsh-hook precmd set-title-precmd
-add-zsh-hook preexec set-title-preexec
-####################################
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+for dump in ~/.zcompdump(N.mh+24); do
+    compinit
+done
 
-if [[ -e "$HOME/workspace/venv/default3/bin/activate" ]]; then
-  source "$HOME/workspace/venv/default3/bin/activate"
+compinit -C
+eval "$(zoxide init zsh)"
+
+zstyle ':completion:*' menu yes select
+
+if [[ -e "$HOME/workspace/venv/default/bin/activate" ]]; then
+  source "${HOME}/workspace/venv/default/bin/activate"
 fi
+
+####### Auros
+export VAULT_ADDR=https://vault.auros.be
+alias -g plso="pls -x 30 -a operational -r 90_superuser-assumed -p operational --"
+alias -g plsl="pls -x 30 -a legacy -r 90_superuser-assumed -p ktx --"
+alias -g pops="pls -x 30 -a operational -r 99_sensitive_superuser-assumed -p operational --"
+alias -g ples="pls -x 30 -a legacy -r 99_sensitive_superuser-assumed -p ktx --"
+alias vl="vault login -method=oidc"
+alias enroll="ssh eran@enroll.auros.be"
+export tag=gtar
+export AWS_PROFILE=ktx
+export LATITUDESH_AUTH_TOKEN=$(security find-generic-password -w -a $USER -s LATITUDESH_AUTH_TOKEN)
+export GITLAB_TOKEN=$(security find-generic-password -w -a $USER -s GITLAB_TOKEN)
+export CONFLUENCE_USER=eran.davidovich
+export CONFLUENCE_TOKEN=$(security find-generic-password -w -a $USER -s CONFLUENCE_TOKEN)
+function ussh {
+  ssh "$1" -t 'sudo su - ubuntu'
+}
+tfu() {
+  terraform force-unlock -force "$@"
+}
+
+export TG_PROVIDER_CACHE=1
+export TG_PROVIDER_CACHE_DIR="$HOME/.terragrunt/provider-cache"
+
+# Added by Antigravity
+export PATH="/Users/erandavidovich/.antigravity/antigravity/bin:$PATH"
+
+sshls() {
+  local d=${ANSIBLE_PATH:-~/workspace/repo/ansible}
+  local p=$1
+  [[ $# -gt 0 ]] && shift
+  local selected=$(grep -ohE '(prod|dev|stage)-\w+-\w+' $d/hosts/*.yaml | sort -u | grep -i "$p" | fzf)
+  [[ -n "$selected" ]] && ssh $@ $selected
+}
+
+vgit() {
+  nvim -p $(git diff --name-only --relative HEAD)
+}
+
+###########

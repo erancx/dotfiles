@@ -2,12 +2,14 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
+      -- Set the colorscheme for LazyVim
       colorscheme = "catppuccin",
     },
   },
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {
+      -- Specify languages to be installed for Treesitter
       ensure_installed = {
         "bash",
         "json",
@@ -25,15 +27,16 @@ return {
     "neovim/nvim-lspconfig",
     ---@class PluginLspOpts
     opts = {
-      ---@type lspconfig.options
       servers = {
+        -- Configure pyright server for Python
         pyright = {},
       },
     },
   },
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     opts = {
+      -- Ensure installation of specific tools
       ensure_installed = {
         "shellcheck",
         "shfmt",
@@ -50,13 +53,37 @@ return {
       picker = {
         sources = {
           projects = {
+            -- Use picker for project selection
             confirm = "picker",
           },
           files = {
+            -- Include hidden files in the file picker
             hidden = true,
           },
         },
       },
     },
+  },
+  {
+    "sphamba/smear-cursor.nvim",
+    opts = {},
+  },
+  {
+    "akinsho/bufferline.nvim",
+    init = function()
+      local bufline = require("catppuccin.groups.integrations.bufferline")
+      function bufline.get()
+        return bufline.get_theme()
+      end
+    end,
+  },
+    {
+    "akinsho/bufferline.nvim",
+    init = function()
+      local bufline = require("catppuccin.special.bufferline")
+      function bufline.get()
+        return bufline.get_theme()
+      end
+    end,
   },
 }

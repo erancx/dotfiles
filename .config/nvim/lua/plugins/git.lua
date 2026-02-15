@@ -71,21 +71,18 @@ return {
     },
   },
   {
-    "SuperBo/fugit2.nvim",
-    lazy = true,
+    "lewis6991/gitsigns.nvim",
+    event = "LazyFile",
     opts = {
-      width = 100,
-    },
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "nvim-lua/plenary.nvim",
-      {
-        "chrisgrieser/nvim-tinygit", -- optional: for Github PR view
+      current_line_blame = true,
+      current_line_blame_opts = {
+        virt_text = true,
+        virt_text_pos = "eol",
+        delay = 500,
+        ignore_whitespace = false,
+        virt_text_priority = 100,
+        use_focus = true,
       },
-    },
-    cmd = { "Fugit2", "Fugit2Diff", "Fugit2Graph" },
-    keys = {
-      { "<leader>gf", mode = "n", desc = "Fugit2", "<cmd>Fugit2<cr>" },
     },
   },
 }

@@ -125,14 +125,14 @@ if [[ -e "$HOME/workspace/venv/default/bin/activate" ]]; then
   source "${HOME}/workspace/venv/default/bin/activate"
 fi
 
-####### Auros
-export VAULT_ADDR=https://vault.auros.be
+# Load local/private configurations
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+
 alias -g plso="pls -x 30 -a operational -r 90_superuser-assumed -p operational --"
 alias -g plsl="pls -x 30 -a legacy -r 90_superuser-assumed -p ktx --"
 alias -g pops="pls -x 30 -a operational -r 99_sensitive_superuser-assumed -p operational --"
 alias -g ples="pls -x 30 -a legacy -r 99_sensitive_superuser-assumed -p ktx --"
 alias vl="vault login -method=oidc"
-alias enroll="ssh eran@enroll.auros.be"
 export tag=gtar
 export AWS_PROFILE=ktx
 export LATITUDESH_AUTH_TOKEN=$(security find-generic-password -w -a $USER -s LATITUDESH_AUTH_TOKEN)

@@ -1,6 +1,7 @@
 [user]
 	name = <Eran> <Davidovich>
-  email = eran.davidovich@auros.global
+[include]
+  path = ~/.gitconfig.local
 	signingkey = C5677B278ABC08D7153382CB8885A6080581BD76
 [init]
 	defaultBranch = main
